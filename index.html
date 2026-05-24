@@ -673,6 +673,33 @@
 </footer>
 
 <script>
+// Recent visitors
+  async function loadVisits() {
+    try {
+      const res = await fetch('/api/visits');
+      const data = await res.json();
+      const list = document.getElementById('visitor-list');
+      if (data.visits.length === 0) {
+        list.textContent = 'No visits yet';
+        return;
+      }
+      list.innerHTML = data.visits.slice(0, 5).map(v =>
+        `<div>${getFlagEmoji(v.countryCode)} ${v.city}, ${v.country}</div>`
+      ).join('');
+    } catch(e) {
+      document.getElementById('visitor-list').textContent = 'Unavailable';
+    }
+  }
+
+  function getFlagEmoji(code) {
+    if (!code || code === '??') return '🌍';
+    return code.toUpperCase().replace(/./g, c =>
+      String.fromCodePoint(127397 + c.charCodeAt())
+    );
+  }
+
+  loadVisits();
+
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -718,5 +745,18 @@
     observer.observe(el);
   });
 </script>
+<div id="recent-visitors" style="
+  position: fixed; bottom: 1.5rem; left: 1.5rem;
+  background: rgba(13,17,23,0.9);
+  border: 1px solid rgba(0,229,255,0.15);
+  border-radius: 4px; padding: 1rem 1.25rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; z-index: 50;
+  backdrop-filter: blur(8px);
+  max-width: 220px;
+">
+  <div style="color: #00e5ff; margin-bottom: 8px; letter-spacing: 0.1em;">RECENT VISITORS</div>
+  <div id="visitor-list" style="color: #64748b; line-height: 2;">Loading...</div>
+</div>
 </body>
 </html>
