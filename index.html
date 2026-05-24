@@ -1,26 +1,722 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Your Name — CV</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mario Kola — Cloud Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: rgba(0,229,255,0.12);
+    --card: rgba(13,17,23,0.8);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+  /* Custom cursor */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed; pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(0,229,255,0.4);
+    border-radius: 50%;
+    position: fixed; pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s, width 0.2s, height 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(8,11,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 12px; font-weight: 600;
+    text-decoration: none; color: var(--muted);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative; z-index: 1;
+  }
+  .hero-content { max-width: 800px; }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: 1.1rem; color: var(--muted);
+    line-height: 1.7; max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.75rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 2px; transition: all 0.2s;
+    cursor: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--bg);
+    font-weight: 700; border: none;
+  }
+  .btn-primary:hover { background: #00b8d4; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .btn-outline:hover { background: rgba(0,229,255,0.08); transform: translateY(-2px); }
+  .counter-badge {
+    position: absolute; right: 4rem; bottom: 4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+  }
+  .counter-num {
+    font-size: 2.5rem; font-weight: 700;
+    color: var(--accent); line-height: 1;
+  }
+
+  /* Sections */
+  section {
+    padding: 6rem 4rem;
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--accent);
+  }
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 3rem; line-height: 1.1;
+  }
+
+  /* About */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .about-text { font-size: 1rem; color: var(--muted); line-height: 1.8; }
+  .about-text p { margin-bottom: 1rem; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 4px;
+  }
+  .stat-num {
+    font-size: 2.5rem; font-weight: 800;
+    color: var(--accent); line-height: 1;
+    font-family: 'Space Mono', monospace;
+  }
+  .stat-label {
+    font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  /* Skills */
+  #skills { background: var(--bg2); max-width: 100%; padding: 6rem 4rem; }
+  #skills > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .skill-category {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.75rem; border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .skill-category:hover { border-color: rgba(0,229,255,0.3); }
+  .skill-cat-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    padding: 4px 12px;
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.15);
+    border-radius: 2px;
+    font-size: 12px; color: var(--text);
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem; border-radius: 4px;
+    transition: all 0.2s; position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover { border-color: rgba(0,229,255,0.25); transform: translateY(-4px); }
+  .project-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .project-title {
+    font-size: 1.2rem; font-weight: 700;
+    margin-bottom: 0.75rem; color: var(--text);
+  }
+  .project-desc {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.7; margin-bottom: 1.25rem;
+  }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tech-tag {
+    padding: 3px 10px;
+    background: rgba(124,58,237,0.12);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 2px;
+    font-size: 11px; color: #a78bfa;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Education & Certs */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.75rem; border-radius: 4px;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: rgba(0,229,255,0.3); }
+  .edu-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .edu-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .edu-sub { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .edu-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+  }
+  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0; }
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 4px;
+    text-align: center; transition: all 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-2px); }
+  .cert-badge {
+    font-size: 2rem; margin-bottom: 0.75rem; display: block;
+  }
+  .cert-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .cert-issuer { font-size: 11px; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .cert-status {
+    display: inline-block; margin-top: 8px;
+    padding: 2px 8px; border-radius: 2px;
+    font-size: 10px; font-family: 'Space Mono', monospace;
+    letter-spacing: 0.1em;
+  }
+  .cert-status.pursuing {
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--accent);
+  }
+  .cert-status.planned {
+    background: rgba(124,58,237,0.08);
+    border: 1px solid rgba(124,58,237,0.2);
+    color: #a78bfa;
+  }
+
+  /* Contact */
+  #contact { background: var(--bg2); max-width: 100%; padding: 6rem 4rem; }
+  .contact-inner { max-width: 1100px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
+  .contact-info p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    background: rgba(0,229,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .form-input, .form-textarea {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px; padding: 0.75rem 1rem;
+    color: var(--text); font-family: 'Syne', sans-serif;
+    font-size: 14px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: rgba(0,229,255,0.4); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    padding: 0.875rem 2rem;
+    background: var(--accent); color: var(--bg);
+    border: none; border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: none; transition: all 0.2s; align-self: flex-start;
+  }
+  .form-submit:hover { background: #00b8d4; transform: translateY(-2px); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 1;
+  }
+  .footer-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--muted);
+  }
+  .footer-text span { color: var(--accent); }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * {
+    opacity: 0; animation: fadeUp 0.6s forwards;
+  }
+  .hero-tag { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.2s; }
+  .hero-desc { animation-delay: 0.3s; }
+  .hero-btns { animation-delay: 0.4s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid, .projects-grid, .edu-grid, .contact-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .counter-badge { right: 1.5rem; bottom: 2rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Your Name</h1>
-    <p>Cloud Engineer | Taunton, UK</p>
-  </header>
-  <section>
-    <h2>Skills</h2>
-    <p>Microsoft Azure · Linux · Networking · Python</p>
-  </section>
-  <section>
-    <h2>Projects</h2>
-    <p>This site — hosted on Azure Static Web Apps</p>
-  </section>
-  <footer>
-    <p>Visitors: <span id="counter">...</span></p>
-  </footer>
-  <script src="counter.js"></script>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">MK // CLOUD ENGINEER</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>Mario<br><span>Kola</span></h1>
+    <p class="hero-desc">Cloud Engineer based in Taunton, UK. Building hybrid cloud infrastructure on Microsoft Azure — from home lab to enterprise-grade deployments.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#projects" class="btn btn-outline">View projects</a>
+    </div>
+  </div>
+  <div class="counter-badge">
+    <span class="counter-num" id="counter">—</span>
+    <span>site visitors</span>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2>Who I am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a self-taught cloud engineer with a passion for <strong>Microsoft Azure</strong> and hybrid infrastructure. I run a home lab where I practice real-world enterprise scenarios — connecting on-premise servers to the cloud using Azure Arc, VPN gateways, and Entra ID.</p>
+      <p>My background is hands-on. I learn by building — from deploying serverless APIs to configuring Site-to-Site VPNs. I'm currently pursuing Azure certifications and actively looking for my first cloud role.</p>
+      <p>Based in <strong>Taunton, UK</strong>. Open to remote and on-site opportunities across the South West.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Azure projects built</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">AZ</div>
+        <div class="stat-label">900 in progress</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">UK</div>
+        <div class="stat-label">Taunton, Somerset</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Curiosity level</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">02 — Skills</div>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">// Cloud — Azure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Static Web Apps</span>
+          <span class="skill-tag">Azure Functions</span>
+          <span class="skill-tag">Cosmos DB</span>
+          <span class="skill-tag">Azure Arc</span>
+          <span class="skill-tag">VPN Gateway</span>
+          <span class="skill-tag">Entra ID</span>
+          <span class="skill-tag">Azure Monitor</span>
+          <span class="skill-tag">Key Vault</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">// Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Windows Server</span>
+          <span class="skill-tag">Active Directory</span>
+          <span class="skill-tag">Linux (Ubuntu)</span>
+          <span class="skill-tag">Hyper-V</span>
+          <span class="skill-tag">pfSense</span>
+          <span class="skill-tag">DNS</span>
+          <span class="skill-tag">TCP/IP</span>
+          <span class="skill-tag">VLANs</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">// Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">PowerShell</span>
+          <span class="skill-tag">Bash</span>
+          <span class="skill-tag">HTML/CSS</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">// Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Azure Portal</span>
+          <span class="skill-tag">Azure CLI</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">Microsoft 365</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-label">03 — Projects</div>
+  <h2>What I've built</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">PROJECT_01</div>
+      <div class="project-title">Cloud CV Website</div>
+      <p class="project-desc">This site. A full-stack cloud application with a serverless Python API, NoSQL visitor counter, and automated CI/CD deployment pipeline. Built entirely on Azure free tier.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Static Web Apps</span>
+        <span class="tech-tag">Azure Functions</span>
+        <span class="tech-tag">Cosmos DB</span>
+        <span class="tech-tag">GitHub Actions</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">PROJECT_02</div>
+      <div class="project-title">Hybrid Home Lab</div>
+      <p class="project-desc">Connected a physical home lab to Azure using Azure Arc, Site-to-Site VPN, and Entra Connect. Simulates real enterprise hybrid cloud architecture with Azure Monitor dashboards.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Azure Arc</span>
+        <span class="tech-tag">VPN Gateway</span>
+        <span class="tech-tag">Entra Connect</span>
+        <span class="tech-tag">Azure Monitor</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">PROJECT_03</div>
+      <div class="project-title">Add your next project</div>
+      <p class="project-desc">Coming soon — currently building more Azure projects to expand my portfolio and deepen my hands-on cloud experience.</p>
+      <div class="project-tech">
+        <span class="tech-tag">In progress</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">PROJECT_04</div>
+      <div class="project-title">Add your next project</div>
+      <p class="project-desc">Coming soon — currently building more Azure projects to expand my portfolio and deepen my hands-on cloud experience.</p>
+      <div class="project-tech">
+        <span class="tech-tag">In progress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education & Certs -->
+<section id="education">
+  <div class="section-label">04 — Education & Certifications</div>
+  <h2>Learning path</h2>
+  <div class="edu-grid" style="margin-bottom:2rem;">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-title">Self-taught Cloud Engineering</div>
+        <div class="edu-sub">Microsoft Learn, hands-on labs, home lab practice</div>
+        <div class="edu-date">2025 — Present</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏠</div>
+      <div>
+        <div class="edu-title">Home Lab — Hybrid Infrastructure</div>
+        <div class="edu-sub">Windows Server, Linux, pfSense, Azure Arc integration</div>
+        <div class="edu-date">2025 — Present</div>
+      </div>
+    </div>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <span class="cert-badge">☁️</span>
+      <div class="cert-name">AZ-900</div>
+      <div class="cert-issuer">Microsoft Azure</div>
+      <span class="cert-status pursuing">Pursuing</span>
+    </div>
+    <div class="cert-card">
+      <span class="cert-badge">⚙️</span>
+      <div class="cert-name">AZ-104</div>
+      <div class="cert-issuer">Azure Administrator</div>
+      <span class="cert-status planned">Planned</span>
+    </div>
+    <div class="cert-card">
+      <span class="cert-badge">🔧</span>
+      <div class="cert-name">AZ-400</div>
+      <div class="cert-issuer">Azure DevOps</div>
+      <span class="cert-status planned">Planned</span>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">05 — Contact</div>
+    <h2>Let's talk</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>I'm currently looking for junior cloud engineering roles in the UK. If you're hiring or want to connect, feel free to reach out.</p>
+        <div class="contact-links">
+          <a href="mailto:mario@mariokola.co.uk" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            mario@mariokola.co.uk
+          </a>
+          <a href="https://github.com/nyxalb" class="contact-link" target="_blank">
+            <div class="contact-link-icon">💻</div>
+            github.com/nyxalb
+          </a>
+          <a href="https://linkedin.com/in/mariokola" class="contact-link" target="_blank">
+            <div class="contact-link-icon">🔗</div>
+            linkedin.com/in/mariokola
+          </a>
+          <a href="https://mariokola.co.uk" class="contact-link">
+            <div class="contact-link-icon">🌐</div>
+            mariokola.co.uk
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Your name</label>
+          <input type="text" class="form-input" placeholder="John Smith" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-input" placeholder="john@company.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about the opportunity..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-text">© 2026 <span>Mario Kola</span> — Cloud Engineer</div>
+  <div class="footer-text">Built on <span>Azure</span> · Deployed via <span>GitHub Actions</span></div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+  document.querySelectorAll('a,button,.btn').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width='48px'; ring.style.height='48px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width='32px'; ring.style.height='32px'; });
+  });
+
+  // Visitor counter
+  async function updateCounter() {
+    try {
+      const res = await fetch('/api/counter');
+      const data = await res.json();
+      document.getElementById('counter').textContent = data.count;
+    } catch(e) {
+      document.getElementById('counter').textContent = '—';
+    }
+  }
+  updateCounter();
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Message sent ✓';
+    btn.style.background = '#10b981';
+    setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; e.target.reset(); }, 3000);
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.skill-category,.project-card,.edu-card,.cert-card,.stat-card').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(20px)';
+    el.style.transition='opacity 0.5s, transform 0.5s';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
