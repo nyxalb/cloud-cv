@@ -13,40 +13,48 @@ def counter(req: func.HttpRequest) -> func.HttpResponse:
     )
     db = client.get_database_client("cvsite")
 
+    # Update visit count
     counter_container = db.get_container_client("counter")
     item = counter_container.read_item(item="1", partition_key="1")
     item["count"] += 1
     counter_container.replace_item(item="1", body=item)
 
-    ip = req.params.get('ip') or req.headers.get('X-Forwarded-For', '').split(',')[0].strip()
-    if not ip or ip == '127.0.0.1':
-        ip = '8.8.8.8'
+    # Get IP from frontend
+    ip = req.params.get('ip', 'Unknown')
 
-try:
-    geo_url = f"https://ipapi.co/{ip}/json/"
-    req2 = urllib.request.Request(geo_url, headers={'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req2, timeout=5) as response:
-        geo = json.loads(response.read())
-    country = geo.get('country_name', 'Unknown')
-    city = geo.get('city', 'Unknown')
-    country_code = geo.get('country_code', '??')
-except:
-    country, city, country_code = 'Unknown', 'Unknown', '??'
+    # Get location from IP
+    try:
+        geo_url = f"https://ipapi.co/{ip}/json/"
+        geo_req = urllib.request.Request(
+            geo_url, headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        with urllib.request.urlopen(geo_req, timeout=5) as response:
+            geo = json.loads(response.read())
+        country = geo.get('country_name', 'Unknown')
+        city = geo.get('city', 'Unknown')
+        country_code = geo.get('country_code', '??')
+    except:
+        country, city, country_code = 'Unknown', 'Unknown', '??'
 
+    # Store visit — IP is private, only in DB
     visits_container = db.get_container_client("visits")
     visit = {
         "id": str(datetime.utcnow().timestamp()).replace('.', ''),
         "country": country,
         "city": city,
         "countryCode": country_code,
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
+        "ip": ip  # private — only stored in DB, never sent to frontend
     }
     visits_container.create_item(visit)
 
+    # Return public data only — NO ip in response
     return func.HttpResponse(
         json.dumps({
             "count": item["count"],
-            "location": {"country": country, "city": city, "countryCode": country_code}
+            "country": country,
+            "city": city,
+            "countryCode": country_code
         }),
         mimetype="application/json",
         headers={"Access-Control-Allow-Origin": "*"}
@@ -61,12 +69,25 @@ def visits(req: func.HttpRequest) -> func.HttpResponse:
     )
     container = client.get_database_client("cvsite").get_container_client("visits")
 
-    query = "SELECT TOP 10 c.country, c.city, c.countryCode, c.timestamp FROM c ORDER BY c.timestamp DESC"
-    items = list(container.query_items(query=query, enable_cross_partition_query=True))
+    # Return public data only — NO ip field returned
+    query = """SELECT TOP 20 c.country, c.city, c.countryCode, c.timestamp
+               FROM c ORDER BY c._ts DESC"""
+    items = list(container.query_items(
+        query=query, enable_cross_partition_query=True
+    ))
+
+    # Count visits per country for the public map
+    country_query = """SELECT c.country, c.countryCode, COUNT(1) as visits
+                       FROM c GROUP BY c.country, c.countryCode"""
+    country_counts = list(container.query_items(
+        query=country_query, enable_cross_partition_query=True
+    ))
 
     return func.HttpResponse(
-        json.dumps({"visits": items}),
+        json.dumps({
+            "recent": items,
+            "countries": country_counts
+        }),
         mimetype="application/json",
         headers={"Access-Control-Allow-Origin": "*"}
     )
-
