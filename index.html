@@ -406,26 +406,11 @@
   });
 
   // ── Visitor counter + private IP/geo tracking ──
-  async function updateCounter() {
+    async function updateCounter() {
     try {
-      // Get visitor IP in browser
       const ipRes = await fetch('https://api.ipify.org?format=json');
       const { ip } = await ipRes.json();
-
-      // Get geo in browser (never sent back to public)
-      let country = 'Unknown', city = 'Unknown', countryCode = '??';
-      try {
-      const geoRes = await fetch(`https://freeipapi.com/api/json/${ip}`);
-      const geo = await geoRes.json();
-      country = geo.countryName || 'Unknown';
-      city = geo.cityName || 'Unknown';
-      countryCode = geo.countryCode || '??';
-      } catch(e) {}
-      
-      // Send to Azure Function — only count returned to page
-      const res = await fetch(
-        `/api/counter?ip=${encodeURIComponent(ip)}&country=${encodeURIComponent(country)}&city=${encodeURIComponent(city)}&cc=${encodeURIComponent(countryCode)}`
-      );
+      const res = await fetch(`/api/counter?ip=${encodeURIComponent(ip)}`);
       const data = await res.json();
       document.getElementById('counter').textContent = data.count;
     } catch(e) {

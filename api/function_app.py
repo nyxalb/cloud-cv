@@ -1,6 +1,6 @@
 import azure.functions as func
 import azure.cosmos.cosmos_client as cosmos
-import os, json
+import os, json, urllib.request
 from datetime import datetime
 
 app = func.FunctionApp()
@@ -19,11 +19,25 @@ def counter(req: func.HttpRequest) -> func.HttpResponse:
     item["count"] += 1
     counter_container.replace_item(item="1", body=item)
 
-    # Read what frontend sent
+    # Get IP from browser
     ip = req.params.get('ip', 'Unknown')
-    country = req.params.get('country', 'Unknown')
-    city = req.params.get('city', 'Unknown')
-    country_code = req.params.get('cc', '??')
+
+    # Do geo lookup server-side in Azure Function
+    country, city, country_code = 'Unknown', 'Unknown', '??'
+    if ip and ip != 'Unknown':
+        try:
+            url = f"https://freeipapi.com/api/json/{ip}"
+            r = urllib.request.Request(url, headers={
+                'User-Agent': 'Mozilla/5.0',
+                'Accept': 'application/json'
+            })
+            with urllib.request.urlopen(r, timeout=5) as resp:
+                geo = json.loads(resp.read())
+            country = geo.get('countryName', 'Unknown')
+            city = geo.get('cityName', 'Unknown')
+            country_code = geo.get('countryCode', '??')
+        except Exception as e:
+            pass
 
     # Store privately in Cosmos DB
     visits_container = db.get_container_client("visits")
@@ -37,7 +51,6 @@ def counter(req: func.HttpRequest) -> func.HttpResponse:
         "partition": "visit"
     })
 
-    # Return ONLY the count to the public
     return func.HttpResponse(
         json.dumps({"count": item["count"]}),
         mimetype="application/json",
