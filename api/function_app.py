@@ -56,3 +56,31 @@ def counter(req: func.HttpRequest) -> func.HttpResponse:
         mimetype="application/json",
         headers={"Access-Control-Allow-Origin": "*"}
     )
+@app.route(route="visitormap", auth_level=func.AuthLevel.ANONYMOUS)
+def visitormap(req: func.HttpRequest) -> func.HttpResponse:
+
+    client = cosmos.CosmosClient.from_connection_string(
+        os.environ["COSMOS_CONNECTION"]
+    )
+    container = client.get_database_client("cvsite").get_container_client("visits")
+
+    # Count visits per country
+    query = """
+        SELECT c.country, c.countryCode, COUNT(1) as visits
+        FROM c
+        WHERE c.country != 'Unknown'
+        GROUP BY c.country, c.countryCode
+    """
+    try:
+        countries = list(container.query_items(
+            query=query,
+            enable_cross_partition_query=True
+        ))
+    except:
+        countries = []
+
+    return func.HttpResponse(
+        json.dumps({"countries": countries}),
+        mimetype="application/json",
+        headers={"Access-Control-Allow-Origin": "*"}
+    )
