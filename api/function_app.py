@@ -87,3 +87,61 @@ def visitormap(req: func.HttpRequest) -> func.HttpResponse:
         mimetype="application/json",
         headers={"Access-Control-Allow-Origin": "*"}
     )
+@app.route(route="contact", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
+def contact(req: func.HttpRequest) -> func.HttpResponse:
+
+    try:
+        body = req.get_json()
+        name = body.get('name', 'Unknown')
+        email = body.get('email', 'Unknown')
+        message = body.get('message', '')
+
+        from azure.communication.email import EmailClient
+
+        client = EmailClient.from_connection_string(
+            os.environ["COMMUNICATION_CONNECTION"]
+        )
+
+        # Get your sender address from Azure managed domain
+        sender = os.environ["SENDER_ADDRESS"]
+
+        message_body = f"""
+New contact form submission from mariokola.co.uk
+
+Name:    {name}
+Email:   {email}
+
+Message:
+{message}
+
+---
+Sent from your CV site contact form
+        """
+
+        email_message = {{
+            "senderAddress": sender,
+            "recipients": {{
+                "to": [{{"address": "mario@mariokola.co.uk"}}]
+            }},
+            "content": {{
+                "subject": f"CV Site — Message from {name}",
+                "plainText": message_body
+            }}
+        }}
+
+        poller = client.begin_send(email_message)
+        poller.result()
+
+        return func.HttpResponse(
+            json.dumps({{"success": True, "message": "Email sent!"}}),
+            mimetype="application/json",
+            headers={{"Access-Control-Allow-Origin": "*"}}
+        )
+
+    except Exception as e:
+        return func.HttpResponse(
+            json.dumps({{"success": False, "error": str(e)}}),
+            mimetype="application/json",
+            status_code=500,
+            headers={{"Access-Control-Allow-Origin": "*"}}
+        )
