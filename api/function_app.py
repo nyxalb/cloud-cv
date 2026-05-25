@@ -22,15 +22,16 @@ def counter(req: func.HttpRequest) -> func.HttpResponse:
     if not ip or ip == '127.0.0.1':
         ip = '8.8.8.8'
 
-    try:
-        geo_url = f"http://ip-api.com/json/{ip}?fields=country,city,countryCode"
-        with urllib.request.urlopen(geo_url, timeout=3) as response:
-            geo = json.loads(response.read())
-        country = geo.get('country', 'Unknown')
-        city = geo.get('city', 'Unknown')
-        country_code = geo.get('countryCode', '??')
-    except:
-        country, city, country_code = 'Unknown', 'Unknown', '??'
+try:
+    geo_url = f"https://ipapi.co/{ip}/json/"
+    req2 = urllib.request.Request(geo_url, headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req2, timeout=5) as response:
+        geo = json.loads(response.read())
+    country = geo.get('country_name', 'Unknown')
+    city = geo.get('city', 'Unknown')
+    country_code = geo.get('country_code', '??')
+except:
+    country, city, country_code = 'Unknown', 'Unknown', '??'
 
     visits_container = db.get_container_client("visits")
     visit = {
