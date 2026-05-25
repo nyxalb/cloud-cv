@@ -64,19 +64,22 @@ def visitormap(req: func.HttpRequest) -> func.HttpResponse:
     )
     container = client.get_database_client("cvsite").get_container_client("visits")
 
-    # Count visits per country
-    query = """
-        SELECT c.country, c.countryCode, COUNT(1) as visits
-        FROM c
-        WHERE c.country != 'Unknown'
-        GROUP BY c.country, c.countryCode
-    """
+    # Get all visits with known countries
+    query = "SELECT c.country, c.countryCode FROM c WHERE c.country != 'Unknown'"
     try:
-        countries = list(container.query_items(
+        items = list(container.query_items(
             query=query,
             enable_cross_partition_query=True
         ))
-    except:
+        # Count manually
+        counts = {}
+        for item in items:
+            key = item['countryCode']
+            if key not in counts:
+                counts[key] = {'country': item['country'], 'countryCode': key, 'visits': 0}
+            counts[key]['visits'] += 1
+        countries = list(counts.values())
+    except Exception as e:
         countries = []
 
     return func.HttpResponse(
