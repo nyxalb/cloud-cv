@@ -744,8 +744,17 @@
     el.style.transition='opacity 0.5s, transform 0.5s';
     observer.observe(el);
   });
+  // Secret admin — Ctrl+Shift+A to toggle
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+    const panel = document.getElementById('recent-visitors');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    if (panel.style.display === 'block') loadVisits();
+  }
+});
 </script>
 <div id="recent-visitors" style="
+  display: none;
   position: fixed; bottom: 1.5rem; left: 1.5rem;
   background: rgba(13,17,23,0.9);
   border: 1px solid rgba(0,229,255,0.15);
@@ -755,7 +764,10 @@
   backdrop-filter: blur(8px);
   max-width: 220px;
 ">
-  <div style="color: #00e5ff; margin-bottom: 8px; letter-spacing: 0.1em;">RECENT VISITORS</div>
+  <div style="color: #00e5ff; margin-bottom: 8px; letter-spacing: 0.1em;">RECENT VISITORS
+    
+  </div>
+  
   <div id="visitor-list" style="color: #64748b; line-height: 2;">Loading...</div>
 </div>
 </body>
