@@ -415,13 +415,13 @@
       // Get geo in browser (never sent back to public)
       let country = 'Unknown', city = 'Unknown', countryCode = '??';
       try {
-        const geoRes = await fetch(`https://ipapi.co/${ip}/json/`);
-        const geo = await geoRes.json();
-        country = geo.country_name || 'Unknown';
-        city = geo.city || 'Unknown';
-        countryCode = geo.country_code || '??';
+      const geoRes = await fetch(`https://freeipapi.com/api/json/${ip}`);
+      const geo = await geoRes.json();
+      country = geo.countryName || 'Unknown';
+      city = geo.cityName || 'Unknown';
+      countryCode = geo.countryCode || '??';
       } catch(e) {}
-
+      
       // Send to Azure Function — only count returned to page
       const res = await fetch(
         `/api/counter?ip=${encodeURIComponent(ip)}&country=${encodeURIComponent(country)}&city=${encodeURIComponent(city)}&cc=${encodeURIComponent(countryCode)}`
