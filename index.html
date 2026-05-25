@@ -475,111 +475,86 @@ async function loadMap() {
     const data = await res.json();
     const countries = data.countries || [];
 
+    const container = document.getElementById('map-container');
+    container.style.position = 'relative';
+    container.style.background = 'transparent';
+
+    // Load world map as image overlay
+    container.innerHTML = `
+      <div style="position:relative;width:100%;height:420px;overflow:hidden;">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png"
+          style="width:100%;height:100%;object-fit:cover;opacity:0.15;filter:hue-rotate(160deg) saturate(2);"
+          alt="World map"
+        />
+        <svg id="dots-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 1000 500"></svg>
+      </div>
+    `;
+
     if (countries.length === 0) return;
 
-    // Country code to approximate lat/lng
     const coords = {
-      'GB': [55.3781, -3.4360], 'US': [37.0902, -95.7129],
-      'DE': [51.1657, 10.4515], 'FR': [46.2276, 2.2137],
-      'NL': [52.1326, 5.2913], 'CA': [56.1304, -106.3468],
-      'AU': [-25.2744, 133.7751], 'IN': [20.5937, 78.9629],
-      'BR': [-14.2350, -51.9253], 'JP': [36.2048, 138.2529],
-      'SG': [1.3521, 103.8198], 'ZA': [-30.5595, 22.9375],
-      'NG': [9.0820, 8.6753], 'PL': [51.9194, 19.1451],
-      'ES': [40.4637, -3.7492], 'IT': [41.8719, 12.5674],
-      'RU': [61.5240, 105.3188], 'CN': [35.8617, 104.1954],
-      'MX': [23.6345, -102.5528], 'AR': [-38.4161, -63.6167],
-      'KR': [35.9078, 127.7669], 'TR': [38.9637, 35.2433],
-      'SE': [60.1282, 18.6435], 'NO': [60.4720, 8.4689],
-      'DK': [56.2639, 9.5018], 'FI': [61.9241, 25.7482],
-      'PT': [39.3999, -8.2245], 'IE': [53.1424, -7.6921],
-      'BE': [50.5039, 4.4699], 'CH': [46.8182, 8.2275],
-      'AT': [47.5162, 14.5501], 'PK': [30.3753, 69.3451],
-      'EG': [26.8206, 30.8025], 'GH': [7.9465, -1.0232],
-      'KE': [-0.0236, 37.9062], 'UA': [48.3794, 31.1656],
-      'ID': [-0.7893, 113.9213], 'TH': [15.8700, 100.9925],
-      'MY': [4.2105, 101.9758], 'PH': [12.8797, 121.7740],
-      'VN': [14.0583, 108.2772], 'NZ': [-40.9006, 174.8860],
+      'GB': [53, -2], 'US': [38, -97], 'DE': [51, 10], 'FR': [46, 2],
+      'NL': [52, 5], 'CA': [56, -106], 'AU': [-25, 134], 'IN': [21, 79],
+      'BR': [-14, -51], 'JP': [36, 138], 'SG': [1, 104], 'ZA': [-30, 23],
+      'NG': [9, 8], 'PL': [52, 19], 'ES': [40, -4], 'IT': [42, 13],
+      'RU': [62, 105], 'CN': [36, 104], 'MX': [23, -102], 'AR': [-38, -63],
+      'KR': [36, 128], 'TR': [39, 35], 'SE': [60, 18], 'NO': [61, 8],
+      'DK': [56, 10], 'FI': [62, 26], 'PT': [39, -8], 'IE': [53, -8],
+      'BE': [51, 4], 'CH': [47, 8], 'AT': [47, 14], 'PK': [30, 69],
+      'EG': [27, 30], 'GH': [8, -1], 'KE': [1, 38], 'UA': [49, 32],
+      'ID': [-2, 118], 'TH': [15, 101], 'MY': [4, 109], 'PH': [13, 122],
+      'VN': [16, 108], 'NZ': [-41, 174], 'RO': [46, 25], 'HU': [47, 19],
+      'CZ': [50, 15], 'GR': [39, 22], 'IL': [31, 35], 'SA': [24, 45],
+      'AE': [24, 54], 'CO': [4, -72], 'CL': [-30, -71], 'PE': [-10, -76],
     };
 
     const maxVisits = Math.max(...countries.map(c => c.visits));
+    const svg = document.getElementById('dots-layer');
 
-    // Build SVG world map with dots
-    const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 800 400');
-    svg.setAttribute('width', '100%');
-    svg.setAttribute('height', '100%');
-    svg.style.background = 'transparent';
-
-    // Simple world outline paths (simplified)
-    const worldPath = document.createElementNS(svgNS, 'rect');
-    worldPath.setAttribute('width', '800');
-    worldPath.setAttribute('height', '400');
-    worldPath.setAttribute('fill', 'rgba(0,229,255,0.02)');
-    svg.appendChild(worldPath);
-
-    // Grid lines
-    for (let i = 0; i <= 8; i++) {
-      const line = document.createElementNS(svgNS, 'line');
-      line.setAttribute('x1', i * 100); line.setAttribute('y1', 0);
-      line.setAttribute('x2', i * 100); line.setAttribute('y2', 400);
-      line.setAttribute('stroke', 'rgba(0,229,255,0.05)');
-      line.setAttribute('stroke-width', '1');
-      svg.appendChild(line);
-    }
-    for (let i = 0; i <= 4; i++) {
-      const line = document.createElementNS(svgNS, 'line');
-      line.setAttribute('x1', 0); line.setAttribute('y1', i * 100);
-      line.setAttribute('x2', 800); line.setAttribute('y2', i * 100);
-      line.setAttribute('stroke', 'rgba(0,229,255,0.05)');
-      line.setAttribute('stroke-width', '1');
-      svg.appendChild(line);
-    }
-
-    // Convert lat/lng to SVG coords
     function latLngToXY(lat, lng) {
-      const x = (lng + 180) * (800 / 360);
-      const y = (90 - lat) * (400 / 180);
+      const x = (lng + 180) * (1000 / 360);
+      const y = (90 - lat) * (500 / 180);
       return [x, y];
     }
 
-    // Draw dots for each country
     countries.forEach(country => {
       const c = coords[country.countryCode];
       if (!c) return;
       const [x, y] = latLngToXY(c[0], c[1]);
-      const size = 4 + (country.visits / maxVisits) * 16;
+      const size = 5 + (country.visits / maxVisits) * 15;
 
-      // Pulse ring
-      const pulse = document.createElementNS(svgNS, 'circle');
+      // Animated pulse ring
+      const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       pulse.setAttribute('cx', x); pulse.setAttribute('cy', y);
-      pulse.setAttribute('r', size + 4);
+      pulse.setAttribute('r', size + 6);
       pulse.setAttribute('fill', 'none');
-      pulse.setAttribute('stroke', 'rgba(0,229,255,0.3)');
-      pulse.setAttribute('stroke-width', '1');
-      pulse.style.animation = `pulse 2s ease-out infinite`;
+      pulse.setAttribute('stroke', 'rgba(0,229,255,0.4)');
+      pulse.setAttribute('stroke-width', '1.5');
+      pulse.style.animation = `mapPulse 2s ease-out infinite`;
       svg.appendChild(pulse);
 
+      // Glow
+      const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      glow.setAttribute('cx', x); glow.setAttribute('cy', y);
+      glow.setAttribute('r', size + 2);
+      glow.setAttribute('fill', 'rgba(0,229,255,0.15)');
+      svg.appendChild(glow);
+
       // Main dot
-      const dot = document.createElementNS(svgNS, 'circle');
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       dot.setAttribute('cx', x); dot.setAttribute('cy', y);
       dot.setAttribute('r', size);
-      dot.setAttribute('fill', 'rgba(0,229,255,0.8)');
-      dot.setAttribute('stroke', 'rgba(0,229,255,0.4)');
-      dot.setAttribute('stroke-width', '1');
-
-      // Tooltip on hover
-      const title = document.createElementNS(svgNS, 'title');
+      dot.setAttribute('fill', '#00e5ff');
+      dot.setAttribute('opacity', '0.9');
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
       title.textContent = `${country.country}: ${country.visits} visit${country.visits > 1 ? 's' : ''}`;
       dot.appendChild(title);
       svg.appendChild(dot);
     });
 
-    document.getElementById('map-container').appendChild(svg);
-
     // Legend
-    const sorted = [...countries].sort((a,b) => b.visits - a.visits);
+    const sorted = [...countries].sort((a, b) => b.visits - a.visits);
     document.getElementById('map-countries').innerHTML = sorted.slice(0, 5).map(c => {
       const flag = c.countryCode.toUpperCase().replace(/./g, ch =>
         String.fromCodePoint(127397 + ch.charCodeAt())
@@ -595,6 +570,11 @@ async function loadMap() {
   }
 }
 
+const mapStyle = document.createElement('style');
+mapStyle.textContent = `@keyframes mapPulse { 0% { opacity:1; r:8; } 100% { opacity:0; r:30; } }`;
+document.head.appendChild(mapStyle);
+
+loadMap();
 // Add pulse animation
 const style = document.createElement('style');
 style.textContent = `@keyframes pulse { 0% { r: 8; opacity: 1; } 100% { r: 24; opacity: 0; } }`;
