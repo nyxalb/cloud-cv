@@ -5,327 +5,463 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mario Kola — Cloud Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #080b10;
-    --bg2: #0d1117;
-    --bg3: #111820;
-    --accent: #00e5ff;
-    --accent2: #7c3aed;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --border: rgba(0,229,255,0.12);
-    --card: rgba(13,17,23,0.8);
-  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
-  .cursor {
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed; pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    width: 32px; height: 32px;
-    border: 1px solid rgba(0,229,255,0.4);
-    border-radius: 50%;
-    position: fixed; pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.15s, width 0.2s, height 0.2s;
-    transform: translate(-50%, -50%);
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none; z-index: 0;
-  }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 4rem;
-    background: rgba(8,11,16,0.85);
+  body { background: #020817; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+  /* Nav */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(2,8,23,0.8);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
   }
-  .nav-logo { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.1em; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a { font-size: 12px; font-weight: 600; text-decoration: none; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 4rem 4rem; position: relative; z-index: 1; }
-  .hero-content { max-width: 800px; }
-  .hero-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
-  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
-  h1 { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
-  h1 span { color: var(--accent); }
-  .hero-desc { font-size: 1.1rem; color: var(--muted); line-height: 1.7; max-width: 520px; margin-bottom: 2.5rem; }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn { padding: 0.75rem 1.75rem; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; cursor: none; }
-  .btn-primary { background: var(--accent); color: var(--bg); font-weight: 700; border: none; }
-  .btn-primary:hover { background: #00b8d4; transform: translateY(-2px); }
-  .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-  .btn-outline:hover { background: rgba(0,229,255,0.08); transform: translateY(-2px); }
-  .counter-badge { position: absolute; right: 4rem; bottom: 4rem; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-  .counter-num { font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
-  section { padding: 6rem 4rem; position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
-  .section-label { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px; }
-  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
-  h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .about-text { font-size: 1rem; color: var(--muted); line-height: 1.8; }
-  .about-text p { margin-bottom: 1rem; }
-  .about-text strong { color: var(--text); font-weight: 600; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .stat-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 4px; }
-  .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; font-family: 'Space Mono', monospace; }
-  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem; }
-  #skills { background: var(--bg2); max-width: 100%; padding: 6rem 4rem; }
-  #skills > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-  .skill-category { background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 4px; transition: border-color 0.2s; }
-  .skill-category:hover { border-color: rgba(0,229,255,0.3); }
-  .skill-cat-title { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.25rem; }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+  .nav-brand h1 {
+    font-size: 1.25rem; font-weight: 900; letter-spacing: 0.025em;
+    background: linear-gradient(90deg, #60a5fa, #67e8f9);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .nav-brand p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  nav { display: flex; gap: 2rem; }
+  nav a { font-size: 14px; color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: #fff; }
+
+  /* Hero */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: 100vh; display: flex; align-items: center;
+  }
+  .hero-bg1 {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, transparent 50%, rgba(6,182,212,0.1) 100%);
+    pointer-events: none;
+  }
+  .hero-blob1 {
+    position: absolute; top: -6rem; right: 0;
+    width: 24rem; height: 24rem; border-radius: 50%;
+    background: rgba(6,182,212,0.1); filter: blur(60px); pointer-events: none;
+  }
+  .hero-blob2 {
+    position: absolute; bottom: 0; left: 0;
+    width: 24rem; height: 24rem; border-radius: 50%;
+    background: rgba(124,58,237,0.1); filter: blur(60px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; padding: 6rem 1.5rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center;
+    border: 1px solid rgba(96,165,250,0.2);
+    background: rgba(59,130,246,0.1);
+    padding: 6px 16px; border-radius: 99px;
+    font-size: 14px; color: #93c5fd; margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 1.5rem; letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: 1.125rem; line-height: 1.75;
+    color: #cbd5e1; max-width: 36rem; margin-bottom: 2rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .btn-blue {
+    background: #2563eb; color: #fff;
+    padding: 1rem 1.5rem; border-radius: 16px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-blue:hover { background: #3b82f6; transform: scale(1.05); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff; padding: 1rem 1.5rem; border-radius: 16px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 3rem; }
+  .pill { padding: 6px 16px; border-radius: 99px; font-size: 12px; font-weight: 500; }
+  .pill-blue { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); color: #93c5fd; }
+  .pill-cyan { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #67e8f9; }
+  .pill-purple { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); color: #c4b5fd; }
+  .pill-green { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #6ee7b7; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;
+  }
+  .stat-num { font-size: 1.875rem; font-weight: 900; color: #fff; }
+  .stat-label { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .hero-visual-blob {
+    position: absolute; width: 18rem; height: 18rem; border-radius: 50%;
+    background: rgba(59,130,246,0.2); filter: blur(60px);
+  }
+  .hero-img-card {
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    border-radius: 24px; padding: 2rem;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    backdrop-filter: blur(20px);
+  }
+  .hero-img-card img { width: 100%; height: 380px; object-fit: cover; border-radius: 16px; }
+  .counter-float {
+    position: absolute; bottom: -1rem; right: -1rem;
+    background: rgba(2,8,23,0.95); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 1rem 1.5rem; text-align: center;
+    backdrop-filter: blur(12px);
+  }
+  .counter-float-num { font-size: 2rem; font-weight: 900; color: #67e8f9; line-height: 1; }
+  .counter-float-label { font-size: 11px; color: #94a3b8; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Skills */
+  #skills { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .section-tag { font-size: 13px; text-transform: uppercase; letter-spacing: 0.3em; color: #60a5fa; margin-bottom: 12px; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem; }
+  .section-header p { max-width: 36rem; color: #94a3b8; font-size: 14px; line-height: 1.7; }
+  h2 { font-size: clamp(1.875rem, 4vw, 2.5rem); font-weight: 700; }
+  h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    border-radius: 24px; padding: 2rem;
+    transition: all 0.2s;
+  }
+  .skill-card:hover { border-color: rgba(59,130,246,0.4); background: rgba(255,255,255,0.1); }
+  .skill-card h4 { font-size: 1.375rem; font-weight: 700; margin-bottom: 1rem; }
+  .skill-card p { color: #cbd5e1; line-height: 1.7; margin-bottom: 1.5rem; font-size: 14px; }
   .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .skill-tag { padding: 4px 12px; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.15); border-radius: 2px; font-size: 12px; color: var(--text); font-family: 'Space Mono', monospace; }
-  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .project-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 4px; transition: all 0.2s; position: relative; overflow: hidden; }
-  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-  .project-card:hover::before { transform: scaleX(1); }
-  .project-card:hover { border-color: rgba(0,229,255,0.25); transform: translateY(-4px); }
-  .project-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 1rem; }
-  .project-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text); }
-  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
-  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tech-tag { padding: 3px 10px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); border-radius: 2px; font-size: 11px; color: #a78bfa; font-family: 'Space Mono', monospace; }
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .edu-card { background: var(--card); border: 1px solid var(--border); padding: 1.75rem; border-radius: 4px; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s; }
-  .edu-card:hover { border-color: rgba(0,229,255,0.3); }
-  .edu-icon { width: 40px; height: 40px; flex-shrink: 0; background: rgba(0,229,255,0.08); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .skill-tag {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(15,23,42,0.7);
+    padding: 5px 12px; border-radius: 99px;
+    font-size: 12px; color: #cbd5e1;
+  }
+
+  /* Projects */
+  #projects { background: rgba(15,23,42,0.5); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 6rem 1.5rem; }
+  .projects-inner { max-width: 1280px; margin: 0 auto; }
+  .projects-header { text-align: center; margin-bottom: 4rem; }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .project-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(2,8,23,0.7);
+    border-radius: 24px; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .project-card:hover { transform: translateY(-8px); border-color: rgba(59,130,246,0.4); background: rgba(15,23,42,0.8); }
+  .project-img {
+    height: 12rem; display: flex; align-items: flex-end; padding: 1.25rem;
+    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(2,8,23,1), rgba(6,182,212,0.1));
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .project-img-badge {
+    border: 1px solid rgba(59,130,246,0.2);
+    background: rgba(0,0,0,0.3);
+    color: #93c5fd; font-size: 12px;
+    padding: 4px 12px; border-radius: 99px;
+    backdrop-filter: blur(8px);
+  }
+  .project-body { padding: 2rem; }
+  .project-tech { font-size: 13px; color: #60a5fa; margin-bottom: 8px; font-weight: 500; }
+  .project-title { font-size: 1.375rem; font-weight: 700; margin-bottom: 1rem; }
+  .project-desc { color: #cbd5e1; font-size: 14px; line-height: 1.7; }
+
+  /* About */
+  #about { max-width: 1152px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .about-text { font-size: 1.125rem; line-height: 1.75; color: #cbd5e1; }
+  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px; padding: 1.5rem;
+  }
+  .about-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #60a5fa; margin-bottom: 8px; font-weight: 600; }
+  .about-card p { color: #cbd5e1; font-size: 13px; line-height: 1.6; }
+
+  /* Education */
+  #education { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  .edu-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px; padding: 1.75rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: rgba(6,182,212,0.3); }
+  .edu-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
   .edu-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .edu-sub { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-  .edu-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); }
+  .edu-sub { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+  .edu-date { font-size: 12px; color: #67e8f9; font-weight: 500; }
   .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .cert-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 4px; text-align: center; transition: all 0.2s; }
-  .cert-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-2px); }
+  .cert-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px; padding: 1.5rem;
+    text-align: center; transition: all 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(6,182,212,0.3); transform: translateY(-2px); }
   .cert-badge { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-  .cert-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-  .cert-issuer { font-size: 11px; color: var(--muted); font-family: 'Space Mono', monospace; }
-  .cert-status { display: inline-block; margin-top: 8px; padding: 2px 8px; border-radius: 2px; font-size: 10px; font-family: 'Space Mono', monospace; letter-spacing: 0.1em; }
-  .cert-status.pursuing { background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2); color: var(--accent); }
-  .cert-status.planned { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); color: #a78bfa; }
-  #contact { background: var(--bg2); max-width: 100%; padding: 6rem 4rem; }
-  .contact-inner { max-width: 1100px; margin: 0 auto; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
-  .contact-info p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link { display: flex; align-items: center; gap: 1rem; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .contact-link:hover { color: var(--accent); }
-  .contact-link-icon { width: 36px; height: 36px; background: rgba(0,229,255,0.06); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .cert-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .cert-issuer { font-size: 12px; color: #94a3b8; }
+  .cert-status { display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 99px; font-size: 11px; font-weight: 500; }
+  .pursuing { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #67e8f9; }
+  .planned { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); color: #c4b5fd; }
+
+  /* Map */
+  #map { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
+  .map-box { border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); border-radius: 24px; overflow: hidden; position: relative; }
+
+  /* Contact CTA */
+  #contact { padding: 6rem 1.5rem; }
+  .contact-inner { max-width: 1280px; margin: 0 auto; }
+  .contact-cta {
+    max-width: 64rem; margin: 0 auto 4rem;
+    border: 1px solid rgba(59,130,246,0.2);
+    background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(6,182,212,0.1));
+    border-radius: 40px; padding: 3rem; text-align: center;
+    backdrop-filter: blur(20px);
+  }
+  .contact-cta h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; margin-bottom: 1rem; }
+  .contact-cta p { color: #cbd5e1; font-size: 1.05rem; max-width: 38rem; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-form-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; font-size: 13px; color: #94a3b8; text-decoration: none; transition: color 0.2s; }
+  .contact-link:hover { color: #67e8f9; }
+  .contact-link-icon { width: 38px; height: 38px; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
   .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
-  .form-input, .form-textarea { background: var(--bg3); border: 1px solid var(--border); border-radius: 2px; padding: 0.75rem 1rem; color: var(--text); font-family: 'Syne', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
-  .form-input:focus, .form-textarea:focus { border-color: rgba(0,229,255,0.4); }
+  .form-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #94a3b8; margin-bottom: 6px; display: block; font-weight: 600; }
+  .form-input, .form-textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0.875rem 1rem; color: #f1f5f9; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+  .form-input:focus, .form-textarea:focus { border-color: rgba(6,182,212,0.5); }
   .form-textarea { resize: vertical; min-height: 120px; }
-  .form-submit { padding: 0.875rem 2rem; background: var(--accent); color: var(--bg); border: none; border-radius: 2px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: none; transition: all 0.2s; align-self: flex-start; }
-  .form-submit:hover { background: #00b8d4; transform: translateY(-2px); }
-  footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
-  .footer-text { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
-  .footer-text span { color: var(--accent); }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-content > * { opacity: 0; animation: fadeUp 0.6s forwards; }
-  .hero-tag { animation-delay: 0.1s; }
-  h1 { animation-delay: 0.2s; }
-  .hero-desc { animation-delay: 0.3s; }
-  .hero-btns { animation-delay: 0.4s; }
+  .form-submit { background: #2563eb; color: #fff; border: none; border-radius: 16px; padding: 0.875rem 2rem; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; align-self: flex-start; }
+  .form-submit:hover { background: #3b82f6; transform: scale(1.03); }
+
+  /* Footer */
+  footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 1.5rem; text-align: center; font-size: 13px; color: #475569; }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .fade-up { opacity:0; animation: fadeUp 0.6s forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+  .delay-6 { animation-delay: 0.6s; }
+
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 6rem 1.5rem 3rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid, .projects-grid, .edu-grid, .contact-grid { grid-template-columns: 1fr; }
-    .cert-grid { grid-template-columns: 1fr 1fr; }
-    .counter-badge { right: 1.5rem; bottom: 2rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    nav { display: none; }
+    .hero-inner { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .hero-visual { display: none; }
+    .skills-grid, .projects-grid, .about-grid, .edu-grid, .cert-grid, .contact-form-section { grid-template-columns: 1fr; }
+    .about-cards { grid-template-columns: 1fr 1fr; }
+    .section-header { flex-direction: column; }
   }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- Nav -->
+<header>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <h1>Mario Kola</h1>
+      <p>Azure • Cloud • Infrastructure</p>
+    </div>
+    <nav>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#map">Visitors</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-<nav>
-  <div class="nav-logo">MK // CLOUD ENGINEER</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
+<!-- Hero -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-tag">Available for opportunities</div>
-    <h1>Mario<br><span>Kola</span></h1>
-    <p class="hero-desc">Cloud Engineer based in Somerset, UK. Building hybrid cloud infrastructure on Microsoft Azure — from home lab to enterprise-grade deployments.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn btn-primary">Get in touch</a>
-      <a href="#projects" class="btn btn-outline">View projects</a>
+  <div class="hero-bg1"></div>
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge fade-up delay-1">📍 Based in Taunton, Somerset</div>
+      <h2 class="hero-title fade-up delay-2">Azure Cloud Engineering<br>&amp; Hybrid Infrastructure</h2>
+      <p class="hero-desc fade-up delay-3">Building scalable Azure infrastructure, hybrid cloud labs, DevOps workflows and secure enterprise-style environments using Microsoft technologies and modern automation tooling.</p>
+      <div class="hero-btns fade-up delay-4">
+        <a href="#contact" class="btn-blue">Contact Me</a>
+        <a href="#skills" class="btn-ghost">View Skills</a>
+      </div>
+      <div class="hero-pills fade-up delay-4">
+        <span class="pill pill-blue">Azure</span>
+        <span class="pill pill-cyan">Terraform</span>
+        <span class="pill pill-purple">DevOps</span>
+        <span class="pill pill-green">Hybrid Cloud</span>
+      </div>
+      <div class="hero-stats fade-up delay-5">
+        <div>
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Cloud Projects</div>
+        </div>
+        <div>
+          <div class="stat-num">AZ</div>
+          <div class="stat-label">Certification Path</div>
+        </div>
+        <div>
+          <div class="stat-num">UK</div>
+          <div class="stat-label">Based in Somerset</div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="counter-badge">
-    <span class="counter-num" id="counter">—</span>
-    <span>site visitors</span>
+    <div class="hero-visual fade-up delay-6">
+      <div class="hero-visual-blob"></div>
+      <div class="hero-img-card">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Tech Setup"/>
+        <div class="counter-float">
+          <div class="counter-float-num" id="counter">—</div>
+          <div class="counter-float-label">Visitors</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="about">
-  <div class="section-label">01 — About</div>
-  <h2>Who I am</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a self-taught cloud engineer with a passion for <strong>Microsoft Azure</strong> and hybrid infrastructure. I run a home lab where I practice real-world enterprise scenarios — connecting on-premise servers to the cloud using Azure Arc, VPN gateways, and Entra ID.</p>
-      <p>My background is hands-on. I learn by building — from deploying serverless APIs to configuring Site-to-Site VPNs. I'm currently pursuing Azure certifications and actively looking for my first cloud role.</p>
-      <p>Based in <strong>Somerset, UK</strong>. Open to remote and on-site opportunities across the South West.</p>
-    </div>
-    <div class="about-stats">
-      <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Azure projects built</div></div>
-      <div class="stat-card"><div class="stat-num">AZ</div><div class="stat-label">900 in progress</div></div>
-      <div class="stat-card"><div class="stat-num">UK</div><div class="stat-label">Taunton, Somerset</div></div>
-      <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Curiosity level</div></div>
-    </div>
-  </div>
-</section>
-
+<!-- Skills -->
 <section id="skills">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="section-label">02 — Skills</div>
-    <h2>What I work with</h2>
-    <div class="skills-grid">
-      <div class="skill-category">
-        <div class="skill-cat-title">// Cloud — Azure</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Static Web Apps</span><span class="skill-tag">Azure Functions</span>
-          <span class="skill-tag">Cosmos DB</span><span class="skill-tag">Azure Arc</span>
-          <span class="skill-tag">VPN Gateway</span><span class="skill-tag">Entra ID</span>
-          <span class="skill-tag">Azure Monitor</span><span class="skill-tag">Key Vault</span>
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Skills &amp; Technologies</p>
+      <h2>What I Work With</h2>
+    </div>
+    <p>Focused on Azure cloud engineering, hybrid infrastructure, automation and enterprise-style deployments.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Azure &amp; Cloud</h4>
+      <p>Hybrid cloud deployments, Azure services, monitoring, networking and identity management.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Static Web Apps</span><span class="skill-tag">Azure Functions</span>
+        <span class="skill-tag">Cosmos DB</span><span class="skill-tag">Azure Arc</span>
+        <span class="skill-tag">VPN Gateway</span><span class="skill-tag">Entra ID</span>
+        <span class="skill-tag">Azure Monitor</span><span class="skill-tag">Key Vault</span>
+        <span class="skill-tag">Azure CLI</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Infrastructure</h4>
+      <p>Hands-on experience with Windows Server, Linux systems, virtualisation and networking.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Windows Server</span><span class="skill-tag">Active Directory</span>
+        <span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Hyper-V</span>
+        <span class="skill-tag">pfSense</span><span class="skill-tag">DNS</span>
+        <span class="skill-tag">TCP/IP</span><span class="skill-tag">VLANs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Automation &amp; DevOps</h4>
+      <p>CI/CD pipelines, scripting, infrastructure automation and cloud deployment workflows.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Terraform</span><span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">PowerShell</span><span class="skill-tag">Docker</span>
+        <span class="skill-tag">Python</span><span class="skill-tag">Bash</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="projects-inner">
+    <div class="projects-header">
+      <p class="section-tag">Portfolio</p>
+      <h2>Recent Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-img">
+          <span class="project-img-badge">Featured Project</span>
+        </div>
+        <div class="project-body">
+          <p class="project-tech">Azure Functions · Cosmos DB · GitHub Actions</p>
+          <h4 class="project-title">Cloud CV Website</h4>
+          <p class="project-desc">Built a full-stack Azure-powered CV website with visitor analytics, private IP tracking, live world map, serverless APIs, CI/CD automation and Cosmos DB integration.</p>
         </div>
       </div>
-      <div class="skill-category">
-        <div class="skill-cat-title">// Infrastructure</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Windows Server</span><span class="skill-tag">Active Directory</span>
-          <span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Hyper-V</span>
-          <span class="skill-tag">pfSense</span><span class="skill-tag">DNS</span>
-          <span class="skill-tag">TCP/IP</span><span class="skill-tag">VLANs</span>
+      <div class="project-card">
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(2,8,23,1),rgba(6,182,212,0.1));">
+          <span class="project-img-badge">Home Lab</span>
+        </div>
+        <div class="project-body">
+          <p class="project-tech">Azure Arc · VPN Gateway · Entra Connect</p>
+          <h4 class="project-title">Hybrid Azure Home Lab</h4>
+          <p class="project-desc">Connected local infrastructure to Azure using VPN Gateway, Azure Arc, Entra ID, monitoring and hybrid cloud management tooling — simulating real enterprise environments.</p>
         </div>
       </div>
-      <div class="skill-category">
-        <div class="skill-cat-title">// Development</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span><span class="skill-tag">PowerShell</span>
-          <span class="skill-tag">Bash</span><span class="skill-tag">HTML/CSS</span>
-          <span class="skill-tag">Git</span><span class="skill-tag">GitHub Actions</span>
-          <span class="skill-tag">Docker</span>
+      <div class="project-card">
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(2,8,23,1),rgba(59,130,246,0.1));">
+          <span class="project-img-badge">Real World</span>
         </div>
-      </div>
-      <div class="skill-category">
-        <div class="skill-cat-title">// Tools</div>
-        <div class="skill-tags">
-          <span class="skill-tag">VS Code</span><span class="skill-tag">Azure Portal</span>
-          <span class="skill-tag">Azure CLI</span><span class="skill-tag">GitHub</span>
-          <span class="skill-tag">Terraform</span><span class="skill-tag">Microsoft 365</span>
+        <div class="project-body">
+          <p class="project-tech">CCTV · Networking</p>
+          <h4 class="project-title">Business CCTV Installation</h4>
+          <p class="project-desc">Installed and configured a full remote monitoring CCTV system for a local business, including network setup and remote access configuration.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="section-label">03 — Projects</div>
-  <h2>What I've built</h2>
-  <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-num">PROJECT_01</div>
-      <div class="project-title">Cloud CV Website</div>
-      <p class="project-desc">This site. A full-stack cloud application with a serverless Python API, NoSQL visitor counter with private IP tracking, and automated CI/CD deployment pipeline. Built entirely on Azure free tier.</p>
-      <div class="project-tech">
-        <span class="tech-tag">Static Web Apps</span><span class="tech-tag">Azure Functions</span>
-        <span class="tech-tag">Cosmos DB</span><span class="tech-tag">GitHub Actions</span>
+<!-- About -->
+<section id="about">
+  <p class="section-tag">About Me</p>
+  <h2 style="margin-bottom:2rem;">Building Real-World Cloud Infrastructure</h2>
+  <div class="about-grid">
+    <p class="about-text">I'm a self-taught Azure Cloud Engineer focused on hybrid infrastructure, automation, monitoring and modern Microsoft cloud technologies. I build hands-on projects in my home lab to simulate enterprise environments and continuously improve my practical cloud engineering skills. Based in <strong style="color:#f1f5f9;">Taunton, Somerset</strong> — open to remote and on-site opportunities across the UK.</p>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-label">Current Focus</div>
+        <p>Azure Administration, Infrastructure Automation and Hybrid Cloud.</p>
       </div>
-    </div>
-    <div class="project-card">
-      <div class="project-num">PROJECT_02</div>
-      <div class="project-title">Hybrid Home Lab</div>
-      <p class="project-desc">Connected a physical home lab to Azure using Azure Arc, Site-to-Site VPN, and Entra Connect. Simulates real enterprise hybrid cloud architecture with Azure Monitor dashboards.</p>
-      <div class="project-tech">
-        <span class="tech-tag">Azure Arc</span><span class="tech-tag">VPN Gateway</span>
-        <span class="tech-tag">Entra Connect</span><span class="tech-tag">Azure Monitor</span>
+      <div class="about-card">
+        <div class="about-card-label">Learning Path</div>
+        <p>Working toward AZ-900 and AZ-104, building real-world cloud projects.</p>
       </div>
-    </div>
-    <div class="project-card">
-      <div class="project-num">PROJECT_03</div>
-      <div class="project-title">Coming soon</div>
-      <p class="project-desc">Currently building more Azure projects to expand my portfolio and deepen my hands-on cloud experience.</p>
-      <div class="project-tech"><span class="tech-tag">In progress</span></div>
-    </div>
-    <div class="project-card">
-      <div class="project-num">PROJECT_04</div>
-      <div class="project-title">Coming soon</div>
-      <p class="project-desc">Currently building more Azure projects to expand my portfolio and deepen my hands-on cloud experience.</p>
-      <div class="project-tech"><span class="tech-tag">In progress</span></div>
+      <div class="about-card">
+        <div class="about-card-label">Home Lab</div>
+        <p>Running Windows Server, Linux VMs, pfSense and Azure Arc integration.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Location</div>
+        <p>Taunton, Somerset, UK. Open to remote roles nationwide.</p>
+      </div>
     </div>
   </div>
 </section>
-<!-- Visitor Map -->
-<section id="map">
-  <div class="section-label">03.5 — Live Visitor Map</div>
-  <h2>Who's been here</h2>
-  <p style="color:var(--muted);font-size:13px;margin-bottom:2rem;font-family:'Space Mono',monospace;">
-    Real visitor data pulled from Azure Cosmos DB — updated on every visit.
-  </p>
-  <div style="
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:4px;
-    overflow:hidden;
-    position:relative;
-  ">
-    <div id="map-container" style="width:100%;height:420px;"></div>
-    <div id="map-legend" style="
-      position:absolute;bottom:1rem;right:1rem;
-      background:rgba(8,11,16,0.9);
-      border:1px solid var(--border);
-      border-radius:4px;padding:0.75rem 1rem;
-      font-family:'Space Mono',monospace;font-size:11px;
-    ">
-      <div style="color:var(--accent);margin-bottom:6px;letter-spacing:0.1em;">TOP VISITORS</div>
-      <div id="map-countries" style="color:var(--muted);line-height:2;"></div>
-    </div>
-  </div>
-</section>
+
+<!-- Education & Certs -->
 <section id="education">
-  <div class="section-label">04 — Education & Certifications</div>
-  <h2>Learning path</h2>
-  <div class="edu-grid" style="margin-bottom:2rem;">
+  <p class="section-tag">Education &amp; Certifications</p>
+  <h2 style="margin-bottom:2rem;">Learning Path</h2>
+  <div class="edu-grid">
     <div class="edu-card">
       <div class="edu-icon">🎓</div>
       <div>
@@ -347,7 +483,7 @@
     <div class="cert-card">
       <span class="cert-badge">☁️</span>
       <div class="cert-name">AZ-900</div>
-      <div class="cert-issuer">Microsoft Azure</div>
+      <div class="cert-issuer">Azure Fundamentals</div>
       <span class="cert-status pursuing">Pursuing</span>
     </div>
     <div class="cert-card">
@@ -365,38 +501,55 @@
   </div>
 </section>
 
+<!-- Visitor Map -->
+<section id="map">
+  <p class="section-tag">Live Data</p>
+  <h2 style="margin-bottom:0.75rem;">Who's been here</h2>
+  <p style="color:#94a3b8;font-size:13px;margin-bottom:2rem;">Real visitor data pulled from Azure Cosmos DB — updated on every visit.</p>
+  <div class="map-box">
+    <div id="map-container" style="width:100%;height:420px;position:relative;"></div>
+    <div id="map-legend" style="position:absolute;bottom:1.5rem;right:1.5rem;background:rgba(2,8,23,0.92);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:1rem 1.25rem;font-size:12px;min-width:180px;backdrop-filter:blur(12px);">
+      <div style="color:#67e8f9;margin-bottom:8px;font-weight:600;letter-spacing:0.05em;font-size:11px;text-transform:uppercase;">Top Visitors</div>
+      <div id="map-countries" style="color:#94a3b8;line-height:2;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
 <section id="contact">
   <div class="contact-inner">
-    <div class="section-label">05 — Contact</div>
-    <h2>Let's talk</h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p>I'm currently looking for junior cloud engineering roles in the UK. If you're hiring or want to connect, feel free to reach out.</p>
+    <div class="contact-cta">
+      <p class="section-tag">Get In Touch</p>
+      <h3>Looking For a Cloud Engineer?</h3>
+      <p>I'm currently open to junior cloud engineering, infrastructure and Azure-focused opportunities across the UK — remote or on-site.</p>
+      <div class="cta-btns">
+        <a href="mailto:mario@mariokola.co.uk" class="btn-blue">Email Me</a>
+        <a href="https://linkedin.com/in/mario-kola-640a8b3b5" class="btn-ghost" target="_blank">LinkedIn</a>
+        <a href="https://github.com/nyxalb" class="btn-ghost" target="_blank">GitHub</a>
+      </div>
+    </div>
+    <div class="contact-form-section">
+      <div>
+        <p class="section-tag">Direct Contact</p>
+        <h3 style="margin-bottom:1rem;">Let's talk</h3>
+        <p style="color:#94a3b8;font-size:14px;line-height:1.8;margin-bottom:0.5rem;">I'm currently looking for junior cloud engineering roles in the UK. If you're hiring or want to connect, feel free to reach out.</p>
         <div class="contact-links">
-          <a href="mailto:mario@mariokola.co.uk" class="contact-link">
-            <div class="contact-link-icon">✉️</div>mario@mariokola.co.uk
-          </a>
-          <a href="https://github.com/nyxalb" class="contact-link" target="_blank">
-            <div class="contact-link-icon">💻</div>github.com/nyxalb
-          </a>
-          <a href="https://linkedin.com/in/mario-kola-640a8b3b5" class="contact-link" target="_blank">
-            <div class="contact-link-icon">🔗</div>linkedin.com/in/mariokola
-          </a>
-          <a href="https://mariokola.co.uk" class="contact-link">
-            <div class="contact-link-icon">🌐</div>mariokola.co.uk
-          </a>
+          <a href="mailto:mario@mariokola.co.uk" class="contact-link"><div class="contact-link-icon">✉️</div>mario@mariokola.co.uk</a>
+          <a href="https://github.com/nyxalb" class="contact-link" target="_blank"><div class="contact-link-icon">💻</div>github.com/nyxalb</a>
+          <a href="https://linkedin.com/in/mario-kola-640a8b3b5" class="contact-link" target="_blank"><div class="contact-link-icon">🔗</div>linkedin.com/in/mario-kola-640a8b3b5</a>
+          <a href="https://mariokola.co.uk" class="contact-link"><div class="contact-link-icon">🌐</div>mariokola.co.uk</a>
         </div>
       </div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-group">
+        <div>
           <label class="form-label">Your name</label>
           <input type="text" class="form-input" placeholder="John Smith" required>
         </div>
-        <div class="form-group">
+        <div>
           <label class="form-label">Email address</label>
           <input type="email" class="form-input" placeholder="john@company.com" required>
         </div>
-        <div class="form-group">
+        <div>
           <label class="form-label">Message</label>
           <textarea class="form-textarea" placeholder="Tell me about the opportunity..." required></textarea>
         </div>
@@ -407,32 +560,12 @@
 </section>
 
 <footer>
-  <div class="footer-text">© 2026 <span>Mario Kola</span> — Cloud Engineer</div>
-  <div class="footer-text">Built on <span>Azure</span> · Deployed via <span>GitHub Actions</span></div>
+  <p>© 2026 Mario Kola • Azure Cloud Engineer • Taunton, Somerset</p>
 </footer>
 
 <script>
-  // ── Custom cursor ──
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  });
-  function animRing() {
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-  document.querySelectorAll('a,button,.btn').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.width = '48px'; ring.style.height = '48px'; });
-    el.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; });
-  });
-
-  // ── Visitor counter + private IP/geo tracking ──
-    async function updateCounter() {
+  // ── Visitor counter ──
+  async function updateCounter() {
     try {
       const ipRes = await fetch('https://api.ipify.org?format=json');
       const { ip } = await ipRes.json();
@@ -446,142 +579,105 @@
   updateCounter();
 
   // ── Contact form ──
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('.form-submit');
-    btn.textContent = 'Message sent ✓';
-    btn.style.background = '#10b981';
-    setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; e.target.reset(); }, 3000);
+    const form = e.target;
+    const name = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const message = form.querySelector('textarea').value;
+    btn.textContent = 'Sending...'; btn.style.opacity = '0.7';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+      const data = await res.json();
+      if (data.success) {
+        btn.textContent = 'Message sent ✓'; btn.style.background = '#10b981'; btn.style.opacity = '1';
+        form.reset();
+      } else {
+        btn.textContent = 'Failed — try again'; btn.style.background = '#ef4444'; btn.style.opacity = '1';
+      }
+      setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; }, 4000);
+    } catch(e) {
+      btn.textContent = 'Failed — try again'; btn.style.background = '#ef4444'; btn.style.opacity = '1';
+      setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; }, 4000);
+    }
   }
+
+  // ── World Map ──
+  async function loadMap() {
+    try {
+      const res = await fetch('/api/visitormap');
+      const data = await res.json();
+      const countries = data.countries || [];
+      const container = document.getElementById('map-container');
+      container.innerHTML = `
+        <div style="position:relative;width:100%;height:420px;overflow:hidden;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png"
+            style="width:100%;height:100%;object-fit:cover;opacity:0.35;filter:hue-rotate(160deg) saturate(2);" alt="World map"/>
+          <svg id="dots-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 1000 500"></svg>
+        </div>`;
+      if (!countries.length) return;
+      const coords = {
+        'GB':[53,-2],'US':[38,-97],'DE':[51,10],'FR':[46,2],'NL':[52,5],
+        'CA':[56,-106],'AU':[-25,134],'IN':[21,79],'BR':[-14,-51],'JP':[36,138],
+        'SG':[1,104],'ZA':[-30,23],'NG':[9,8],'PL':[52,19],'ES':[40,-4],
+        'IT':[42,13],'RU':[62,105],'CN':[36,104],'MX':[23,-102],'AR':[-38,-63],
+        'KR':[36,128],'TR':[39,35],'SE':[60,18],'NO':[61,8],'DK':[56,10],
+        'FI':[62,26],'PT':[39,-8],'IE':[53,-8],'BE':[51,4],'CH':[47,8],
+        'AT':[47,14],'PK':[30,69],'EG':[27,30],'GH':[8,-1],'KE':[1,38],
+        'UA':[49,32],'ID':[-2,118],'TH':[15,101],'MY':[4,109],'PH':[13,122],
+        'VN':[16,108],'NZ':[-41,174],'RO':[46,25],'HU':[47,19],'CZ':[50,15],
+        'GR':[39,22],'IL':[31,35],'SA':[24,45],'AE':[24,54],'CO':[4,-72],
+      };
+      const maxVisits = Math.max(...countries.map(c => c.visits));
+      const svg = document.getElementById('dots-layer');
+      const ns = 'http://www.w3.org/2000/svg';
+      function latLngToXY(lat, lng) { return [(lng+180)*(1000/360),(90-lat)*(500/180)]; }
+      countries.forEach(country => {
+        const c = coords[country.countryCode]; if (!c) return;
+        const [x,y] = latLngToXY(c[0],c[1]);
+        const size = 5 + (country.visits/maxVisits)*15;
+        const pulse = document.createElementNS(ns,'circle');
+        pulse.setAttribute('cx',x); pulse.setAttribute('cy',y); pulse.setAttribute('r',size+6);
+        pulse.setAttribute('fill','none'); pulse.setAttribute('stroke','rgba(103,232,249,0.4)'); pulse.setAttribute('stroke-width','1.5');
+        pulse.style.animation='mapPulse 2s ease-out infinite'; svg.appendChild(pulse);
+        const glow = document.createElementNS(ns,'circle');
+        glow.setAttribute('cx',x); glow.setAttribute('cy',y); glow.setAttribute('r',size+2);
+        glow.setAttribute('fill','rgba(103,232,249,0.15)'); svg.appendChild(glow);
+        const dot = document.createElementNS(ns,'circle');
+        dot.setAttribute('cx',x); dot.setAttribute('cy',y); dot.setAttribute('r',size);
+        dot.setAttribute('fill','#67e8f9'); dot.setAttribute('opacity','0.9');
+        const title = document.createElementNS(ns,'title');
+        title.textContent=`${country.country}: ${country.visits} visit${country.visits>1?'s':''}`;
+        dot.appendChild(title); svg.appendChild(dot);
+      });
+      const sorted = [...countries].sort((a,b)=>b.visits-a.visits);
+      document.getElementById('map-countries').innerHTML = sorted.slice(0,5).map(c => {
+        const flag = c.countryCode.toUpperCase().replace(/./g,ch=>String.fromCodePoint(127397+ch.charCodeAt()));
+        return `<div style="display:flex;justify-content:space-between;gap:16px;"><span>${flag} ${c.country}</span><span style="color:#67e8f9;">${c.visits}</span></div>`;
+      }).join('');
+    } catch(e) { console.log('Map error:',e); }
+  }
+  const mapStyle = document.createElement('style');
+  mapStyle.textContent=`@keyframes mapPulse{0%{opacity:1;}100%{opacity:0;transform:scale(2);}}`;
+  document.head.appendChild(mapStyle);
+  loadMap();
 
   // ── Scroll animations ──
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
+      if (entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.skill-category,.project-card,.edu-card,.cert-card,.stat-card').forEach(el => {
-    el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s, transform 0.5s';
+  document.querySelectorAll('.skill-card,.project-card,.edu-card,.cert-card,.about-card').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(20px)';
+    el.style.transition='opacity 0.5s, transform 0.5s';
     observer.observe(el);
   });
-// ── World Map ──
-async function loadMap() {
-  try {
-    const res = await fetch('/api/visitormap');
-    const data = await res.json();
-    const countries = data.countries || [];
-
-    const container = document.getElementById('map-container');
-    container.style.position = 'relative';
-    container.style.background = 'transparent';
-
-    // Load world map as image overlay
-    container.innerHTML = `
-      <div style="position:relative;width:100%;height:420px;overflow:hidden;">
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png"
-          style="width:100%;height:100%;object-fit:cover;opacity:0.35;filter:hue-rotate(160deg) saturate(2);"
-          alt="World map"
-        />
-        <svg id="dots-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 1000 500"></svg>
-      </div>
-    `;
-
-    if (countries.length === 0) return;
-
-    const coords = {
-      'GB': [53, -2], 'US': [38, -97], 'DE': [51, 10], 'FR': [46, 2],
-      'NL': [52, 5], 'CA': [56, -106], 'AU': [-25, 134], 'IN': [21, 79],
-      'BR': [-14, -51], 'JP': [36, 138], 'SG': [1, 104], 'ZA': [-30, 23],
-      'NG': [9, 8], 'PL': [52, 19], 'ES': [40, -4], 'IT': [42, 13],
-      'RU': [62, 105], 'CN': [36, 104], 'MX': [23, -102], 'AR': [-38, -63],
-      'KR': [36, 128], 'TR': [39, 35], 'SE': [60, 18], 'NO': [61, 8],
-      'DK': [56, 10], 'FI': [62, 26], 'PT': [39, -8], 'IE': [53, -8],
-      'BE': [51, 4], 'CH': [47, 8], 'AT': [47, 14], 'PK': [30, 69],
-      'EG': [27, 30], 'GH': [8, -1], 'KE': [1, 38], 'UA': [49, 32],
-      'ID': [-2, 118], 'TH': [15, 101], 'MY': [4, 109], 'PH': [13, 122],
-      'VN': [16, 108], 'NZ': [-41, 174], 'RO': [46, 25], 'HU': [47, 19],
-      'CZ': [50, 15], 'GR': [39, 22], 'IL': [31, 35], 'SA': [24, 45],
-      'AE': [24, 54], 'CO': [4, -72], 'CL': [-30, -71], 'PE': [-10, -76],
-    };
-
-    const maxVisits = Math.max(...countries.map(c => c.visits));
-    const svg = document.getElementById('dots-layer');
-
-    function latLngToXY(lat, lng) {
-      const x = (lng + 180) * (1000 / 360);
-      const y = (90 - lat) * (500 / 180);
-      return [x, y];
-    }
-
-    countries.forEach(country => {
-      const c = coords[country.countryCode];
-      if (!c) return;
-      const [x, y] = latLngToXY(c[0], c[1]);
-      const size = 5 + (country.visits / maxVisits) * 15;
-
-      // Animated pulse ring
-      const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      pulse.setAttribute('cx', x); pulse.setAttribute('cy', y);
-      pulse.setAttribute('r', size + 6);
-      pulse.setAttribute('fill', 'none');
-      pulse.setAttribute('stroke', 'rgba(0,229,255,0.4)');
-      pulse.setAttribute('stroke-width', '1.5');
-      pulse.style.animation = `mapPulse 2s ease-out infinite`;
-      svg.appendChild(pulse);
-
-      // Glow
-      const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      glow.setAttribute('cx', x); glow.setAttribute('cy', y);
-      glow.setAttribute('r', size + 2);
-      glow.setAttribute('fill', 'rgba(0,229,255,0.15)');
-      svg.appendChild(glow);
-
-      // Main dot
-      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      dot.setAttribute('cx', x); dot.setAttribute('cy', y);
-      dot.setAttribute('r', size);
-      dot.setAttribute('fill', '#00e5ff');
-      dot.setAttribute('opacity', '0.9');
-      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-      title.textContent = `${country.country}: ${country.visits} visit${country.visits > 1 ? 's' : ''}`;
-      dot.appendChild(title);
-      svg.appendChild(dot);
-    });
-
-    // Legend
-    const sorted = [...countries].sort((a, b) => b.visits - a.visits);
-    document.getElementById('map-countries').innerHTML = sorted.slice(0, 5).map(c => {
-      const flag = c.countryCode.toUpperCase().replace(/./g, ch =>
-        String.fromCodePoint(127397 + ch.charCodeAt())
-      );
-      return `<div style="display:flex;justify-content:space-between;gap:16px;">
-        <span>${flag} ${c.country}</span>
-        <span style="color:var(--accent);">${c.visits}</span>
-      </div>`;
-    }).join('');
-
-  } catch(e) {
-    console.log('Map error:', e);
-  }
-}
-
-const mapStyle = document.createElement('style');
-mapStyle.textContent = `@keyframes mapPulse { 0% { opacity:1; r:8; } 100% { opacity:0; r:30; } }`;
-document.head.appendChild(mapStyle);
-
-loadMap();
-// Add pulse animation
-const style = document.createElement('style');
-style.textContent = `@keyframes pulse { 0% { r: 8; opacity: 1; } 100% { r: 24; opacity: 0; } }`;
-document.head.appendChild(style);
-
-loadMap();
-
 </script>
 </body>
 </html>
