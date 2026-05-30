@@ -1,6 +1,8 @@
 import azure.functions as func
 import azure.cosmos.cosmos_client as cosmos
-import os, json, urllib.request
+import os
+import json
+import urllib.request
 from datetime import datetime
 
 app = func.FunctionApp()
@@ -145,3 +147,5 @@ Sent from your CV site contact form
             status_code=500,
             headers={{"Access-Control-Allow-Origin": "*"}}
         )
+    
+    

@@ -83,6 +83,7 @@
   .exp-list li { font-size:13px; color:#cbd5e1; padding-left:1.25rem; position:relative; line-height:1.6; }
   .exp-list li::before { content:'→'; position:absolute; left:0; color:#60a5fa; font-size:12px; }
 
+  
   /* Projects */
   #projects { padding:6rem 1.5rem; }
   .projects-inner { max-width:1280px; margin:0 auto; }
@@ -174,6 +175,108 @@
     .about-cards{grid-template-columns:1fr 1fr;}
     .skills-header{flex-direction:column;}
   }
+ /* Your existing CSS */
+
+    body {
+      background:#0f172a;
+    }
+
+    /* AI Assistant */
+
+#ai-chat{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  z-index:9999;
+}
+
+#chat-toggle{
+  width:60px;
+  height:60px;
+  border:none;
+  border-radius:50%;
+  background:#67e8f9;
+  cursor:pointer;
+  font-size:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+#chat-window{
+  display:none;
+  width:380px;
+  height:550px;
+  background:#020817;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:12px;
+  backdrop-filter:blur(20px);
+}
+
+#chat-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+#close-chat{
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+#chat-messages{
+  height:420px;
+  overflow-y:auto;
+  padding:15px;
+}
+
+.bot-message,
+.user-message{
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.bot-message{
+  background:rgba(103,232,249,.12);
+}
+
+.user-message{
+  background:rgba(255,255,255,.08);
+  margin-left:auto;
+}
+
+#chat-input-area{
+  display:flex;
+  gap:8px;
+  padding:12px;
+}
+
+#chat-input{
+  flex:1;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  color:white;
+  padding:10px;
+}
+
+#send-btn{
+  border:none;
+  background:#2563eb;
+  color:white;
+  border-radius:10px;
+  padding:10px 16px;
+  cursor:pointer;
+}
+
+  
 </style>
 </head>
 <body>
@@ -211,7 +314,10 @@
   <div class="hero-inner">
     <div>
       <div class="hero-badge fade-up d1">📍 Based in Somerset</div>
-      <h2 class="hero-title fade-up d2">Azure Cloud Engineering<br>&amp; Hybrid Infrastructure</h2>
+      <h2 class="hero-title fade-up d2">
+  I'm a<br>
+  <span id="typing-text" style="background:linear-gradient(90deg,#67e8f9,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></span><span id="typing-cursor" style="color:#67e8f9;animation:cursorBlink 1s infinite;">|</span>
+</h2>
       <p class="hero-desc fade-up d3">Building scalable Azure infrastructure, hybrid cloud labs, DevOps workflows and secure enterprise-style environments. Self-taught engineer with real-world IT and cybersecurity experience.</p>
       <div class="hero-btns fade-up d4">
         <a href="#contact" class="btn-blue">Contact Me</a>
@@ -982,6 +1088,131 @@ async function loadGitHubGraph() {
   }
 }
 loadGitHubGraph();
+// ── AI Assistant ──
+
+const chatToggle = document.getElementById('chat-toggle');
+const chatWindow = document.getElementById('chat-window');
+const closeChat = document.getElementById('close-chat');
+const sendBtn = document.getElementById('send-btn');
+const chatInput = document.getElementById('chat-input');
+const messages = document.getElementById('chat-messages');
+
+chatToggle.onclick = () => {
+  chatWindow.style.display = 'block';
+};
+
+closeChat.onclick = () => {
+  chatWindow.style.display = 'none';
+};
+
+async function sendMessage() {
+
+  const text = chatInput.value.trim();
+
+  if(!text) return;
+
+  messages.innerHTML += `
+  <div class="user-message">${text}</div>
+  `;
+
+  chatInput.value = '';
+
+  messages.innerHTML += `
+  <div class="bot-message" id="typing">
+    Thinking...
+  </div>
+  `;
+
+  messages.scrollTop = messages.scrollHeight;
+
+  try {
+
+    const res = await fetch('/api/chat', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        message:text
+      })
+    });
+
+    const data = await res.json();
+
+    document.getElementById('typing').remove();
+
+    messages.innerHTML += `
+    <div class="bot-message">
+      ${data.reply}
+    </div>
+    `;
+
+  } catch {
+
+    document.getElementById('typing').remove();
+
+    messages.innerHTML += `
+    <div class="bot-message">
+      Sorry, I couldn't connect.
+    </div>
+    `;
+  }
+
+  messages.scrollTop = messages.scrollHeight;
+}
+
+sendBtn.addEventListener('click', sendMessage);
+
+chatInput.addEventListener('keypress', e => {
+  if(e.key === 'Enter'){
+    sendMessage();
+  }
+});
+
+// ── Typing animation ──
+const titles = [
+  'Cloud Engineer',
+  'Azure Specialist',
+  'Home Lab Builder',
+  'DevOps Enthusiast',
+  'IT Technician',
+  'Security Minded',
+  'AZ-900 Candidate',
+  'Hybrid Cloud Guy',
+];
+let titleIndex = 0;
+let charIndex = 0;
+let deleting = false;
+const typingEl = document.getElementById('typing-text');
+
+const typingStyle = document.createElement('style');
+typingStyle.textContent = `@keyframes cursorBlink { 0%,100%{opacity:1;} 50%{opacity:0;} }`;
+document.head.appendChild(typingStyle);
+
+function type() {
+  const current = titles[titleIndex];
+  if (!deleting) {
+    typingEl.textContent = current.slice(0, charIndex + 1);
+    charIndex++;
+    if (charIndex === current.length) {
+      deleting = true;
+      setTimeout(type, 2000);
+      return;
+    }
+    setTimeout(type, 80);
+  } else {
+    typingEl.textContent = current.slice(0, charIndex - 1);
+    charIndex--;
+    if (charIndex === 0) {
+      deleting = false;
+      titleIndex = (titleIndex + 1) % titles.length;
+      setTimeout(type, 400);
+      return;
+    }
+    setTimeout(type, 40);
+  }
+}
+type();
 </script>
 <!-- Terminal Easter Egg -->
 <div id="terminal" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:640px;max-width:95vw;background:rgba(2,8,23,0.97);border:1px solid rgba(103,232,249,0.3);border-radius:16px;padding:0;z-index:9000;box-shadow:0 25px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);font-family:'Courier New',monospace;">
@@ -995,6 +1226,32 @@ loadGitHubGraph();
   <div style="padding:0.5rem 1rem 1rem;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,0.06);">
     <span style="color:#67e8f9;font-size:13px;">❯</span>
     <input id="terminal-input" type="text" style="flex:1;background:transparent;border:none;outline:none;color:#f1f5f9;font-family:'Courier New',monospace;font-size:13px;" placeholder="type a command..." autocomplete="off"/>
+  </div>
+</div>
+<!-- AI Assistant -->
+<div id="ai-chat">
+  <button id="chat-toggle">💬</button>
+
+  <div id="chat-window">
+    <div id="chat-header">
+      <span>AI Assistant</span>
+      <button id="close-chat">✕</button>
+    </div>
+
+    <div id="chat-messages">
+      <div class="bot-message">
+        Hi! Ask me about Mario's skills, projects, experience or certifications.
+      </div>
+    </div>
+
+    <div id="chat-input-area">
+      <input
+        type="text"
+        id="chat-input"
+        placeholder="Ask me anything..."
+      />
+      <button id="send-btn">Send</button>
+    </div>
   </div>
 </div>
 
