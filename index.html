@@ -571,6 +571,34 @@
     </div>
   </div>
 </section>
+<!-- GitHub Activity -->
+<section id="github" class="section-wrap">
+  <p class="section-tag">GitHub Activity</p>
+  <h2>Actively Building</h2>
+  <p style="color:#94a3b8;font-size:13px;margin-bottom:2rem;">Live commit activity pulled from GitHub API — updated automatically.</p>
+  <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:2rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="https://github.com/nyxalb.png" style="width:40px;height:40px;border-radius:50%;border:2px solid rgba(103,232,249,0.3);" alt="GitHub avatar"/>
+        <div>
+          <div style="font-size:14px;font-weight:600;">nyxalb</div>
+          <div style="font-size:12px;color:#94a3b8;" id="github-stats">Loading...</div>
+        </div>
+      </div>
+      <a href="https://github.com/nyxalb" target="_blank" style="font-size:12px;color:#67e8f9;text-decoration:none;border:1px solid rgba(103,232,249,0.2);padding:6px 16px;border-radius:99px;transition:all 0.2s;" onmouseover="this.style.background='rgba(103,232,249,0.1)'" onmouseout="this.style.background='transparent'">View GitHub →</a>
+    </div>
+    <div id="github-graph" style="overflow-x:auto;"></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-top:1rem;justify-content:flex-end;">
+      <span style="font-size:11px;color:#94a3b8;">Less</span>
+      <div style="width:12px;height:12px;border-radius:3px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);"></div>
+      <div style="width:12px;height:12px;border-radius:3px;background:rgba(103,232,249,0.2);"></div>
+      <div style="width:12px;height:12px;border-radius:3px;background:rgba(103,232,249,0.4);"></div>
+      <div style="width:12px;height:12px;border-radius:3px;background:rgba(103,232,249,0.7);"></div>
+      <div style="width:12px;height:12px;border-radius:3px;background:#67e8f9;"></div>
+      <span style="font-size:11px;color:#94a3b8;">More</span>
+    </div>
+  </div>
+</section>
 
 <!-- Visitor Map -->
 <section id="map" class="section-wrap">
@@ -609,6 +637,7 @@
           <a href="https://github.com/nyxalb" class="contact-link" target="_blank"><div class="contact-link-icon">💻</div>github.com/nyxalb</a>
           <a href="https://linkedin.com/in/" class="contact-link" target="_blank"><div class="contact-link-icon">🔗</div>linkedin.com/</a>
           <a href="https://mariokola.co.uk" class="contact-link"><div class="contact-link-icon">🌐</div>mariokola.co.uk</a>
+          <a href="#github">GitHub</a>
         </div>
       </div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -867,7 +896,92 @@ document.getElementById('terminal-input').addEventListener('keydown', e => {
     e.target.value = historyIndex >= 0 ? terminalHistory[historyIndex] : '';
   }
 });
+// ── GitHub Activity Graph ──
+async function loadGitHubGraph() {
+  try {
+    const username = 'nyxalb';
 
+    // Fetch repos
+    const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+    const repos = await reposRes.json();
+
+    // Fetch recent events
+    const eventsRes = await fetch(`https://api.github.com/users/${username}/events?per_page=100`);
+    const events = await eventsRes.json();
+
+    // Count commits per day over last 52 weeks
+    const commitsByDay = {};
+    const now = new Date();
+    const yearAgo = new Date(now);
+    yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+
+    events.forEach(event => {
+      if (event.type === 'PushEvent') {
+        const date = event.created_at.split('T')[0];
+        const commits = event.payload.commits ? event.payload.commits.length : 1;
+        commitsByDay[date] = (commitsByDay[date] || 0) + commits;
+      }
+    });
+
+    // Build 52 weeks grid
+    const weeks = 52;
+    const days = 7;
+    const cellSize = 14;
+    const cellGap = 3;
+    const totalWidth = weeks * (cellSize + cellGap);
+    const totalHeight = days * (cellSize + cellGap);
+
+    let svg = `<svg width="${totalWidth}" height="${totalHeight + 24}" viewBox="0 0 ${totalWidth} ${totalHeight + 24}" xmlns="http://www.w3.org/2000/svg">`;
+
+    // Day labels
+    const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+    dayLabels.forEach((label, i) => {
+      if (label) svg += `<text x="0" y="${i * (cellSize + cellGap) + cellSize}" fill="#64748b" font-size="9" font-family="Inter,sans-serif">${label}</text>`;
+    });
+
+    // Get start date (52 weeks ago, start of week)
+    const startDate = new Date(yearAgo);
+    startDate.setDate(startDate.getDate() - startDate.getDay());
+
+    let totalCommits = 0;
+    let activeDays = 0;
+
+    for (let week = 0; week < weeks; week++) {
+      for (let day = 0; day < days; day++) {
+        const date = new Date(startDate);
+        date.setDate(startDate.getDate() + week * 7 + day);
+        const dateStr = date.toISOString().split('T')[0];
+        const count = commitsByDay[dateStr] || 0;
+        if (count > 0) { totalCommits += count; activeDays++; }
+
+        let color;
+        if (count === 0) color = 'rgba(255,255,255,0.05)';
+        else if (count <= 2) color = 'rgba(103,232,249,0.25)';
+        else if (count <= 4) color = 'rgba(103,232,249,0.45)';
+        else if (count <= 7) color = 'rgba(103,232,249,0.7)';
+        else color = '#67e8f9';
+
+        const x = week * (cellSize + cellGap);
+        const y = day * (cellSize + cellGap) + 20;
+
+        svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" fill="${color}">
+          <title>${dateStr}: ${count} commit${count !== 1 ? 's' : ''}</title>
+        </rect>`;
+      }
+    }
+
+    svg += '</svg>';
+
+    document.getElementById('github-graph').innerHTML = svg;
+    document.getElementById('github-stats').textContent =
+      `${repos.length} repos · ${totalCommits} commits in the last year · ${activeDays} active days`;
+
+  } catch(e) {
+    document.getElementById('github-graph').innerHTML = '<p style="color:#64748b;font-size:13px;">Could not load GitHub activity.</p>';
+    document.getElementById('github-stats').textContent = 'github.com/nyxalb';
+  }
+}
+loadGitHubGraph();
 </script>
 <!-- Terminal Easter Egg -->
 <div id="terminal" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:640px;max-width:95vw;background:rgba(2,8,23,0.97);border:1px solid rgba(103,232,249,0.3);border-radius:16px;padding:0;z-index:9000;box-shadow:0 25px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);font-family:'Courier New',monospace;">
