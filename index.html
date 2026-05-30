@@ -733,6 +733,156 @@
   // ── Scroll animations ──
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});
   document.querySelectorAll('.skill-card,.project-card,.edu-card,.cert-card,.about-card,.strength-card,.exp-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s, transform 0.5s';obs.observe(el);});
+// ── Terminal Easter Egg ──
+const terminalCmds = {
+  help: `<span style="color:#67e8f9;">Available commands:</span>
+  whoami          — who is Mario?
+  ls projects     — list projects
+  ls skills       — list skills
+  cat about.txt   — about me
+  cat contact.txt — contact info
+  ping azure      — ping Azure
+  hack            — try to hack me
+  sudo hire mario — hire command
+  clear           — clear terminal
+  exit            — close terminal`,
+
+  whoami: `<span style="color:#10b981;">mario@mariokola.co.uk</span>
+  Role:     Cloud Engineer & IT Technician
+  Location: Taunton, Somerset, UK
+  Status:   <span style="color:#67e8f9;">Available for opportunities</span>
+  Skills:   Azure · DevOps · Cybersecurity · Hardware`,
+
+  'ls projects': `<span style="color:#67e8f9;">drwxr-xr-x</span>  cloud-cv-website/
+<span style="color:#67e8f9;">drwxr-xr-x</span>  hybrid-azure-home-lab/
+<span style="color:#67e8f9;">drwxr-xr-x</span>  business-cctv-installation/
+<span style="color:#67e8f9;">drwxr-xr-x</span>  hackerone-bug-bounty/
+<span style="color:#94a3b8;">-rw-r--r--</span>  more-coming-soon.txt`,
+
+  'ls skills': `<span style="color:#67e8f9;">Cloud:</span>      Azure · Cosmos DB · Azure Functions · Arc · Entra ID
+<span style="color:#67e8f9;">Infra:</span>      Windows Server · Linux · Hyper-V · pfSense
+<span style="color:#67e8f9;">DevOps:</span>     GitHub Actions · Terraform · Docker · Python
+<span style="color:#67e8f9;">Security:</span>   HackerOne · TryHackMe · CTF · Web Vulns
+<span style="color:#67e8f9;">Hardware:</span>   PC Repair · Soldering · CCTV · Diagnostics`,
+
+  'cat about.txt': `Name:     Mario Kola
+Location: Taunton, Somerset, UK
+Story:    Started in hardware repair at TA1 Computer Shop.
+          Moved into cybersecurity via TryHackMe and HackerOne.
+          Now building hybrid Azure cloud infrastructure.
+Goal:     First cloud engineering role where hands-on
+          experience meets modern cloud skills.
+Fun fact: This terminal is an easter egg — well found! 🎉`,
+
+  'cat contact.txt': `Email:    mario@mariokola.co.uk
+GitHub:   github.com/nyxalb
+LinkedIn: linkedin.com/in/mario-kola-640a8b3b5
+Website:  mariokola.co.uk
+Status:   <span style="color:#10b981;">Open to opportunities</span>`,
+
+  'ping azure': `PING azure.microsoft.com (20.190.151.7)
+64 bytes from azure: icmp_seq=1 ttl=117 time=<span style="color:#10b981;">2.1 ms</span>
+64 bytes from azure: icmp_seq=2 ttl=117 time=<span style="color:#10b981;">1.8 ms</span>
+64 bytes from azure: icmp_seq=3 ttl=117 time=<span style="color:#10b981;">2.3 ms</span>
+<span style="color:#67e8f9;">Azure is up. All systems operational. ✓</span>`,
+
+  hack: `<span style="color:#ef4444;">ACCESS DENIED</span>
+Initialising countermeasures...
+Tracing connection... 
+<span style="color:#f59e0b;">Warning: Your IP has been logged.</span>
+Just kidding 😄 — but I do store visitor IPs in Cosmos DB.`,
+
+  'sudo hire mario': `<span style="color:#f59e0b;">[sudo] password for recruiter:</span> ••••••••
+Verifying credentials...
+<span style="color:#10b981;">✓ Access granted</span>
+<span style="color:#67e8f9;">Executing: hire mario --role cloud-engineer --location uk</span>
+Opening mail client...
+→ Redirecting to mario@mariokola.co.uk
+<span style="color:#10b981;">Great choice! 🚀</span>`,
+
+  clear: '__clear__',
+  exit: '__exit__',
+};
+
+let terminalHistory = [];
+let historyIndex = -1;
+let terminalOpen = false;
+
+function openTerminal() {
+  const t = document.getElementById('terminal');
+  t.style.display = 'block';
+  terminalOpen = true;
+  const output = document.getElementById('terminal-output');
+  if (output.innerHTML === '') {
+    output.innerHTML = `<div style="color:#67e8f9;margin-bottom:8px;">Welcome to mario@mariokola.co.uk terminal</div>
+<div style="color:#94a3b8;font-size:12px;margin-bottom:12px;">Type <span style="color:#f1f5f9;">help</span> to see available commands</div>`;
+  }
+  setTimeout(() => document.getElementById('terminal-input').focus(), 100);
+}
+
+function closeTerminal() {
+  document.getElementById('terminal').style.display = 'none';
+  terminalOpen = false;
+}
+
+function printToTerminal(html) {
+  const output = document.getElementById('terminal-output');
+  output.innerHTML += `<div style="margin-bottom:8px;">${html}</div>`;
+  output.scrollTop = output.scrollHeight;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === '`') {
+    e.preventDefault();
+    terminalOpen ? closeTerminal() : openTerminal();
+  }
+  if (e.key === 'Escape' && terminalOpen) closeTerminal();
+});
+
+document.getElementById('terminal-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const input = e.target.value.trim().toLowerCase();
+    if (!input) return;
+    terminalHistory.unshift(input);
+    historyIndex = -1;
+    printToTerminal(`<span style="color:#67e8f9;">❯</span> <span style="color:#f1f5f9;">${input}</span>`);
+    e.target.value = '';
+    const cmd = terminalCmds[input];
+    if (cmd === '__clear__') {
+      document.getElementById('terminal-output').innerHTML = '';
+    } else if (cmd === '__exit__') {
+      closeTerminal();
+    } else if (cmd) {
+      printToTerminal(`<div style="color:#cbd5e1;">${cmd}</div>`);
+    } else {
+      printToTerminal(`<span style="color:#ef4444;">command not found: ${input}</span> — type <span style="color:#67e8f9;">help</span>`);
+    }
+  }
+  if (e.key === 'ArrowUp') {
+    historyIndex = Math.min(historyIndex + 1, terminalHistory.length - 1);
+    e.target.value = terminalHistory[historyIndex] || '';
+  }
+  if (e.key === 'ArrowDown') {
+    historyIndex = Math.max(historyIndex - 1, -1);
+    e.target.value = historyIndex >= 0 ? terminalHistory[historyIndex] : '';
+  }
+});
+
 </script>
+<!-- Terminal Easter Egg -->
+<div id="terminal" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:640px;max-width:95vw;background:rgba(2,8,23,0.97);border:1px solid rgba(103,232,249,0.3);border-radius:16px;padding:0;z-index:9000;box-shadow:0 25px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);font-family:'Courier New',monospace;">
+  <div style="background:rgba(255,255,255,0.05);padding:0.75rem 1rem;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;cursor:pointer;" onclick="closeTerminal()"></div>
+    <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;"></div>
+    <div style="width:12px;height:12px;border-radius:50%;background:#10b981;"></div>
+    <span style="font-size:12px;color:#94a3b8;margin-left:8px;">mario@mariokola.co.uk ~ </span>
+  </div>
+  <div id="terminal-output" style="padding:1rem;height:280px;overflow-y:auto;font-size:13px;line-height:1.8;color:#e2e8f0;"></div>
+  <div style="padding:0.5rem 1rem 1rem;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,0.06);">
+    <span style="color:#67e8f9;font-size:13px;">❯</span>
+    <input id="terminal-input" type="text" style="flex:1;background:transparent;border:none;outline:none;color:#f1f5f9;font-family:'Courier New',monospace;font-size:13px;" placeholder="type a command..." autocomplete="off"/>
+  </div>
+</div>
+
 </body>
 </html>
