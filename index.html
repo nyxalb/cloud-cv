@@ -12,289 +12,188 @@
   body { background: #020817; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
   /* Nav */
-  header {
-    position: sticky; top: 0; z-index: 50;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    background: rgba(2,8,23,0.8);
-    backdrop-filter: blur(12px);
-  }
-  .nav-inner {
-    max-width: 1280px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 1.5rem;
-  }
-  .nav-brand h1 {
-    font-size: 1.25rem; font-weight: 900; letter-spacing: 0.025em;
-    background: linear-gradient(90deg, #60a5fa, #67e8f9);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
+  header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(2,8,23,0.8); backdrop-filter: blur(12px); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; }
+  .nav-brand h1 { font-size: 1.25rem; font-weight: 900; background: linear-gradient(90deg,#60a5fa,#67e8f9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
   .nav-brand p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
   nav { display: flex; gap: 2rem; }
   nav a { font-size: 14px; color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
   nav a:hover { color: #fff; }
 
   /* Hero */
-  .hero {
-    position: relative; overflow: hidden;
-    min-height: 100vh; display: flex; align-items: center;
-  }
-  .hero-bg1 {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, transparent 50%, rgba(6,182,212,0.1) 100%);
-    pointer-events: none;
-  }
-  .hero-blob1 {
-    position: absolute; top: -6rem; right: 0;
-    width: 24rem; height: 24rem; border-radius: 50%;
-    background: rgba(6,182,212,0.1); filter: blur(60px); pointer-events: none;
-  }
-  .hero-blob2 {
-    position: absolute; bottom: 0; left: 0;
-    width: 24rem; height: 24rem; border-radius: 50%;
-    background: rgba(124,58,237,0.1); filter: blur(60px); pointer-events: none;
-  }
-  .hero-inner {
-    position: relative; max-width: 1280px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 3rem; padding: 6rem 1.5rem; align-items: center;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center;
-    border: 1px solid rgba(96,165,250,0.2);
-    background: rgba(59,130,246,0.1);
-    padding: 6px 16px; border-radius: 99px;
-    font-size: 14px; color: #93c5fd; margin-bottom: 1.5rem;
-  }
-  .hero-title {
-    font-size: clamp(2.5rem, 5vw, 3.75rem);
-    font-weight: 900; line-height: 1.1;
-    margin-bottom: 1.5rem; letter-spacing: -0.02em;
-  }
-  .hero-desc {
-    font-size: 1.125rem; line-height: 1.75;
-    color: #cbd5e1; max-width: 36rem; margin-bottom: 2rem;
-  }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-  .btn-blue {
-    background: #2563eb; color: #fff;
-    padding: 1rem 1.5rem; border-radius: 16px;
-    font-size: 15px; font-weight: 600;
-    text-decoration: none; border: none; cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-blue:hover { background: #3b82f6; transform: scale(1.05); }
-  .btn-ghost {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #fff; padding: 1rem 1.5rem; border-radius: 16px;
-    font-size: 15px; font-weight: 600;
-    text-decoration: none; cursor: pointer; transition: all 0.2s;
-  }
-  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
-  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 3rem; }
-  .pill { padding: 6px 16px; border-radius: 99px; font-size: 12px; font-weight: 500; }
-  .pill-blue { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); color: #93c5fd; }
-  .pill-cyan { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #67e8f9; }
-  .pill-purple { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); color: #c4b5fd; }
-  .pill-green { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #6ee7b7; }
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;
-  }
-  .stat-num { font-size: 1.875rem; font-weight: 900; color: #fff; }
-  .stat-label { font-size: 13px; color: #94a3b8; margin-top: 4px; }
-  .hero-visual { position: relative; display: flex; justify-content: center; }
-  .hero-visual-blob {
-    position: absolute; width: 18rem; height: 18rem; border-radius: 50%;
-    background: rgba(59,130,246,0.2); filter: blur(60px);
-  }
-  .hero-img-card {
-    position: relative;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    border-radius: 24px; padding: 2rem;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-    backdrop-filter: blur(20px);
-  }
-  .hero-img-card img { width: 100%; height: 380px; object-fit: cover; border-radius: 16px; }
-  .counter-float {
-    position: absolute; bottom: -1rem; right: -1rem;
-    background: rgba(2,8,23,0.95); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px; padding: 1rem 1.5rem; text-align: center;
-    backdrop-filter: blur(12px);
-  }
-  .counter-float-num { font-size: 2rem; font-weight: 900; color: #67e8f9; line-height: 1; }
-  .counter-float-label { font-size: 11px; color: #94a3b8; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .hero { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg,rgba(59,130,246,0.1) 0%,transparent 50%,rgba(6,182,212,0.1) 100%); pointer-events: none; }
+  .hero-blob1 { position: absolute; top:-6rem; right:0; width:24rem; height:24rem; border-radius:50%; background:rgba(6,182,212,0.1); filter:blur(60px); pointer-events:none; }
+  .hero-blob2 { position: absolute; bottom:0; left:0; width:24rem; height:24rem; border-radius:50%; background:rgba(124,58,237,0.1); filter:blur(60px); pointer-events:none; }
+  .hero-inner { position:relative; max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; padding:6rem 1.5rem; align-items:center; }
+  .hero-badge { display:inline-flex; align-items:center; border:1px solid rgba(96,165,250,0.2); background:rgba(59,130,246,0.1); padding:6px 16px; border-radius:99px; font-size:14px; color:#93c5fd; margin-bottom:1.5rem; }
+  .hero-title { font-size:clamp(2.5rem,5vw,3.75rem); font-weight:900; line-height:1.1; margin-bottom:1.5rem; letter-spacing:-0.02em; }
+  .hero-desc { font-size:1.05rem; line-height:1.75; color:#cbd5e1; max-width:36rem; margin-bottom:2rem; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
+  .btn-blue { background:#2563eb; color:#fff; padding:1rem 1.5rem; border-radius:16px; font-size:15px; font-weight:600; text-decoration:none; border:none; cursor:pointer; transition:all 0.2s; }
+  .btn-blue:hover { background:#3b82f6; transform:scale(1.05); }
+  .btn-ghost { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:1rem 1.5rem; border-radius:16px; font-size:15px; font-weight:600; text-decoration:none; cursor:pointer; transition:all 0.2s; }
+  .btn-ghost:hover { background:rgba(255,255,255,0.1); }
+  .hero-pills { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:3rem; }
+  .pill { padding:6px 16px; border-radius:99px; font-size:12px; font-weight:500; }
+  .pill-blue { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2); color:#93c5fd; }
+  .pill-cyan { background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); color:#67e8f9; }
+  .pill-purple { background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); color:#c4b5fd; }
+  .pill-green { background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); color:#6ee7b7; }
+  .pill-red { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); color:#fca5a5; }
+  .hero-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:2rem; }
+  .stat-num { font-size:1.875rem; font-weight:900; color:#fff; }
+  .stat-label { font-size:13px; color:#94a3b8; margin-top:4px; }
+  .hero-visual { position:relative; display:flex; justify-content:center; }
+  .hero-visual-blob { position:absolute; width:18rem; height:18rem; border-radius:50%; background:rgba(59,130,246,0.2); filter:blur(60px); }
+  .hero-img-card { position:relative; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:24px; padding:2rem; box-shadow:0 25px 50px rgba(0,0,0,0.5); backdrop-filter:blur(20px); }
+  .hero-img-card img { width:100%; height:380px; object-fit:cover; border-radius:16px; }
+  .counter-float { position:absolute; bottom:-1rem; right:-1rem; background:rgba(2,8,23,0.95); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:1rem 1.5rem; text-align:center; backdrop-filter:blur(12px); }
+  .counter-float-num { font-size:2rem; font-weight:900; color:#67e8f9; line-height:1; }
+  .counter-float-label { font-size:11px; color:#94a3b8; margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
+
+  /* Sections */
+  .section-wrap { max-width:1280px; margin:0 auto; padding:6rem 1.5rem; }
+  .section-tag { font-size:13px; text-transform:uppercase; letter-spacing:0.3em; color:#60a5fa; margin-bottom:12px; }
+  h2 { font-size:clamp(1.875rem,4vw,2.5rem); font-weight:700; margin-bottom:2rem; }
+  h3 { font-size:clamp(1.25rem,3vw,1.75rem); font-weight:700; }
 
   /* Skills */
-  #skills { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
-  .section-tag { font-size: 13px; text-transform: uppercase; letter-spacing: 0.3em; color: #60a5fa; margin-bottom: 12px; }
-  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem; }
-  .section-header p { max-width: 36rem; color: #94a3b8; font-size: 14px; line-height: 1.7; }
-  h2 { font-size: clamp(1.875rem, 4vw, 2.5rem); font-weight: 700; }
-  h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; }
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .skill-card {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    border-radius: 24px; padding: 2rem;
-    transition: all 0.2s;
-  }
-  .skill-card:hover { border-color: rgba(59,130,246,0.4); background: rgba(255,255,255,0.1); }
-  .skill-card h4 { font-size: 1.375rem; font-weight: 700; margin-bottom: 1rem; }
-  .skill-card p { color: #cbd5e1; line-height: 1.7; margin-bottom: 1.5rem; font-size: 14px; }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .skill-tag {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(15,23,42,0.7);
-    padding: 5px 12px; border-radius: 99px;
-    font-size: 12px; color: #cbd5e1;
-  }
+  .skills-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
+  .skills-header p { max-width:36rem; color:#94a3b8; font-size:14px; line-height:1.7; }
+  .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .skill-card { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:24px; padding:2rem; transition:all 0.2s; }
+  .skill-card:hover { border-color:rgba(59,130,246,0.4); background:rgba(255,255,255,0.08); }
+  .skill-icon { font-size:2rem; margin-bottom:1rem; display:block; }
+  .skill-card h4 { font-size:1.2rem; font-weight:700; margin-bottom:0.75rem; }
+  .skill-card p { color:#cbd5e1; line-height:1.7; margin-bottom:1.25rem; font-size:13px; }
+  .skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-tag { border:1px solid rgba(255,255,255,0.1); background:rgba(15,23,42,0.7); padding:4px 12px; border-radius:99px; font-size:12px; color:#cbd5e1; }
+
+  /* Experience */
+  #experience { background:rgba(15,23,42,0.5); border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); }
+  .exp-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .exp-card { border:1px solid rgba(255,255,255,0.1); background:rgba(2,8,23,0.7); border-radius:20px; padding:1.75rem; transition:all 0.3s; }
+  .exp-card:hover { border-color:rgba(59,130,246,0.3); transform:translateY(-4px); }
+  .exp-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:8px; }
+  .exp-role { font-size:1.05rem; font-weight:700; }
+  .exp-company { font-size:13px; color:#60a5fa; margin-top:2px; font-weight:500; }
+  .exp-date { font-size:12px; color:#94a3b8; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:4px 12px; border-radius:99px; white-space:nowrap; }
+  .exp-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .exp-list li { font-size:13px; color:#cbd5e1; padding-left:1.25rem; position:relative; line-height:1.6; }
+  .exp-list li::before { content:'→'; position:absolute; left:0; color:#60a5fa; font-size:12px; }
 
   /* Projects */
-  #projects { background: rgba(15,23,42,0.5); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 6rem 1.5rem; }
-  .projects-inner { max-width: 1280px; margin: 0 auto; }
-  .projects-header { text-align: center; margin-bottom: 4rem; }
-  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  .project-card {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(2,8,23,0.7);
-    border-radius: 24px; overflow: hidden;
-    transition: all 0.3s;
-  }
-  .project-card:hover { transform: translateY(-8px); border-color: rgba(59,130,246,0.4); background: rgba(15,23,42,0.8); }
-  .project-img {
-    height: 12rem; display: flex; align-items: flex-end; padding: 1.25rem;
-    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(2,8,23,1), rgba(6,182,212,0.1));
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .project-img-badge {
-    border: 1px solid rgba(59,130,246,0.2);
-    background: rgba(0,0,0,0.3);
-    color: #93c5fd; font-size: 12px;
-    padding: 4px 12px; border-radius: 99px;
-    backdrop-filter: blur(8px);
-  }
-  .project-body { padding: 2rem; }
-  .project-tech { font-size: 13px; color: #60a5fa; margin-bottom: 8px; font-weight: 500; }
-  .project-title { font-size: 1.375rem; font-weight: 700; margin-bottom: 1rem; }
-  .project-desc { color: #cbd5e1; font-size: 14px; line-height: 1.7; }
+  #projects { padding:6rem 1.5rem; }
+  .projects-inner { max-width:1280px; margin:0 auto; }
+  .projects-header { text-align:center; margin-bottom:3rem; }
+  .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+  .project-card { border:1px solid rgba(255,255,255,0.1); background:rgba(2,8,23,0.7); border-radius:24px; overflow:hidden; transition:all 0.3s; }
+  .project-card:hover { transform:translateY(-8px); border-color:rgba(59,130,246,0.4); }
+  .project-img { height:10rem; display:flex; align-items:flex-end; padding:1.25rem; }
+  .project-img-badge { border:1px solid rgba(59,130,246,0.2); background:rgba(0,0,0,0.3); color:#93c5fd; font-size:12px; padding:4px 12px; border-radius:99px; backdrop-filter:blur(8px); }
+  .project-body { padding:1.75rem; }
+  .project-tech { font-size:13px; color:#60a5fa; margin-bottom:8px; font-weight:500; }
+  .project-title { font-size:1.1rem; font-weight:700; margin-bottom:0.75rem; }
+  .project-desc { color:#cbd5e1; font-size:13px; line-height:1.7; }
+
+  /* Strengths */
+  #strengths { background:rgba(15,23,42,0.5); border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); }
+  .strengths-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+  .strength-card { border:1px solid rgba(255,255,255,0.08); background:rgba(2,8,23,0.6); border-radius:16px; padding:1.5rem; transition:all 0.2s; }
+  .strength-card:hover { border-color:rgba(59,130,246,0.3); background:rgba(15,23,42,0.8); }
+  .strength-icon { font-size:1.5rem; margin-bottom:0.75rem; }
+  .strength-title { font-size:14px; font-weight:700; margin-bottom:6px; color:#f1f5f9; }
+  .strength-desc { font-size:12px; color:#94a3b8; line-height:1.6; }
 
   /* About */
-  #about { max-width: 1152px; margin: 0 auto; padding: 6rem 1.5rem; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-  .about-text { font-size: 1.125rem; line-height: 1.75; color: #cbd5e1; }
-  .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .about-card {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px; padding: 1.5rem;
-  }
-  .about-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #60a5fa; margin-bottom: 8px; font-weight: 600; }
-  .about-card p { color: #cbd5e1; font-size: 13px; line-height: 1.6; }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; }
+  .about-text { font-size:1rem; line-height:1.8; color:#cbd5e1; }
+  .about-text p { margin-bottom:1rem; }
+  .about-cards { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .about-card { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:16px; padding:1.5rem; }
+  .about-card-label { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#60a5fa; margin-bottom:8px; font-weight:600; }
+  .about-card p { color:#cbd5e1; font-size:13px; line-height:1.6; }
 
   /* Education */
-  #education { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-  .edu-card {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px; padding: 1.75rem;
-    display: flex; gap: 1rem; align-items: flex-start;
-    transition: border-color 0.2s;
-  }
-  .edu-card:hover { border-color: rgba(6,182,212,0.3); }
-  .edu-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-  .edu-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .edu-sub { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
-  .edu-date { font-size: 12px; color: #67e8f9; font-weight: 500; }
-  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .cert-card {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px; padding: 1.5rem;
-    text-align: center; transition: all 0.2s;
-  }
-  .cert-card:hover { border-color: rgba(6,182,212,0.3); transform: translateY(-2px); }
-  .cert-badge { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-  .cert-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .cert-issuer { font-size: 12px; color: #94a3b8; }
-  .cert-status { display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 99px; font-size: 11px; font-weight: 500; }
-  .pursuing { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #67e8f9; }
-  .planned { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); color: #c4b5fd; }
+  .edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem; }
+  .edu-card { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:16px; padding:1.75rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.2s; }
+  .edu-card:hover { border-color:rgba(6,182,212,0.3); }
+  .edu-icon { width:44px; height:44px; flex-shrink:0; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .edu-title { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .edu-sub { font-size:12px; color:#94a3b8; margin-bottom:6px; }
+  .edu-date { font-size:12px; color:#67e8f9; font-weight:500; }
+  .cert-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+  .cert-card { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:16px; padding:1.5rem; text-align:center; transition:all 0.2s; }
+  .cert-card:hover { border-color:rgba(6,182,212,0.3); transform:translateY(-2px); }
+  .cert-badge { font-size:2rem; margin-bottom:0.75rem; display:block; }
+  .cert-name { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .cert-issuer { font-size:11px; color:#94a3b8; }
+  .cert-status { display:inline-block; margin-top:10px; padding:3px 12px; border-radius:99px; font-size:11px; font-weight:500; }
+  .pursuing { background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); color:#67e8f9; }
+  .planned { background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); color:#c4b5fd; }
+  .completed { background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); color:#6ee7b7; }
 
   /* Map */
-  #map { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
-  .map-box { border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); border-radius: 24px; overflow: hidden; position: relative; }
+  .map-box { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03); border-radius:24px; overflow:hidden; position:relative; }
 
-  /* Contact CTA */
-  #contact { padding: 6rem 1.5rem; }
-  .contact-inner { max-width: 1280px; margin: 0 auto; }
-  .contact-cta {
-    max-width: 64rem; margin: 0 auto 4rem;
-    border: 1px solid rgba(59,130,246,0.2);
-    background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(6,182,212,0.1));
-    border-radius: 40px; padding: 3rem; text-align: center;
-    backdrop-filter: blur(20px);
-  }
-  .contact-cta h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; margin-bottom: 1rem; }
-  .contact-cta p { color: #cbd5e1; font-size: 1.05rem; max-width: 38rem; margin: 0 auto 2.5rem; line-height: 1.7; }
-  .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .contact-form-section { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
-  .contact-link { display: flex; align-items: center; gap: 1rem; font-size: 13px; color: #94a3b8; text-decoration: none; transition: color 0.2s; }
-  .contact-link:hover { color: #67e8f9; }
-  .contact-link-icon { width: 38px; height: 38px; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-  .form-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #94a3b8; margin-bottom: 6px; display: block; font-weight: 600; }
-  .form-input, .form-textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0.875rem 1rem; color: #f1f5f9; font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
-  .form-input:focus, .form-textarea:focus { border-color: rgba(6,182,212,0.5); }
-  .form-textarea { resize: vertical; min-height: 120px; }
-  .form-submit { background: #2563eb; color: #fff; border: none; border-radius: 16px; padding: 0.875rem 2rem; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; align-self: flex-start; }
-  .form-submit:hover { background: #3b82f6; transform: scale(1.03); }
+  /* Contact */
+  #contact { padding:6rem 1.5rem; }
+  .contact-inner { max-width:1280px; margin:0 auto; }
+  .contact-cta { max-width:64rem; margin:0 auto 4rem; border:1px solid rgba(59,130,246,0.2); background:linear-gradient(135deg,rgba(37,99,235,0.2),rgba(6,182,212,0.1)); border-radius:40px; padding:3rem; text-align:center; backdrop-filter:blur(20px); }
+  .contact-cta h3 { font-size:clamp(1.5rem,3vw,2.25rem); font-weight:700; margin-bottom:1rem; }
+  .contact-cta p { color:#cbd5e1; font-size:1rem; max-width:38rem; margin:0 auto 2.5rem; line-height:1.7; }
+  .cta-btns { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+  .contact-form-section { display:grid; grid-template-columns:1fr 1.2fr; gap:4rem; }
+  .contact-links { display:flex; flex-direction:column; gap:1rem; margin-top:1.5rem; }
+  .contact-link { display:flex; align-items:center; gap:1rem; font-size:13px; color:#94a3b8; text-decoration:none; transition:color 0.2s; }
+  .contact-link:hover { color:#67e8f9; }
+  .contact-link-icon { width:38px; height:38px; background:rgba(6,182,212,0.08); border:1px solid rgba(6,182,212,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .contact-form { display:flex; flex-direction:column; gap:1rem; }
+  .form-label { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#94a3b8; margin-bottom:6px; display:block; font-weight:600; }
+  .form-input, .form-textarea { width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:0.875rem 1rem; color:#f1f5f9; font-family:'Inter',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; }
+  .form-input:focus, .form-textarea:focus { border-color:rgba(6,182,212,0.5); }
+  .form-textarea { resize:vertical; min-height:120px; }
+  .form-submit { background:#2563eb; color:#fff; border:none; border-radius:16px; padding:0.875rem 2rem; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; align-self:flex-start; }
+  .form-submit:hover { background:#3b82f6; transform:scale(1.03); }
 
   /* Footer */
-  footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 1.5rem; text-align: center; font-size: 13px; color: #475569; }
+  footer { border-top:1px solid rgba(255,255,255,0.1); padding:2rem 1.5rem; text-align:center; font-size:13px; color:#475569; }
 
   /* Animations */
-  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-  .fade-up { opacity:0; animation: fadeUp 0.6s forwards; }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
-  .delay-4 { animation-delay: 0.4s; }
-  .delay-5 { animation-delay: 0.5s; }
-  .delay-6 { animation-delay: 0.6s; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
+  .fade-up { opacity:0; animation:fadeUp 0.6s forwards; }
+  .d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}.d4{animation-delay:0.4s}.d5{animation-delay:0.5s}.d6{animation-delay:0.6s}
 
-  @media (max-width: 768px) {
-    nav { display: none; }
-    .hero-inner { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
-    .hero-visual { display: none; }
-    .skills-grid, .projects-grid, .about-grid, .edu-grid, .cert-grid, .contact-form-section { grid-template-columns: 1fr; }
-    .about-cards { grid-template-columns: 1fr 1fr; }
-    .section-header { flex-direction: column; }
+  @media(max-width:768px){
+    nav{display:none;}
+    .hero-inner{grid-template-columns:1fr;padding:4rem 1.5rem;}
+    .hero-visual{display:none;}
+    .skills-grid,.projects-grid,.strengths-grid,.about-grid,.edu-grid,.contact-form-section,.exp-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr 1fr;}
+    .about-cards{grid-template-columns:1fr 1fr;}
+    .skills-header{flex-direction:column;}
   }
 </style>
 </head>
 <body>
-<div id="scroll-bar" style="
-  position:fixed;top:0;left:0;height:3px;width:0%;
-  background:linear-gradient(90deg,#67e8f9,#3b82f6);
-  z-index:9999;transition:width 0.1s;
-"></div>
-<canvas id="particles" 
-style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.4;"
-></canvas>
+
+<!-- Scroll progress bar -->
+<div id="scroll-bar" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#67e8f9,#3b82f6);z-index:9999;transition:width 0.1s;pointer-events:none;"></div>
+
+<!-- Particle canvas -->
+<canvas id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;"></canvas>
 
 <!-- Nav -->
 <header>
   <div class="nav-inner">
     <div class="nav-brand">
       <h1>Mario Kola</h1>
-      <p>Azure • Cloud • Infrastructure</p>
+      <p>Azure • Cloud • Infrastructure • Security</p>
     </div>
     <nav>
       <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -306,40 +205,32 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-bg1"></div>
+  <div class="hero-bg"></div>
   <div class="hero-blob1"></div>
   <div class="hero-blob2"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-badge fade-up delay-1">📍 Based in Somerset</div>
-      <h2 class="hero-title fade-up delay-2">Azure Cloud Engineering<br>&amp; Hybrid Infrastructure</h2>
-      <p class="hero-desc fade-up delay-3">Building scalable Azure infrastructure, hybrid cloud labs, DevOps workflows and secure enterprise-style environments using Microsoft technologies and modern automation tooling.</p>
-      <div class="hero-btns fade-up delay-4">
+      <div class="hero-badge fade-up d1">📍 Based in Somerset</div>
+      <h2 class="hero-title fade-up d2">Azure Cloud Engineering<br>&amp; Hybrid Infrastructure</h2>
+      <p class="hero-desc fade-up d3">Building scalable Azure infrastructure, hybrid cloud labs, DevOps workflows and secure enterprise-style environments. Self-taught engineer with real-world IT and cybersecurity experience.</p>
+      <div class="hero-btns fade-up d4">
         <a href="#contact" class="btn-blue">Contact Me</a>
         <a href="#skills" class="btn-ghost">View Skills</a>
       </div>
-      <div class="hero-pills fade-up delay-4">
+      <div class="hero-pills fade-up d4">
         <span class="pill pill-blue">Azure</span>
-        <span class="pill pill-cyan">Terraform</span>
-        <span class="pill pill-purple">DevOps</span>
+        <span class="pill pill-cyan">DevOps</span>
+        <span class="pill pill-purple">Terraform</span>
         <span class="pill pill-green">Hybrid Cloud</span>
+        <span class="pill pill-red">Cybersecurity</span>
       </div>
-      <div class="hero-stats fade-up delay-5">
-        <div>
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Cloud Projects</div>
-        </div>
-        <div>
-          <div class="stat-num">AZ</div>
-          <div class="stat-label">Certification Path</div>
-        </div>
-        <div>
-          <div class="stat-num">UK</div>
-          <div class="stat-label">Based in Somerset</div>
-        </div>
+      <div class="hero-stats fade-up d5">
+        <div><div class="stat-num">5+</div><div class="stat-label">Cloud Projects</div></div>
+        <div><div class="stat-num">AZ</div><div class="stat-label">Cert Path</div></div>
+        <div><div class="stat-num">UK</div><div class="stat-label">Somerset</div></div>
       </div>
     </div>
-    <div class="hero-visual fade-up delay-6">
+    <div class="hero-visual fade-up d6">
       <div class="hero-visual-blob"></div>
       <div class="hero-img-card">
         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Tech Setup"/>
@@ -353,16 +244,17 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
 </section>
 
 <!-- Skills -->
-<section id="skills">
-  <div class="section-header">
+<section id="skills" class="section-wrap">
+  <div class="skills-header">
     <div>
       <p class="section-tag">Skills &amp; Technologies</p>
       <h2>What I Work With</h2>
     </div>
-    <p>Focused on Azure cloud engineering, hybrid infrastructure, automation and enterprise-style deployments.</p>
+    <p>Covering cloud engineering, infrastructure, cybersecurity, hardware and IT support across real-world environments.</p>
   </div>
   <div class="skills-grid">
     <div class="skill-card">
+      <span class="skill-icon">☁️</span>
       <h4>Azure &amp; Cloud</h4>
       <p>Hybrid cloud deployments, Azure services, monitoring, networking and identity management.</p>
       <div class="skill-tags">
@@ -370,20 +262,21 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
         <span class="skill-tag">Cosmos DB</span><span class="skill-tag">Azure Arc</span>
         <span class="skill-tag">VPN Gateway</span><span class="skill-tag">Entra ID</span>
         <span class="skill-tag">Azure Monitor</span><span class="skill-tag">Key Vault</span>
-        <span class="skill-tag">Azure CLI</span>
       </div>
     </div>
     <div class="skill-card">
-      <h4>Infrastructure</h4>
-      <p>Hands-on experience with Windows Server, Linux systems, virtualisation and networking.</p>
+      <span class="skill-icon">🖥️</span>
+      <h4>Infrastructure &amp; Hardware</h4>
+      <p>Hands-on experience with Windows Server, Linux, virtualisation, networking and hardware repair.</p>
       <div class="skill-tags">
         <span class="skill-tag">Windows Server</span><span class="skill-tag">Active Directory</span>
         <span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Hyper-V</span>
-        <span class="skill-tag">pfSense</span><span class="skill-tag">DNS</span>
-        <span class="skill-tag">TCP/IP</span><span class="skill-tag">VLANs</span>
+        <span class="skill-tag">pfSense</span><span class="skill-tag">PC/Laptop Repair</span>
+        <span class="skill-tag">Soldering</span><span class="skill-tag">CCTV Systems</span>
       </div>
     </div>
     <div class="skill-card">
+      <span class="skill-icon">🔧</span>
       <h4>Automation &amp; DevOps</h4>
       <p>CI/CD pipelines, scripting, infrastructure automation and cloud deployment workflows.</p>
       <div class="skill-tags">
@@ -391,6 +284,110 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
         <span class="skill-tag">PowerShell</span><span class="skill-tag">Docker</span>
         <span class="skill-tag">Python</span><span class="skill-tag">Bash</span>
         <span class="skill-tag">Git</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🔐</span>
+      <h4>Cybersecurity</h4>
+      <p>Offensive security mindset with hands-on CTF and bug bounty experience. Strong foundation in web vulnerabilities and reconnaissance.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">HackerOne</span><span class="skill-tag">TryHackMe</span>
+        <span class="skill-tag">CTF Challenges</span><span class="skill-tag">Pen Testing</span>
+        <span class="skill-tag">Web Vulnerabilities</span><span class="skill-tag">Reconnaissance</span>
+        <span class="skill-tag">OSINT</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🛠️</span>
+      <h4>IT Support</h4>
+      <p>Real-world customer-facing technical support and hardware troubleshooting from hands-on shop experience.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Hardware Diagnostics</span><span class="skill-tag">Windows Troubleshooting</span>
+        <span class="skill-tag">Component Replacement</span><span class="skill-tag">Customer Support</span>
+        <span class="skill-tag">Device Repair</span><span class="skill-tag">Problem Solving</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">💻</span>
+      <h4>Web Development</h4>
+      <p>Frontend fundamentals complementing cloud and security work — useful for secure coding and bug bounty hunting.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML/CSS</span><span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Python</span><span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Azure Static Web Apps</span><span class="skill-tag">Serverless</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-wrap">
+    <p class="section-tag">Work Experience</p>
+    <h2>Where I've Worked</h2>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">IT Technician &amp; Hardware Repair</div>
+            <div class="exp-company">Computer Shop · Somerset</div>
+          </div>
+          <span class="exp-date">Real-world experience</span>
+        </div>
+        <ul class="exp-list">
+          <li>Diagnosed and repaired PC, laptop and mobile hardware faults</li>
+          <li>Component replacement including motherboards, screens and storage</li>
+          <li>Customer-facing technical support and problem resolution</li>
+          <li>Soldering and low-level hardware repair work</li>
+          <li>Windows troubleshooting and software issue resolution</li>
+          <li>Working under pressure with real client devices and deadlines</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">CCTV Installation Engineer</div>
+            <div class="exp-company">Local Business Project </div>
+          </div>
+          <span class="exp-date">Project</span>
+        </div>
+        <ul class="exp-list">
+          <li>Designed and installed full remote monitoring CCTV system</li>
+          <li>Network configuration for remote viewing and access</li>
+          <li>Cable management and physical hardware installation</li>
+          <li>Configured secure remote access for business owner</li>
+          <li>End-to-end project from planning to handover</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Bug Bounty Hunter</div>
+            <div class="exp-company">HackerOne Platform</div>
+          </div>
+          <span class="exp-date">Active</span>
+        </div>
+        <ul class="exp-list">
+          <li>Vulnerability research on real-world web applications</li>
+          <li>Web security testing and responsible disclosure</li>
+          <li>Reconnaissance and attack surface mapping</li>
+          <li>Report writing and vulnerability documentation</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">CTF &amp; Security Research</div>
+            <div class="exp-company">TryHackMe · Self-directed</div>
+          </div>
+          <span class="exp-date">Active</span>
+        </div>
+        <ul class="exp-list">
+          <li>Hands-on CTF challenges covering a range of attack types</li>
+          <li>Offensive security techniques and tools</li>
+          <li>Web vulnerabilities including XSS, SQLi, IDOR</li>
+          <li>Linux privilege escalation and enumeration</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -405,77 +402,129 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
     </div>
     <div class="projects-grid">
       <div class="project-card">
-        <div class="project-img">
-          <span class="project-img-badge">Featured Project</span>
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(59,130,246,0.3),rgba(2,8,23,1),rgba(6,182,212,0.1));">
+          <span class="project-img-badge">Featured</span>
         </div>
         <div class="project-body">
           <p class="project-tech">Azure Functions · Cosmos DB · GitHub Actions</p>
           <h4 class="project-title">Cloud CV Website</h4>
-          <p class="project-desc">Built a full-stack Azure-powered CV website with visitor analytics, private IP tracking, live world map, serverless APIs, CI/CD automation and Cosmos DB integration.</p>
+          <p class="project-desc">Full-stack Azure-powered CV site with visitor analytics, private IP tracking, live world map, serverless APIs and CI/CD automation.</p>
         </div>
       </div>
       <div class="project-card">
-        <div class="project-img" style="background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(2,8,23,1),rgba(6,182,212,0.1));">
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(2,8,23,1),rgba(6,182,212,0.1));">
           <span class="project-img-badge">Home Lab</span>
         </div>
         <div class="project-body">
           <p class="project-tech">Azure Arc · VPN Gateway · Entra Connect</p>
           <h4 class="project-title">Hybrid Azure Home Lab</h4>
-          <p class="project-desc">Connected local infrastructure to Azure using VPN Gateway, Azure Arc, Entra ID, monitoring and hybrid cloud management tooling — simulating real enterprise environments.</p>
+          <p class="project-desc">Connected local infrastructure to Azure using VPN Gateway, Azure Arc, Entra ID and hybrid cloud management — simulating enterprise environments.</p>
         </div>
       </div>
       <div class="project-card">
-        <div class="project-img" style="background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(2,8,23,1),rgba(59,130,246,0.1));">
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(16,185,129,0.3),rgba(2,8,23,1),rgba(59,130,246,0.1));">
           <span class="project-img-badge">Real World</span>
         </div>
         <div class="project-body">
-          <p class="project-tech">CCTV · Networking</p>
+          <p class="project-tech">CCTV · Networking · Remote Access</p>
           <h4 class="project-title">Business CCTV Installation</h4>
-          <p class="project-desc">Installed and configured a full remote monitoring CCTV system for a local business, including network setup and remote access configuration.</p>
+          <p class="project-desc">Designed and installed a full remote monitoring CCTV system for a local business including network setup and secure remote access configuration.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Professional Strengths -->
+<section id="strengths">
+  <div class="section-wrap">
+    <p class="section-tag">Professional Strengths</p>
+    <h2>What Sets Me Apart</h2>
+    <div class="strengths-grid">
+      <div class="strength-card">
+        <div class="strength-icon">🧠</div>
+        <div class="strength-title">Self-learning Mindset</div>
+        <div class="strength-desc">Everything I know is self-taught through hands-on labs, real projects and continuous practice — not just courses.</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">🔍</div>
+        <div class="strength-title">Curiosity &amp; Persistence</div>
+        <div class="strength-desc">I don't stop at "it doesn't work" — I debug, research and iterate until I find the solution.</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">🤝</div>
+        <div class="strength-title">Customer-facing Experience</div>
+        <div class="strength-desc">Real experience communicating technical solutions to non-technical customers under pressure at Computer Shop.</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">⚡</div>
+        <div class="strength-title">Hands-on Confidence</div>
+        <div class="strength-desc">From soldering components to configuring Azure VPN gateways — comfortable working at every layer of the stack.</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">🔄</div>
+        <div class="strength-title">Adaptability</div>
+        <div class="strength-desc">Flexible across cloud, security, hardware and development — able to pick up new tools and technologies quickly.</div>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">🛡️</div>
+        <div class="strength-title">Security Mindset</div>
+        <div class="strength-desc">Bug bounty and CTF experience means I think about how things can break — valuable in any infrastructure or cloud role.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- About -->
-<section id="about">
+<section id="about" class="section-wrap">
   <p class="section-tag">About Me</p>
-  <h2 style="margin-bottom:2rem;">Building Real-World Cloud Infrastructure</h2>
+  <h2>Building Real-World Cloud Infrastructure</h2>
   <div class="about-grid">
-    <p class="about-text">I'm a self-taught Azure Cloud Engineer focused on hybrid infrastructure, automation, monitoring and modern Microsoft cloud technologies. I build hands-on projects in my home lab to simulate enterprise environments and continuously improve my practical cloud engineering skills. Based in <strong style="color:#f1f5f9;">Somerset</strong> — open to remote and on-site opportunities across the UK.</p>
+    <div class="about-text">
+      <p>I'm a self-taught cloud engineer and IT technician based in <strong style="color:#f1f5f9;">Somerset</strong>. My journey started with hardware repair at Computer Shop, where I developed real-world troubleshooting and customer support skills that most cloud engineers don't have.</p>
+      <p>From there I moved into cybersecurity — working through TryHackMe labs and HackerOne bug bounties — before discovering a passion for <strong style="color:#f1f5f9;">Microsoft Azure</strong> and hybrid infrastructure. I now run a home lab simulating enterprise cloud environments.</p>
+      <p>I'm actively pursuing Azure certifications and looking for my first cloud or IT engineering role where I can bring both technical depth and real-world practical experience.</p>
+    </div>
     <div class="about-cards">
       <div class="about-card">
         <div class="about-card-label">Current Focus</div>
-        <p>Azure Administration, Infrastructure Automation and Hybrid Cloud.</p>
+        <p>Azure Administration, Hybrid Cloud and Infrastructure Automation.</p>
       </div>
       <div class="about-card">
         <div class="about-card-label">Learning Path</div>
-        <p>Working toward AZ-900 and AZ-104, building real-world cloud projects.</p>
+        <p>AZ-900 → AZ-104 → AZ-400, building real projects at every step.</p>
       </div>
       <div class="about-card">
         <div class="about-card-label">Home Lab</div>
-        <p>Running Windows Server, Linux VMs, pfSense and Azure Arc integration.</p>
+        <p>Windows Server, Linux VMs, pfSense, Azure Arc and VPN Gateway integration.</p>
       </div>
       <div class="about-card">
-        <div class="about-card-label">Location</div>
-        <p>Somerset, UK. Open to remote roles nationwide.</p>
+        <div class="about-card-label">Open To</div>
+        <p>Cloud Engineer, IT Engineer, SOC Analyst, Field Technician — remote or Somerset.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Education & Certs -->
-<section id="education">
+<section id="education" class="section-wrap">
   <p class="section-tag">Education &amp; Certifications</p>
-  <h2 style="margin-bottom:2rem;">Learning Path</h2>
+  <h2>Learning Path</h2>
   <div class="edu-grid">
     <div class="edu-card">
-      <div class="edu-icon">🎓</div>
+      <div class="edu-icon">☁️</div>
       <div>
         <div class="edu-title">Self-taught Cloud Engineering</div>
-        <div class="edu-sub">Microsoft Learn, hands-on labs, home lab practice</div>
+        <div class="edu-sub">Microsoft Learn, Azure portal labs, home lab practice</div>
         <div class="edu-date">2025 — Present</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🔐</div>
+      <div>
+        <div class="edu-title">Cybersecurity — TryHackMe &amp; HackerOne</div>
+        <div class="edu-sub">CTF challenges, bug bounty, offensive security labs</div>
+        <div class="edu-date">2024 — Present</div>
       </div>
     </div>
     <div class="edu-card">
@@ -484,6 +533,14 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
         <div class="edu-title">Home Lab — Hybrid Infrastructure</div>
         <div class="edu-sub">Windows Server, Linux, pfSense, Azure Arc integration</div>
         <div class="edu-date">2025 — Present</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🛠️</div>
+      <div>
+        <div class="edu-title">IT Technician — Computer Shop</div>
+        <div class="edu-sub">Hardware repair, diagnostics, customer support</div>
+        <div class="edu-date">Real-world experience</div>
       </div>
     </div>
   </div>
@@ -506,13 +563,19 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
       <div class="cert-issuer">Azure DevOps</div>
       <span class="cert-status planned">Planned</span>
     </div>
+    <div class="cert-card">
+      <span class="cert-badge">🔐</span>
+      <div class="cert-name">CompTIA Sec+</div>
+      <div class="cert-issuer">Security</div>
+      <span class="cert-status planned">Planned</span>
+    </div>
   </div>
 </section>
 
 <!-- Visitor Map -->
-<section id="map">
+<section id="map" class="section-wrap">
   <p class="section-tag">Live Data</p>
-  <h2 style="margin-bottom:0.75rem;">Who's been here</h2>
+  <h2>Who's been here</h2>
   <p style="color:#94a3b8;font-size:13px;margin-bottom:2rem;">Real visitor data pulled from Azure Cosmos DB — updated on every visit.</p>
   <div class="map-box">
     <div id="map-container" style="width:100%;height:420px;position:relative;"></div>
@@ -529,7 +592,7 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
     <div class="contact-cta">
       <p class="section-tag">Get In Touch</p>
       <h3>Looking For a Cloud Engineer?</h3>
-      <p>I'm currently open to junior cloud engineering, infrastructure and Azure-focused opportunities across the UK — remote or on-site.</p>
+      <p>Open to junior cloud engineering, IT engineering, cybersecurity and Azure-focused roles across the UK — remote or on-site in Somerset.</p>
       <div class="cta-btns">
         <a href="mailto:mario@mariokola.co.uk" class="btn-blue">Email Me</a>
         <a href="https://linkedin.com/in/" class="btn-ghost" target="_blank">LinkedIn</a>
@@ -540,7 +603,7 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
       <div>
         <p class="section-tag">Direct Contact</p>
         <h3 style="margin-bottom:1rem;">Let's talk</h3>
-        <p style="color:#94a3b8;font-size:14px;line-height:1.8;margin-bottom:0.5rem;">I'm currently looking for junior cloud engineering roles in the UK. If you're hiring or want to connect, feel free to reach out.</p>
+        <p style="color:#94a3b8;font-size:14px;line-height:1.8;margin-bottom:0.5rem;">Whether you're hiring, want to collaborate, or just want to connect — feel free to reach out.</p>
         <div class="contact-links">
           <a href="mailto:mario@mariokola.co.uk" class="contact-link"><div class="contact-link-icon">✉️</div>mario@mariokola.co.uk</a>
           <a href="https://github.com/nyxalb" class="contact-link" target="_blank"><div class="contact-link-icon">💻</div>github.com/nyxalb</a>
@@ -549,18 +612,9 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
         </div>
       </div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div>
-          <label class="form-label">Your name</label>
-          <input type="text" class="form-input" placeholder="John Smith" required>
-        </div>
-        <div>
-          <label class="form-label">Email address</label>
-          <input type="email" class="form-input" placeholder="john@company.com" required>
-        </div>
-        <div>
-          <label class="form-label">Message</label>
-          <textarea class="form-textarea" placeholder="Tell me about the opportunity..." required></textarea>
-        </div>
+        <div><label class="form-label">Your name</label><input type="text" class="form-input" placeholder="John Smith" required></div>
+        <div><label class="form-label">Email address</label><input type="email" class="form-input" placeholder="john@company.com" required></div>
+        <div><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about the opportunity..." required></textarea></div>
         <button type="submit" class="form-submit">Send message →</button>
       </form>
     </div>
@@ -568,10 +622,54 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
 </section>
 
 <footer>
-  <p>© 2026 Mario Kola • Azure Cloud Engineer • Somerset</p>
+  <p>© 2026 Mario Kola • Cloud Engineer &amp; IT Technician • Somerset</p>
 </footer>
 
 <script>
+  // ── Scroll progress ──
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scroll-bar').style.width = pct + '%';
+  });
+
+  // ── Particles ──
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  class Particle {
+    constructor() { this.reset(); }
+    reset() { this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-.5)*.5; this.vy=(Math.random()-.5)*.5; this.size=Math.random()*2+1; }
+    update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; }
+    draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fillStyle='rgba(103,232,249,0.6)'; ctx.fill(); }
+  }
+  for(let i=0;i<80;i++) particles.push(new Particle());
+  function drawParticles() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{p.update();p.draw();});
+    for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
+      const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<150){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(103,232,249,${.15*(1-d/150)})`;ctx.lineWidth=.5;ctx.stroke();}
+    }
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  // ── 3D tilt ──
+  document.querySelectorAll('.project-card,.skill-card,.cert-card,.strength-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r=card.getBoundingClientRect();
+      const rx=((e.clientY-r.top-r.height/2)/r.height)*-10;
+      const ry=((e.clientX-r.left-r.width/2)/r.width)*10;
+      card.style.transform=`perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      card.style.transition='transform 0.1s';
+    });
+    card.addEventListener('mouseleave', ()=>{card.style.transform='perspective(600px) rotateX(0) rotateY(0) translateY(0)';card.style.transition='transform 0.4s ease';});
+  });
+
   // ── Visitor counter ──
   async function updateCounter() {
     try {
@@ -580,9 +678,7 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
       const res = await fetch(`/api/counter?ip=${encodeURIComponent(ip)}`);
       const data = await res.json();
       document.getElementById('counter').textContent = data.count;
-    } catch(e) {
-      document.getElementById('counter').textContent = '—';
-    }
+    } catch(e) { document.getElementById('counter').textContent = '—'; }
   }
   updateCounter();
 
@@ -591,28 +687,19 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
     e.preventDefault();
     const btn = e.target.querySelector('.form-submit');
     const form = e.target;
-    const name = form.querySelector('input[type="text"]').value;
-    const email = form.querySelector('input[type="email"]').value;
-    const message = form.querySelector('textarea').value;
-    btn.textContent = 'Sending...'; btn.style.opacity = '0.7';
+    btn.textContent='Sending...'; btn.style.opacity='0.7';
     try {
       const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message })
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:form.querySelector('input[type="text"]').value,email:form.querySelector('input[type="email"]').value,message:form.querySelector('textarea').value})
       });
       const data = await res.json();
-      if (data.success) {
-        btn.textContent = 'Message sent ✓'; btn.style.background = '#10b981'; btn.style.opacity = '1';
-        form.reset();
-      } else {
-        btn.textContent = 'Failed — try again'; btn.style.background = '#ef4444'; btn.style.opacity = '1';
-      }
-      setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; }, 4000);
-    } catch(e) {
-      btn.textContent = 'Failed — try again'; btn.style.background = '#ef4444'; btn.style.opacity = '1';
-      setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; }, 4000);
-    }
+      btn.textContent = data.success ? 'Message sent ✓' : 'Failed — try again';
+      btn.style.background = data.success ? '#10b981' : '#ef4444';
+      btn.style.opacity='1';
+      if(data.success) form.reset();
+      setTimeout(()=>{btn.textContent='Send message →';btn.style.background='';},4000);
+    } catch(e) { btn.textContent='Failed — try again'; btn.style.background='#ef4444'; btn.style.opacity='1'; setTimeout(()=>{btn.textContent='Send message →';btn.style.background='';},4000); }
   }
 
   // ── World Map ──
@@ -622,155 +709,30 @@ style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-
       const data = await res.json();
       const countries = data.countries || [];
       const container = document.getElementById('map-container');
-      container.innerHTML = `
-        <div style="position:relative;width:100%;height:420px;overflow:hidden;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png"
-            style="width:100%;height:100%;object-fit:cover;opacity:0.35;filter:hue-rotate(160deg) saturate(2);" alt="World map"/>
-          <svg id="dots-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 1000 500"></svg>
-        </div>`;
-      if (!countries.length) return;
-      const coords = {
-        'GB':[53,-2],'US':[38,-97],'DE':[51,10],'FR':[46,2],'NL':[52,5],
-        'CA':[56,-106],'AU':[-25,134],'IN':[21,79],'BR':[-14,-51],'JP':[36,138],
-        'SG':[1,104],'ZA':[-30,23],'NG':[9,8],'PL':[52,19],'ES':[40,-4],
-        'IT':[42,13],'RU':[62,105],'CN':[36,104],'MX':[23,-102],'AR':[-38,-63],
-        'KR':[36,128],'TR':[39,35],'SE':[60,18],'NO':[61,8],'DK':[56,10],
-        'FI':[62,26],'PT':[39,-8],'IE':[53,-8],'BE':[51,4],'CH':[47,8],
-        'AT':[47,14],'PK':[30,69],'EG':[27,30],'GH':[8,-1],'KE':[1,38],
-        'UA':[49,32],'ID':[-2,118],'TH':[15,101],'MY':[4,109],'PH':[13,122],
-        'VN':[16,108],'NZ':[-41,174],'RO':[46,25],'HU':[47,19],'CZ':[50,15],
-        'GR':[39,22],'IL':[31,35],'SA':[24,45],'AE':[24,54],'CO':[4,-72],
-      };
-      const maxVisits = Math.max(...countries.map(c => c.visits));
-      const svg = document.getElementById('dots-layer');
-      const ns = 'http://www.w3.org/2000/svg';
-      function latLngToXY(lat, lng) { return [(lng+180)*(1000/360),(90-lat)*(500/180)]; }
-      countries.forEach(country => {
-        const c = coords[country.countryCode]; if (!c) return;
-        const [x,y] = latLngToXY(c[0],c[1]);
-        const size = 5 + (country.visits/maxVisits)*15;
-        const pulse = document.createElementNS(ns,'circle');
-        pulse.setAttribute('cx',x); pulse.setAttribute('cy',y); pulse.setAttribute('r',size+6);
-        pulse.setAttribute('fill','none'); pulse.setAttribute('stroke','rgba(103,232,249,0.4)'); pulse.setAttribute('stroke-width','1.5');
-        pulse.style.animation='mapPulse 2s ease-out infinite'; svg.appendChild(pulse);
-        const glow = document.createElementNS(ns,'circle');
-        glow.setAttribute('cx',x); glow.setAttribute('cy',y); glow.setAttribute('r',size+2);
-        glow.setAttribute('fill','rgba(103,232,249,0.15)'); svg.appendChild(glow);
-        const dot = document.createElementNS(ns,'circle');
-        dot.setAttribute('cx',x); dot.setAttribute('cy',y); dot.setAttribute('r',size);
-        dot.setAttribute('fill','#67e8f9'); dot.setAttribute('opacity','0.9');
-        const title = document.createElementNS(ns,'title');
-        title.textContent=`${country.country}: ${country.visits} visit${country.visits>1?'s':''}`;
-        dot.appendChild(title); svg.appendChild(dot);
+      container.innerHTML = `<div style="position:relative;width:100%;height:420px;overflow:hidden;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png" style="width:100%;height:100%;object-fit:cover;opacity:0.35;filter:hue-rotate(160deg) saturate(2);" alt="World map"/><svg id="dots-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 1000 500"></svg></div>`;
+      if(!countries.length) return;
+      const coords={'GB':[53,-2],'US':[38,-97],'DE':[51,10],'FR':[46,2],'NL':[52,5],'CA':[56,-106],'AU':[-25,134],'IN':[21,79],'BR':[-14,-51],'JP':[36,138],'SG':[1,104],'ZA':[-30,23],'NG':[9,8],'PL':[52,19],'ES':[40,-4],'IT':[42,13],'RU':[62,105],'CN':[36,104],'MX':[23,-102],'AR':[-38,-63],'KR':[36,128],'TR':[39,35],'SE':[60,18],'NO':[61,8],'DK':[56,10],'FI':[62,26],'PT':[39,-8],'IE':[53,-8],'BE':[51,4],'CH':[47,8],'AT':[47,14],'PK':[30,69],'EG':[27,30],'GH':[8,-1],'KE':[1,38],'UA':[49,32],'ID':[-2,118],'TH':[15,101],'MY':[4,109],'PH':[13,122],'VN':[16,108],'NZ':[-41,174]};
+      const maxV=Math.max(...countries.map(c=>c.visits));
+      const svg=document.getElementById('dots-layer');
+      const ns='http://www.w3.org/2000/svg';
+      function ll(lat,lng){return[(lng+180)*(1000/360),(90-lat)*(500/180)];}
+      countries.forEach(c=>{
+        const coord=coords[c.countryCode]; if(!coord)return;
+        const[x,y]=ll(coord[0],coord[1]);const size=5+(c.visits/maxV)*15;
+        const pulse=document.createElementNS(ns,'circle');pulse.setAttribute('cx',x);pulse.setAttribute('cy',y);pulse.setAttribute('r',size+6);pulse.setAttribute('fill','none');pulse.setAttribute('stroke','rgba(103,232,249,0.4)');pulse.setAttribute('stroke-width','1.5');pulse.style.animation='mapPulse 2s ease-out infinite';svg.appendChild(pulse);
+        const glow=document.createElementNS(ns,'circle');glow.setAttribute('cx',x);glow.setAttribute('cy',y);glow.setAttribute('r',size+2);glow.setAttribute('fill','rgba(103,232,249,0.15)');svg.appendChild(glow);
+        const dot=document.createElementNS(ns,'circle');dot.setAttribute('cx',x);dot.setAttribute('cy',y);dot.setAttribute('r',size);dot.setAttribute('fill','#67e8f9');dot.setAttribute('opacity','0.9');
+        const t=document.createElementNS(ns,'title');t.textContent=`${c.country}: ${c.visits} visit${c.visits>1?'s':''}`;dot.appendChild(t);svg.appendChild(dot);
       });
-      const sorted = [...countries].sort((a,b)=>b.visits-a.visits);
-      document.getElementById('map-countries').innerHTML = sorted.slice(0,5).map(c => {
-        const flag = c.countryCode.toUpperCase().replace(/./g,ch=>String.fromCodePoint(127397+ch.charCodeAt()));
-        return `<div style="display:flex;justify-content:space-between;gap:16px;"><span>${flag} ${c.country}</span><span style="color:#67e8f9;">${c.visits}</span></div>`;
-      }).join('');
-    } catch(e) { console.log('Map error:',e); }
+      document.getElementById('map-countries').innerHTML=[...countries].sort((a,b)=>b.visits-a.visits).slice(0,5).map(c=>{const f=c.countryCode.toUpperCase().replace(/./g,ch=>String.fromCodePoint(127397+ch.charCodeAt()));return`<div style="display:flex;justify-content:space-between;gap:16px;"><span>${f} ${c.country}</span><span style="color:#67e8f9;">${c.visits}</span></div>`;}).join('');
+    } catch(e){console.log('Map error:',e);}
   }
-  const mapStyle = document.createElement('style');
-  mapStyle.textContent=`@keyframes mapPulse{0%{opacity:1;}100%{opacity:0;transform:scale(2);}}`;
-  document.head.appendChild(mapStyle);
+  const ms=document.createElement('style');ms.textContent='@keyframes mapPulse{0%{opacity:1;}100%{opacity:0;transform:scale(2);}}';document.head.appendChild(ms);
   loadMap();
 
   // ── Scroll animations ──
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.skill-card,.project-card,.edu-card,.cert-card,.about-card').forEach(el => {
-    el.style.opacity='0'; el.style.transform='translateY(20px)';
-    el.style.transition='opacity 0.5s, transform 0.5s';
-    observer.observe(el);
-  });
-// ── Scroll progress bar ──
-window.addEventListener('scroll', () => {
-  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  document.getElementById('scroll-bar').style.width = scrolled + '%';
-});
-
-// ── Particle network ──
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
-const PARTICLE_COUNT = 80;
-const MAX_DISTANCE = 150;
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.vx = (Math.random() - 0.5) * 0.5;
-    this.vy = (Math.random() - 0.5) * 0.5;
-    this.size = Math.random() * 2 + 1;
-  }
-  update() {
-    this.x += this.vx; this.y += this.vy;
-    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(103,232,249,0.6)';
-    ctx.fill();
-  }
-}
-
-for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => { p.update(); p.draw(); });
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < MAX_DISTANCE) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(103,232,249,${0.15 * (1 - dist/MAX_DISTANCE)})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(drawParticles);
-}
-drawParticles();
-
-// ── 3D tilt on cards ──
-document.querySelectorAll('.project-card,.skill-card,.cert-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rotateX = ((y - cy) / cy) * -8;
-    const rotateY = ((x - cx) / cx) * 8;
-    card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    card.style.transition = 'transform 0.1s';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) translateY(0)';
-    card.style.transition = 'transform 0.4s ease';
-  });
-});
-
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});
+  document.querySelectorAll('.skill-card,.project-card,.edu-card,.cert-card,.about-card,.strength-card,.exp-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s, transform 0.5s';obs.observe(el);});
 </script>
 </body>
 </html>
