@@ -462,7 +462,7 @@
       <div class="strength-card">
         <div class="strength-icon">🔍</div>
         <div class="strength-title">Curiosity &amp; Persistence</div>
-        <div class="strength-desc">I don't stop at "it doesn't work" — I debug, research and iterate until I find the solution.</div>
+        <input class="strength-desc">I don't stop at "it doesn't work" — I debug, research and iterate until I find the solution.</div>
       </div>
       <div class="strength-card">
         <div class="strength-icon">🤝</div>
@@ -666,6 +666,20 @@
 <footer>
   <p>© 2026 Mario Kola • Cloud Engineer &amp; IT Technician • Somerset</p>
 </footer>
+
+<!-- Terminal Easter Egg -->
+<div id="terminal" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:640px;max-width:95vw;background:rgba(2,8,23,0.97);border:1px solid rgba(103,232,249,0.3);border-radius:16px;padding:0;z-index:9000;box-shadow:0 25px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);font-family:'Courier New',monospace;"></div> 
+  <div style="background:rgba(255,255,255,0.05);padding:0.75rem 1rem;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);"></div>
+    <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;cursor:pointer;" onclick="closeTerminal()"></div>
+    <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;"></div>
+    <div style="width:12px;height:12px;border-radius:50%;background:#10b981;"></div>
+    <span style="font-size:12px;color:#94a3b8;margin-left:8px;">mario@mariokola.co.uk ~ </span>
+  </div>
+  <div id="terminal-output" style="padding:1rem;height:280px;overflow-y:auto;font-size:13px;line-height:1.8;color:#e2e8f0;"></div>
+  <div style="padding:0.5rem 1rem 1rem;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,0.06);"></div>
+    <span style="color:#67e8f9;font-size:13px;"></span>
+    <input id="terminal-input" type="text" style="flex: 1;">
+
 
 <script>
 
@@ -1044,6 +1058,7 @@ function type() {
 }
 type();
 </script>
+
 
 </body>
 </html>
