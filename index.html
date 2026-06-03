@@ -10,8 +10,6 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: #020817; color: #f1f5f9; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-
-  /* Nav */
   header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(2,8,23,0.8); backdrop-filter: blur(12px); }
   .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; }
   .nav-brand h1 { font-size: 1.25rem; font-weight: 900; background: linear-gradient(90deg,#60a5fa,#67e8f9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
@@ -19,8 +17,6 @@
   nav { display: flex; gap: 2rem; }
   nav a { font-size: 14px; color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
   nav a:hover { color: #fff; }
-
-  /* Hero */
   .hero { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg,rgba(59,130,246,0.1) 0%,transparent 50%,rgba(6,182,212,0.1) 100%); pointer-events: none; }
   .hero-blob1 { position: absolute; top:-6rem; right:0; width:24rem; height:24rem; border-radius:50%; background:rgba(6,182,212,0.1); filter:blur(60px); pointer-events:none; }
@@ -51,14 +47,10 @@
   .counter-float { position:absolute; bottom:-1rem; right:-1rem; background:rgba(2,8,23,0.95); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:1rem 1.5rem; text-align:center; backdrop-filter:blur(12px); }
   .counter-float-num { font-size:2rem; font-weight:900; color:#67e8f9; line-height:1; }
   .counter-float-label { font-size:11px; color:#94a3b8; margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
-
-  /* Sections */
   .section-wrap { max-width:1280px; margin:0 auto; padding:6rem 1.5rem; }
   .section-tag { font-size:13px; text-transform:uppercase; letter-spacing:0.3em; color:#60a5fa; margin-bottom:12px; }
   h2 { font-size:clamp(1.875rem,4vw,2.5rem); font-weight:700; margin-bottom:2rem; }
   h3 { font-size:clamp(1.25rem,3vw,1.75rem); font-weight:700; }
-
-  /* Skills */
   .skills-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
   .skills-header p { max-width:36rem; color:#94a3b8; font-size:14px; line-height:1.7; }
   .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
@@ -69,8 +61,6 @@
   .skill-card p { color:#cbd5e1; line-height:1.7; margin-bottom:1.25rem; font-size:13px; }
   .skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
   .skill-tag { border:1px solid rgba(255,255,255,0.1); background:rgba(15,23,42,0.7); padding:4px 12px; border-radius:99px; font-size:12px; color:#cbd5e1; }
-
-  /* Experience */
   #experience { background:rgba(15,23,42,0.5); border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); }
   .exp-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
   .exp-card { border:1px solid rgba(255,255,255,0.1); background:rgba(2,8,23,0.7); border-radius:20px; padding:1.75rem; transition:all 0.3s; }
@@ -82,9 +72,6 @@
   .exp-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
   .exp-list li { font-size:13px; color:#cbd5e1; padding-left:1.25rem; position:relative; line-height:1.6; }
   .exp-list li::before { content:'→'; position:absolute; left:0; color:#60a5fa; font-size:12px; }
-
-  
-  /* Projects */
   #projects { padding:6rem 1.5rem; }
   .projects-inner { max-width:1280px; margin:0 auto; }
   .projects-header { text-align:center; margin-bottom:3rem; }
@@ -97,8 +84,6 @@
   .project-tech { font-size:13px; color:#60a5fa; margin-bottom:8px; font-weight:500; }
   .project-title { font-size:1.1rem; font-weight:700; margin-bottom:0.75rem; }
   .project-desc { color:#cbd5e1; font-size:13px; line-height:1.7; }
-
-  /* Strengths */
   #strengths { background:rgba(15,23,42,0.5); border-top:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); }
   .strengths-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
   .strength-card { border:1px solid rgba(255,255,255,0.08); background:rgba(2,8,23,0.6); border-radius:16px; padding:1.5rem; transition:all 0.2s; }
@@ -106,8 +91,6 @@
   .strength-icon { font-size:1.5rem; margin-bottom:0.75rem; }
   .strength-title { font-size:14px; font-weight:700; margin-bottom:6px; color:#f1f5f9; }
   .strength-desc { font-size:12px; color:#94a3b8; line-height:1.6; }
-
-  /* About */
   .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; }
   .about-text { font-size:1rem; line-height:1.8; color:#cbd5e1; }
   .about-text p { margin-bottom:1rem; }
@@ -115,8 +98,6 @@
   .about-card { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:16px; padding:1.5rem; }
   .about-card-label { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#60a5fa; margin-bottom:8px; font-weight:600; }
   .about-card p { color:#cbd5e1; font-size:13px; line-height:1.6; }
-
-  /* Education */
   .edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem; }
   .edu-card { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); border-radius:16px; padding:1.75rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.2s; }
   .edu-card:hover { border-color:rgba(6,182,212,0.3); }
@@ -134,11 +115,7 @@
   .pursuing { background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); color:#67e8f9; }
   .planned { background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); color:#c4b5fd; }
   .completed { background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); color:#6ee7b7; }
-
-  /* Map */
   .map-box { border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03); border-radius:24px; overflow:hidden; position:relative; }
-
-  /* Contact */
   #contact { padding:6rem 1.5rem; }
   .contact-inner { max-width:1280px; margin:0 auto; }
   .contact-cta { max-width:64rem; margin:0 auto 4rem; border:1px solid rgba(59,130,246,0.2); background:linear-gradient(135deg,rgba(37,99,235,0.2),rgba(6,182,212,0.1)); border-radius:40px; padding:3rem; text-align:center; backdrop-filter:blur(20px); }
@@ -157,15 +134,10 @@
   .form-textarea { resize:vertical; min-height:120px; }
   .form-submit { background:#2563eb; color:#fff; border:none; border-radius:16px; padding:0.875rem 2rem; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; align-self:flex-start; }
   .form-submit:hover { background:#3b82f6; transform:scale(1.03); }
-
-  /* Footer */
   footer { border-top:1px solid rgba(255,255,255,0.1); padding:2rem 1.5rem; text-align:center; font-size:13px; color:#475569; }
-
-  /* Animations */
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
   .fade-up { opacity:0; animation:fadeUp 0.6s forwards; }
   .d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}.d4{animation-delay:0.4s}.d5{animation-delay:0.5s}.d6{animation-delay:0.6s}
-
   @media(max-width:768px){
     nav{display:none;}
     .hero-inner{grid-template-columns:1fr;padding:4rem 1.5rem;}
@@ -175,26 +147,13 @@
     .about-cards{grid-template-columns:1fr 1fr;}
     .skills-header{flex-direction:column;}
   }
- /* Your existing CSS */
-
-    body {
-      background:#0f172a;
-    }
-
-
-
-  
 </style>
 </head>
 <body>
 
-<!-- Scroll progress bar -->
 <div id="scroll-bar" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#67e8f9,#3b82f6);z-index:9999;transition:width 0.1s;pointer-events:none;"></div>
-
-<!-- Particle canvas -->
 <canvas id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;"></canvas>
 
-<!-- Nav -->
 <header>
   <div class="nav-inner">
     <div class="nav-brand">
@@ -207,13 +166,13 @@
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
+      <a href="#github">GitHub</a>
       <a href="#map">Visitors</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<!-- Hero -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-blob1"></div>
@@ -221,10 +180,7 @@
   <div class="hero-inner">
     <div>
       <div class="hero-badge fade-up d1">📍 Based in Somerset</div>
-      <h2 class="hero-title fade-up d2">
-  I'm a<br>
-  <span id="typing-text" style="color:#67e8f9;"></span><span id="typing-cursor" style="color:#67e8f9;animation:cursorBlink 1s infinite;">|</span>
-</h2>
+      <h2 class="hero-title fade-up d2">I'm a<br><span id="typing-text" style="color:#67e8f9;"></span><span id="typing-cursor" style="color:#67e8f9;">|</span></h2>
       <p class="hero-desc fade-up d3">Building scalable Azure infrastructure, hybrid cloud labs, DevOps workflows and secure enterprise-style environments. Self-taught engineer with real-world IT and cybersecurity experience.</p>
       <div class="hero-btns fade-up d4">
         <a href="#contact" class="btn-blue">Contact Me</a>
@@ -256,239 +212,60 @@
   </div>
 </section>
 
-<!-- Skills -->
 <section id="skills" class="section-wrap">
   <div class="skills-header">
-    <div>
-      <p class="section-tag">Skills &amp; Technologies</p>
-      <h2>What I Work With</h2>
-    </div>
+    <div><p class="section-tag">Skills &amp; Technologies</p><h2>What I Work With</h2></div>
     <p>Covering cloud engineering, infrastructure, cybersecurity, hardware and IT support across real-world environments.</p>
   </div>
   <div class="skills-grid">
-    <div class="skill-card">
-      <span class="skill-icon">☁️</span>
-      <h4>Azure &amp; Cloud</h4>
-      <p>Hybrid cloud deployments, Azure services, monitoring, networking and identity management.</p>
-      <div class="skill-tags">
-        <span class="skill-tag">Static Web Apps</span><span class="skill-tag">Azure Functions</span>
-        <span class="skill-tag">Cosmos DB</span><span class="skill-tag">Azure Arc</span>
-        <span class="skill-tag">VPN Gateway</span><span class="skill-tag">Entra ID</span>
-        <span class="skill-tag">Azure Monitor</span><span class="skill-tag">Key Vault</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <span class="skill-icon">🖥️</span>
-      <h4>Infrastructure &amp; Hardware</h4>
-      <p>Hands-on experience with Windows Server, Linux, virtualisation, networking and hardware repair.</p>
-      <div class="skill-tags">
-        <span class="skill-tag">Windows Server</span><span class="skill-tag">Active Directory</span>
-        <span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Hyper-V</span>
-        <span class="skill-tag">pfSense</span><span class="skill-tag">PC/Laptop Repair</span>
-        <span class="skill-tag">Soldering</span><span class="skill-tag">CCTV Systems</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <span class="skill-icon">🔧</span>
-      <h4>Automation &amp; DevOps</h4>
-      <p>CI/CD pipelines, scripting, infrastructure automation and cloud deployment workflows.</p>
-      <div class="skill-tags">
-        <span class="skill-tag">Terraform</span><span class="skill-tag">GitHub Actions</span>
-        <span class="skill-tag">PowerShell</span><span class="skill-tag">Docker</span>
-        <span class="skill-tag">Python</span><span class="skill-tag">Bash</span>
-        <span class="skill-tag">Git</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <span class="skill-icon">🔐</span>
-      <h4>Cybersecurity</h4>
-      <p>Offensive security mindset with hands-on CTF and bug bounty experience. Strong foundation in web vulnerabilities and reconnaissance.</p>
-      <div class="skill-tags">
-        <span class="skill-tag">HackerOne</span><span class="skill-tag">TryHackMe</span>
-        <span class="skill-tag">CTF Challenges</span><span class="skill-tag">Pen Testing</span>
-        <span class="skill-tag">Web Vulnerabilities</span><span class="skill-tag">Reconnaissance</span>
-        <span class="skill-tag">OSINT</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <span class="skill-icon">🛠️</span>
-      <h4>IT Support</h4>
-      <p>Real-world customer-facing technical support and hardware troubleshooting from hands-on shop experience.</p>
-      <div class="skill-tags">
-        <span class="skill-tag">Hardware Diagnostics</span><span class="skill-tag">Windows Troubleshooting</span>
-        <span class="skill-tag">Component Replacement</span><span class="skill-tag">Customer Support</span>
-        <span class="skill-tag">Device Repair</span><span class="skill-tag">Problem Solving</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <span class="skill-icon">💻</span>
-      <h4>Web Development</h4>
-      <p>Frontend fundamentals complementing cloud and security work — useful for secure coding and bug bounty hunting.</p>
-      <div class="skill-tags">
-        <span class="skill-tag">HTML/CSS</span><span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">Python</span><span class="skill-tag">REST APIs</span>
-        <span class="skill-tag">Azure Static Web Apps</span><span class="skill-tag">Serverless</span>
-      </div>
-    </div>
+    <div class="skill-card"><span class="skill-icon">☁️</span><h4>Azure &amp; Cloud</h4><p>Hybrid cloud deployments, Azure services, monitoring, networking and identity management.</p><div class="skill-tags"><span class="skill-tag">Static Web Apps</span><span class="skill-tag">Azure Functions</span><span class="skill-tag">Cosmos DB</span><span class="skill-tag">Azure Arc</span><span class="skill-tag">VPN Gateway</span><span class="skill-tag">Entra ID</span><span class="skill-tag">Azure Monitor</span><span class="skill-tag">Key Vault</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🖥️</span><h4>Infrastructure &amp; Hardware</h4><p>Hands-on experience with Windows Server, Linux, virtualisation, networking and hardware repair.</p><div class="skill-tags"><span class="skill-tag">Windows Server</span><span class="skill-tag">Active Directory</span><span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Hyper-V</span><span class="skill-tag">pfSense</span><span class="skill-tag">PC/Laptop Repair</span><span class="skill-tag">Soldering</span><span class="skill-tag">CCTV Systems</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🔧</span><h4>Automation &amp; DevOps</h4><p>CI/CD pipelines, scripting, infrastructure automation and cloud deployment workflows.</p><div class="skill-tags"><span class="skill-tag">Terraform</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">PowerShell</span><span class="skill-tag">Docker</span><span class="skill-tag">Python</span><span class="skill-tag">Bash</span><span class="skill-tag">Git</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🔐</span><h4>Cybersecurity</h4><p>Offensive security mindset with hands-on CTF and bug bounty experience. Strong foundation in web vulnerabilities and reconnaissance.</p><div class="skill-tags"><span class="skill-tag">HackerOne</span><span class="skill-tag">TryHackMe</span><span class="skill-tag">CTF Challenges</span><span class="skill-tag">Pen Testing</span><span class="skill-tag">Web Vulnerabilities</span><span class="skill-tag">Reconnaissance</span><span class="skill-tag">OSINT</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🛠️</span><h4>IT Support</h4><p>Real-world customer-facing technical support and hardware troubleshooting from hands-on shop experience.</p><div class="skill-tags"><span class="skill-tag">Hardware Diagnostics</span><span class="skill-tag">Windows Troubleshooting</span><span class="skill-tag">Component Replacement</span><span class="skill-tag">Customer Support</span><span class="skill-tag">Device Repair</span><span class="skill-tag">Problem Solving</span></div></div>
+    <div class="skill-card"><span class="skill-icon">💻</span><h4>Web Development</h4><p>Frontend fundamentals complementing cloud and security work — useful for secure coding and bug bounty hunting.</p><div class="skill-tags"><span class="skill-tag">HTML/CSS</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Python</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Azure Static Web Apps</span><span class="skill-tag">Serverless</span></div></div>
   </div>
 </section>
 
-<!-- Experience -->
 <section id="experience">
   <div class="section-wrap">
     <p class="section-tag">Work Experience</p>
     <h2>Where I've Worked</h2>
     <div class="exp-grid">
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">IT Technician &amp; Hardware Repair</div>
-            <div class="exp-company">Computer Shop · Somerset</div>
-          </div>
-          <span class="exp-date">Real-world experience</span>
-        </div>
-        <ul class="exp-list">
-          <li>Diagnosed and repaired PC, laptop and mobile hardware faults</li>
-          <li>Component replacement including motherboards, screens and storage</li>
-          <li>Customer-facing technical support and problem resolution</li>
-          <li>Soldering and low-level hardware repair work</li>
-          <li>Windows troubleshooting and software issue resolution</li>
-          <li>Working under pressure with real client devices and deadlines</li>
-        </ul>
-      </div>
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">CCTV Installation Engineer</div>
-            <div class="exp-company">Local Business Project </div>
-          </div>
-          <span class="exp-date">Project</span>
-        </div>
-        <ul class="exp-list">
-          <li>Designed and installed full remote monitoring CCTV system</li>
-          <li>Network configuration for remote viewing and access</li>
-          <li>Cable management and physical hardware installation</li>
-          <li>Configured secure remote access for business owner</li>
-          <li>End-to-end project from planning to handover</li>
-        </ul>
-      </div>
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">Bug Bounty Hunter</div>
-            <div class="exp-company">HackerOne Platform</div>
-          </div>
-          <span class="exp-date">Active</span>
-        </div>
-        <ul class="exp-list">
-          <li>Vulnerability research on real-world web applications</li>
-          <li>Web security testing and responsible disclosure</li>
-          <li>Reconnaissance and attack surface mapping</li>
-          <li>Report writing and vulnerability documentation</li>
-        </ul>
-      </div>
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">CTF &amp; Security Research</div>
-            <div class="exp-company">TryHackMe · Self-directed</div>
-          </div>
-          <span class="exp-date">Active</span>
-        </div>
-        <ul class="exp-list">
-          <li>Hands-on CTF challenges covering a range of attack types</li>
-          <li>Offensive security techniques and tools</li>
-          <li>Web vulnerabilities including XSS, SQLi, IDOR</li>
-          <li>Linux privilege escalation and enumeration</li>
-        </ul>
-      </div>
+      <div class="exp-card"><div class="exp-header"><div><div class="exp-role">IT Technician &amp; Hardware Repair</div><div class="exp-company">Computer Shop · Somerset</div></div><span class="exp-date">Real-world experience</span></div><ul class="exp-list"><li>Diagnosed and repaired PC, laptop and mobile hardware faults</li><li>Component replacement including motherboards, screens and storage</li><li>Customer-facing technical support and problem resolution</li><li>Soldering and low-level hardware repair work</li><li>Windows troubleshooting and software issue resolution</li><li>Working under pressure with real client devices and deadlines</li></ul></div>
+      <div class="exp-card"><div class="exp-header"><div><div class="exp-role">CCTV Installation Engineer</div><div class="exp-company">Local Business Project</div></div><span class="exp-date">Project</span></div><ul class="exp-list"><li>Designed and installed full remote monitoring CCTV system</li><li>Network configuration for remote viewing and access</li><li>Cable management and physical hardware installation</li><li>Configured secure remote access for business owner</li><li>End-to-end project from planning to handover</li></ul></div>
+      <div class="exp-card"><div class="exp-header"><div><div class="exp-role">Bug Bounty Hunter</div><div class="exp-company">HackerOne Platform</div></div><span class="exp-date">Active</span></div><ul class="exp-list"><li>Vulnerability research on real-world web applications</li><li>Web security testing and responsible disclosure</li><li>Reconnaissance and attack surface mapping</li><li>Report writing and vulnerability documentation</li></ul></div>
+      <div class="exp-card"><div class="exp-header"><div><div class="exp-role">CTF &amp; Security Research</div><div class="exp-company">TryHackMe · Self-directed</div></div><span class="exp-date">Active</span></div><ul class="exp-list"><li>Hands-on CTF challenges covering a range of attack types</li><li>Offensive security techniques and tools</li><li>Web vulnerabilities including XSS, SQLi, IDOR</li><li>Linux privilege escalation and enumeration</li></ul></div>
     </div>
   </div>
 </section>
 
-<!-- Projects -->
 <section id="projects">
   <div class="projects-inner">
-    <div class="projects-header">
-      <p class="section-tag">Portfolio</p>
-      <h2>Recent Projects</h2>
-    </div>
+    <div class="projects-header"><p class="section-tag">Portfolio</p><h2>Recent Projects</h2></div>
     <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-img" style="background:linear-gradient(135deg,rgba(59,130,246,0.3),rgba(2,8,23,1),rgba(6,182,212,0.1));">
-          <span class="project-img-badge">Featured</span>
-        </div>
-        <div class="project-body">
-          <p class="project-tech">Azure Functions · Cosmos DB · GitHub Actions</p>
-          <h4 class="project-title">Cloud CV Website</h4>
-          <p class="project-desc">Full-stack Azure-powered CV site with visitor analytics, private IP tracking, live world map, serverless APIs and CI/CD automation.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img" style="background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(2,8,23,1),rgba(6,182,212,0.1));">
-          <span class="project-img-badge">Home Lab</span>
-        </div>
-        <div class="project-body">
-          <p class="project-tech">Azure Arc · VPN Gateway · Entra Connect</p>
-          <h4 class="project-title">Hybrid Azure Home Lab</h4>
-          <p class="project-desc">Connected local infrastructure to Azure using VPN Gateway, Azure Arc, Entra ID and hybrid cloud management — simulating enterprise environments.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-img" style="background:linear-gradient(135deg,rgba(16,185,129,0.3),rgba(2,8,23,1),rgba(59,130,246,0.1));">
-          <span class="project-img-badge">Real World</span>
-        </div>
-        <div class="project-body">
-          <p class="project-tech">CCTV · Networking · Remote Access</p>
-          <h4 class="project-title">Business CCTV Installation</h4>
-          <p class="project-desc">Designed and installed a full remote monitoring CCTV system for a local business including network setup and secure remote access configuration.</p>
-        </div>
-      </div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,rgba(59,130,246,0.3),rgba(2,8,23,1),rgba(6,182,212,0.1));"><span class="project-img-badge">Featured</span></div><div class="project-body"><p class="project-tech">Azure Functions · Cosmos DB · GitHub Actions</p><h4 class="project-title">Cloud CV Website</h4><p class="project-desc">Full-stack Azure-powered CV site with visitor analytics, private IP tracking, live world map, serverless APIs and CI/CD automation.</p></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(2,8,23,1),rgba(6,182,212,0.1));"><span class="project-img-badge">Home Lab</span></div><div class="project-body"><p class="project-tech">Azure Arc · VPN Gateway · Entra Connect</p><h4 class="project-title">Hybrid Azure Home Lab</h4><p class="project-desc">Connected local infrastructure to Azure using VPN Gateway, Azure Arc, Entra ID and hybrid cloud management — simulating enterprise environments.</p></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,rgba(16,185,129,0.3),rgba(2,8,23,1),rgba(59,130,246,0.1));"><span class="project-img-badge">Real World</span></div><div class="project-body"><p class="project-tech">CCTV · Networking · Remote Access</p><h4 class="project-title">Business CCTV Installation</h4><p class="project-desc">Designed and installed a full remote monitoring CCTV system for a local business including network setup and secure remote access configuration.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- Professional Strengths -->
 <section id="strengths">
   <div class="section-wrap">
     <p class="section-tag">Professional Strengths</p>
     <h2>What Sets Me Apart</h2>
     <div class="strengths-grid">
-      <div class="strength-card">
-        <div class="strength-icon">🧠</div>
-        <div class="strength-title">Self-learning Mindset</div>
-        <div class="strength-desc">Everything I know is self-taught through hands-on labs, real projects and continuous practice — not just courses.</div>
-      </div>
-      <div class="strength-card">
-        <div class="strength-icon">🔍</div>
-        <div class="strength-title">Curiosity &amp; Persistence</div>
-        <input class="strength-desc">I don't stop at "it doesn't work" — I debug, research and iterate until I find the solution.</div>
-      </div>
-      <div class="strength-card">
-        <div class="strength-icon">🤝</div>
-        <div class="strength-title">Customer-facing Experience</div>
-        <div class="strength-desc">Real experience communicating technical solutions to non-technical customers under pressure at Computer Shop.</div>
-      </div>
-      <div class="strength-card">
-        <div class="strength-icon">⚡</div>
-        <div class="strength-title">Hands-on Confidence</div>
-        <div class="strength-desc">From soldering components to configuring Azure VPN gateways — comfortable working at every layer of the stack.</div>
-      </div>
-      <div class="strength-card">
-        <div class="strength-icon">🔄</div>
-        <div class="strength-title">Adaptability</div>
-        <div class="strength-desc">Flexible across cloud, security, hardware and development — able to pick up new tools and technologies quickly.</div>
-      </div>
-      <div class="strength-card">
-        <div class="strength-icon">🛡️</div>
-        <div class="strength-title">Security Mindset</div>
-        <div class="strength-desc">Bug bounty and CTF experience means I think about how things can break — valuable in any infrastructure or cloud role.</div>
-      </div>
+      <div class="strength-card"><div class="strength-icon">🧠</div><div class="strength-title">Self-learning Mindset</div><div class="strength-desc">Everything I know is self-taught through hands-on labs, real projects and continuous practice — not just courses.</div></div>
+      <div class="strength-card"><div class="strength-icon">🔍</div><div class="strength-title">Curiosity &amp; Persistence</div><div class="strength-desc">I don't stop at "it doesn't work" — I debug, research and iterate until I find the solution.</div></div>
+      <div class="strength-card"><div class="strength-icon">🤝</div><div class="strength-title">Customer-facing Experience</div><div class="strength-desc">Real experience communicating technical solutions to non-technical customers under pressure at Computer Shop.</div></div>
+      <div class="strength-card"><div class="strength-icon">⚡</div><div class="strength-title">Hands-on Confidence</div><div class="strength-desc">From soldering components to configuring Azure VPN gateways — comfortable working at every layer of the stack.</div></div>
+      <div class="strength-card"><div class="strength-icon">🔄</div><div class="strength-title">Adaptability</div><div class="strength-desc">Flexible across cloud, security, hardware and development — able to pick up new tools and technologies quickly.</div></div>
+      <div class="strength-card"><div class="strength-icon">🛡️</div><div class="strength-title">Security Mindset</div><div class="strength-desc">Bug bounty and CTF experience means I think about how things can break — valuable in any infrastructure or cloud role.</div></div>
     </div>
   </div>
 </section>
 
-<!-- About -->
 <section id="about" class="section-wrap">
   <p class="section-tag">About Me</p>
   <h2>Building Real-World Cloud Infrastructure</h2>
@@ -499,92 +276,31 @@
       <p>I'm actively pursuing Azure certifications and looking for my first cloud or IT engineering role where I can bring both technical depth and real-world practical experience.</p>
     </div>
     <div class="about-cards">
-      <div class="about-card">
-        <div class="about-card-label">Current Focus</div>
-        <p>Azure Administration, Hybrid Cloud and Infrastructure Automation.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-card-label">Learning Path</div>
-        <p>AZ-900 → AZ-104 → AZ-400, building real projects at every step.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-card-label">Home Lab</div>
-        <p>Windows Server, Linux VMs, pfSense, Azure Arc and VPN Gateway integration.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-card-label">Open To</div>
-        <p>Cloud Engineer, IT Engineer, SOC Analyst, Field Technician — remote or Somerset.</p>
-      </div>
+      <div class="about-card"><div class="about-card-label">Current Focus</div><p>Azure Administration, Hybrid Cloud and Infrastructure Automation.</p></div>
+      <div class="about-card"><div class="about-card-label">Learning Path</div><p>AZ-900 → AZ-104 → AZ-400, building real projects at every step.</p></div>
+      <div class="about-card"><div class="about-card-label">Home Lab</div><p>Windows Server, Linux VMs, pfSense, Azure Arc and VPN Gateway integration.</p></div>
+      <div class="about-card"><div class="about-card-label">Open To</div><p>Cloud Engineer, IT Engineer, SOC Analyst, Field Technician — remote or Somerset.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Education & Certs -->
 <section id="education" class="section-wrap">
   <p class="section-tag">Education &amp; Certifications</p>
   <h2>Learning Path</h2>
   <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-icon">☁️</div>
-      <div>
-        <div class="edu-title">Self-taught Cloud Engineering</div>
-        <div class="edu-sub">Microsoft Learn, Azure portal labs, home lab practice</div>
-        <div class="edu-date">2025 — Present</div>
-      </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-icon">🔐</div>
-      <div>
-        <div class="edu-title">Cybersecurity — TryHackMe &amp; HackerOne</div>
-        <div class="edu-sub">CTF challenges, bug bounty, offensive security labs</div>
-        <div class="edu-date">2024 — Present</div>
-      </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-icon">🏠</div>
-      <div>
-        <div class="edu-title">Home Lab — Hybrid Infrastructure</div>
-        <div class="edu-sub">Windows Server, Linux, pfSense, Azure Arc integration</div>
-        <div class="edu-date">2025 — Present</div>
-      </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-icon">🛠️</div>
-      <div>
-        <div class="edu-title">IT Technician — Computer Shop</div>
-        <div class="edu-sub">Hardware repair, diagnostics, customer support</div>
-        <div class="edu-date">Real-world experience</div>
-      </div>
-    </div>
+    <div class="edu-card"><div class="edu-icon">☁️</div><div><div class="edu-title">Self-taught Cloud Engineering</div><div class="edu-sub">Microsoft Learn, Azure portal labs, home lab practice</div><div class="edu-date">2025 — Present</div></div></div>
+    <div class="edu-card"><div class="edu-icon">🔐</div><div><div class="edu-title">Cybersecurity — TryHackMe &amp; HackerOne</div><div class="edu-sub">CTF challenges, bug bounty, offensive security labs</div><div class="edu-date">2024 — Present</div></div></div>
+    <div class="edu-card"><div class="edu-icon">🏠</div><div><div class="edu-title">Home Lab — Hybrid Infrastructure</div><div class="edu-sub">Windows Server, Linux, pfSense, Azure Arc integration</div><div class="edu-date">2025 — Present</div></div></div>
+    <div class="edu-card"><div class="edu-icon">🛠️</div><div><div class="edu-title">IT Technician — Computer Shop</div><div class="edu-sub">Hardware repair, diagnostics, customer support</div><div class="edu-date">Real-world experience</div></div></div>
   </div>
   <div class="cert-grid">
-    <div class="cert-card">
-      <span class="cert-badge">☁️</span>
-      <div class="cert-name">AZ-900</div>
-      <div class="cert-issuer">Azure Fundamentals</div>
-      <span class="cert-status pursuing">Pursuing</span>
-    </div>
-    <div class="cert-card">
-      <span class="cert-badge">⚙️</span>
-      <div class="cert-name">AZ-104</div>
-      <div class="cert-issuer">Azure Administrator</div>
-      <span class="cert-status planned">Planned</span>
-    </div>
-    <div class="cert-card">
-      <span class="cert-badge">🔧</span>
-      <div class="cert-name">AZ-400</div>
-      <div class="cert-issuer">Azure DevOps</div>
-      <span class="cert-status planned">Planned</span>
-    </div>
-    <div class="cert-card">
-      <span class="cert-badge">🔐</span>
-      <div class="cert-name">CompTIA Sec+</div>
-      <div class="cert-issuer">Security</div>
-      <span class="cert-status planned">Planned</span>
-    </div>
+    <div class="cert-card"><span class="cert-badge">☁️</span><div class="cert-name">AZ-900</div><div class="cert-issuer">Azure Fundamentals</div><span class="cert-status pursuing">Pursuing</span></div>
+    <div class="cert-card"><span class="cert-badge">⚙️</span><div class="cert-name">AZ-104</div><div class="cert-issuer">Azure Administrator</div><span class="cert-status planned">Planned</span></div>
+    <div class="cert-card"><span class="cert-badge">🔧</span><div class="cert-name">AZ-400</div><div class="cert-issuer">Azure DevOps</div><span class="cert-status planned">Planned</span></div>
+    <div class="cert-card"><span class="cert-badge">🔐</span><div class="cert-name">CompTIA Sec+</div><div class="cert-issuer">Security</div><span class="cert-status planned">Planned</span></div>
   </div>
 </section>
-<!-- GitHub Activity -->
+
 <section id="github" class="section-wrap">
   <p class="section-tag">GitHub Activity</p>
   <h2>Actively Building</h2>
@@ -593,12 +309,9 @@
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="https://github.com/nyxalb.png" style="width:40px;height:40px;border-radius:50%;border:2px solid rgba(103,232,249,0.3);" alt="GitHub avatar"/>
-        <div>
-          <div style="font-size:14px;font-weight:600;">nyxalb</div>
-          <div style="font-size:12px;color:#94a3b8;" id="github-stats">Loading...</div>
-        </div>
+        <div><div style="font-size:14px;font-weight:600;">nyxalb</div><div style="font-size:12px;color:#94a3b8;" id="github-stats">Loading...</div></div>
       </div>
-      <a href="https://github.com/nyxalb" target="_blank" style="font-size:12px;color:#67e8f9;text-decoration:none;border:1px solid rgba(103,232,249,0.2);padding:6px 16px;border-radius:99px;transition:all 0.2s;" onmouseover="this.style.background='rgba(103,232,249,0.1)'" onmouseout="this.style.background='transparent'">View GitHub →</a>
+      <a href="https://github.com/nyxalb" target="_blank" style="font-size:12px;color:#67e8f9;text-decoration:none;border:1px solid rgba(103,232,249,0.2);padding:6px 16px;border-radius:99px;" onmouseover="this.style.background='rgba(103,232,249,0.1)'" onmouseout="this.style.background='transparent'">View GitHub →</a>
     </div>
     <div id="github-graph" style="overflow-x:auto;"></div>
     <div style="display:flex;align-items:center;gap:6px;margin-top:1rem;justify-content:flex-end;">
@@ -613,7 +326,6 @@
   </div>
 </section>
 
-<!-- Visitor Map -->
 <section id="map" class="section-wrap">
   <p class="section-tag">Live Data</p>
   <h2>Who's been here</h2>
@@ -621,13 +333,12 @@
   <div class="map-box">
     <div id="map-container" style="width:100%;height:420px;position:relative;"></div>
     <div id="map-legend" style="position:absolute;bottom:1.5rem;right:1.5rem;background:rgba(2,8,23,0.92);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:1rem 1.25rem;font-size:12px;min-width:180px;backdrop-filter:blur(12px);">
-      <div style="color:#67e8f9;margin-bottom:8px;font-weight:600;letter-spacing:0.05em;font-size:11px;text-transform:uppercase;">Top Visitors</div>
+      <div style="color:#67e8f9;margin-bottom:8px;font-weight:600;font-size:11px;text-transform:uppercase;">Top Visitors</div>
       <div id="map-countries" style="color:#94a3b8;line-height:2;"></div>
     </div>
   </div>
 </section>
 
-<!-- Contact -->
 <section id="contact">
   <div class="contact-inner">
     <div class="contact-cta">
@@ -636,7 +347,7 @@
       <p>Open to junior cloud engineering, IT engineering, cybersecurity and Azure-focused roles across the UK — remote or on-site in Somerset.</p>
       <div class="cta-btns">
         <a href="mailto:mario@mariokola.co.uk" class="btn-blue">Email Me</a>
-        <a href="https://linkedin.com/in/" class="btn-ghost" target="_blank">LinkedIn</a>
+        <a href="https://linkedin.com/in/mario-kola-640a8b3b5" class="btn-ghost" target="_blank">LinkedIn</a>
         <a href="https://github.com/nyxalb" class="btn-ghost" target="_blank">GitHub</a>
       </div>
     </div>
@@ -648,9 +359,8 @@
         <div class="contact-links">
           <a href="mailto:mario@mariokola.co.uk" class="contact-link"><div class="contact-link-icon">✉️</div>mario@mariokola.co.uk</a>
           <a href="https://github.com/nyxalb" class="contact-link" target="_blank"><div class="contact-link-icon">💻</div>github.com/nyxalb</a>
-          <a href="https://linkedin.com/in/" class="contact-link" target="_blank"><div class="contact-link-icon">🔗</div>linkedin.com/</a>
+          <a href="https://linkedin.com/in/mario-kola-640a8b3b5" class="contact-link" target="_blank"><div class="contact-link-icon">🔗</div>linkedin.com/in/mario-kola-640a8b3b5</a>
           <a href="https://mariokola.co.uk" class="contact-link"><div class="contact-link-icon">🌐</div>mariokola.co.uk</a>
-          <a href="#github">GitHub</a>
         </div>
       </div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -667,23 +377,22 @@
   <p>© 2026 Mario Kola • Cloud Engineer &amp; IT Technician • Somerset</p>
 </footer>
 
-<!-- Terminal Easter Egg -->
-<div id="terminal" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:640px;max-width:95vw;background:rgba(2,8,23,0.97);border:1px solid rgba(103,232,249,0.3);border-radius:16px;padding:0;z-index:9000;box-shadow:0 25px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);font-family:'Courier New',monospace;"></div> 
-  <div style="background:rgba(255,255,255,0.05);padding:0.75rem 1rem;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);"></div>
+<!-- Terminal Easter Egg — must be before </body> -->
+<div id="terminal" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);width:640px;max-width:95vw;background:rgba(2,8,23,0.97);border:1px solid rgba(103,232,249,0.3);border-radius:16px;padding:0;z-index:9000;box-shadow:0 25px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);font-family:'Courier New',monospace;">
+  <div style="background:rgba(255,255,255,0.05);padding:0.75rem 1rem;border-radius:16px 16px 0 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
     <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;cursor:pointer;" onclick="closeTerminal()"></div>
     <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;"></div>
     <div style="width:12px;height:12px;border-radius:50%;background:#10b981;"></div>
     <span style="font-size:12px;color:#94a3b8;margin-left:8px;">mario@mariokola.co.uk ~ </span>
   </div>
   <div id="terminal-output" style="padding:1rem;height:280px;overflow-y:auto;font-size:13px;line-height:1.8;color:#e2e8f0;"></div>
-  <div style="padding:0.5rem 1rem 1rem;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,0.06);"></div>
-    <span style="color:#67e8f9;font-size:13px;"></span>
-    <input id="terminal-input" type="text" style="flex: 1;">
-
+  <div style="padding:0.5rem 1rem 1rem;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,0.06);">
+    <span style="color:#67e8f9;font-size:13px;">❯</span>
+    <input id="terminal-input" type="text" style="flex:1;background:transparent;border:none;outline:none;color:#f1f5f9;font-family:'Courier New',monospace;font-size:13px;" placeholder="type a command..." autocomplete="off"/>
+  </div>
+</div>
 
 <script>
-
-  
   // ── Scroll progress ──
   window.addEventListener('scroll', () => {
     const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
@@ -791,276 +500,110 @@
   // ── Scroll animations ──
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});
   document.querySelectorAll('.skill-card,.project-card,.edu-card,.cert-card,.about-card,.strength-card,.exp-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s, transform 0.5s';obs.observe(el);});
-// ── Terminal Easter Egg ──
-const terminalCmds = {
-  help: `<span style="color:#67e8f9;">Available commands:</span>
-  whoami          — who is Mario?
-  ls projects     — list projects
-  ls skills       — list skills
-  cat about.txt   — about me
-  cat contact.txt — contact info
-  ping azure      — ping Azure
-  hack            — try to hack me
-  sudo hire mario — hire command
-  clear           — clear terminal
-  exit            — close terminal`,
 
-  whoami: `<span style="color:#10b981;">mario@mariokola.co.uk</span>
-  Role:     Cloud Engineer & IT Technician
-  Location: Taunton, Somerset, UK
-  Status:   <span style="color:#67e8f9;">Available for opportunities</span>
-  Skills:   Azure · DevOps · Cybersecurity · Hardware`,
-
-  'ls projects': `<span style="color:#67e8f9;">drwxr-xr-x</span>  cloud-cv-website/
-<span style="color:#67e8f9;">drwxr-xr-x</span>  hybrid-azure-home-lab/
-<span style="color:#67e8f9;">drwxr-xr-x</span>  business-cctv-installation/
-<span style="color:#67e8f9;">drwxr-xr-x</span>  hackerone-bug-bounty/
-<span style="color:#94a3b8;">-rw-r--r--</span>  more-coming-soon.txt`,
-
-  'ls skills': `<span style="color:#67e8f9;">Cloud:</span>      Azure · Cosmos DB · Azure Functions · Arc · Entra ID
-<span style="color:#67e8f9;">Infra:</span>      Windows Server · Linux · Hyper-V · pfSense
-<span style="color:#67e8f9;">DevOps:</span>     GitHub Actions · Terraform · Docker · Python
-<span style="color:#67e8f9;">Security:</span>   HackerOne · TryHackMe · CTF · Web Vulns
-<span style="color:#67e8f9;">Hardware:</span>   PC Repair · Soldering · CCTV · Diagnostics`,
-
-  'cat about.txt': `Name:     Mario Kola
-Location: Taunton, Somerset, UK
-Story:    Started in hardware repair at TA1 Computer Shop.
-          Moved into cybersecurity via TryHackMe and HackerOne.
-          Now building hybrid Azure cloud infrastructure.
-Goal:     First cloud engineering role where hands-on
-          experience meets modern cloud skills.
-Fun fact: This terminal is an easter egg — well found! 🎉`,
-
-  'cat contact.txt': `Email:    mario@mariokola.co.uk
-GitHub:   github.com/nyxalb
-LinkedIn: linkedin.com/in/mario-kola-640a8b3b5
-Website:  mariokola.co.uk
-Status:   <span style="color:#10b981;">Open to opportunities</span>`,
-
-  'ping azure': `PING azure.microsoft.com (20.190.151.7)
-64 bytes from azure: icmp_seq=1 ttl=117 time=<span style="color:#10b981;">2.1 ms</span>
-64 bytes from azure: icmp_seq=2 ttl=117 time=<span style="color:#10b981;">1.8 ms</span>
-64 bytes from azure: icmp_seq=3 ttl=117 time=<span style="color:#10b981;">2.3 ms</span>
-<span style="color:#67e8f9;">Azure is up. All systems operational. ✓</span>`,
-
-  hack: `<span style="color:#ef4444;">ACCESS DENIED</span>
-Initialising countermeasures...
-Tracing connection... 
-<span style="color:#f59e0b;">Warning: Your IP has been logged.</span>
-Just kidding 😄 — but I do store visitor IPs in Cosmos DB.`,
-
-  'sudo hire mario': `<span style="color:#f59e0b;">[sudo] password for recruiter:</span> ••••••••
-Verifying credentials...
-<span style="color:#10b981;">✓ Access granted</span>
-<span style="color:#67e8f9;">Executing: hire mario --role cloud-engineer --location uk</span>
-Opening mail client...
-→ Redirecting to mario@mariokola.co.uk
-<span style="color:#10b981;">Great choice! 🚀</span>`,
-
-  clear: '__clear__',
-  exit: '__exit__',
-};
-
-let terminalHistory = [];
-let historyIndex = -1;
-let terminalOpen = false;
-
-function openTerminal() {
-  const t = document.getElementById('terminal');
-  t.style.display = 'block';
-  terminalOpen = true;
-  const output = document.getElementById('terminal-output');
-  if (output.innerHTML === '') {
-    output.innerHTML = `<div style="color:#67e8f9;margin-bottom:8px;">Welcome to mario@mariokola.co.uk terminal</div>
-<div style="color:#94a3b8;font-size:12px;margin-bottom:12px;">Type <span style="color:#f1f5f9;">help</span> to see available commands</div>`;
+  // ── Terminal Easter Egg ──
+  const terminalCmds = {
+    help: `<span style="color:#67e8f9;">Available commands:</span>\n  whoami · ls projects · ls skills · cat about.txt · cat contact.txt · ping azure · hack · sudo hire mario · clear · exit`,
+    whoami: `<span style="color:#10b981;">mario@mariokola.co.uk</span>\n  Role: Cloud Engineer & IT Technician\n  Location: Taunton, Somerset, UK\n  Status: <span style="color:#67e8f9;">Available for opportunities</span>`,
+    'ls projects': `<span style="color:#67e8f9;">drwxr-xr-x</span>  cloud-cv-website/\n<span style="color:#67e8f9;">drwxr-xr-x</span>  hybrid-azure-home-lab/\n<span style="color:#67e8f9;">drwxr-xr-x</span>  business-cctv-installation/\n<span style="color:#67e8f9;">drwxr-xr-x</span>  hackerone-bug-bounty/`,
+    'ls skills': `<span style="color:#67e8f9;">Cloud:</span> Azure · Cosmos DB · Functions · Arc · Entra ID\n<span style="color:#67e8f9;">Infra:</span> Windows Server · Linux · Hyper-V · pfSense\n<span style="color:#67e8f9;">DevOps:</span> GitHub Actions · Terraform · Docker · Python\n<span style="color:#67e8f9;">Security:</span> HackerOne · TryHackMe · CTF · Web Vulns`,
+    'cat about.txt': `Name: Mario Kola\nLocation: Taunton, Somerset, UK\nStory: Started in hardware repair → cybersecurity → Azure cloud.\nGoal: First cloud engineering role.\nFun fact: This terminal is an easter egg — well found! 🎉`,
+    'cat contact.txt': `Email: mario@mariokola.co.uk\nGitHub: github.com/nyxalb\nLinkedIn: linkedin.com/in/mario-kola-640a8b3b5\nStatus: <span style="color:#10b981;">Open to opportunities</span>`,
+    'ping azure': `PING azure.microsoft.com\nicmp_seq=1 time=<span style="color:#10b981;">2.1ms</span>\nicmp_seq=2 time=<span style="color:#10b981;">1.8ms</span>\n<span style="color:#67e8f9;">Azure is up. All systems operational. ✓</span>`,
+    hack: `<span style="color:#ef4444;">ACCESS DENIED</span>\nInitialising countermeasures...\n<span style="color:#f59e0b;">Warning: Your IP has been logged.</span>\nJust kidding 😄`,
+    'sudo hire mario': `<span style="color:#f59e0b;">[sudo] password:</span> ••••••••\n<span style="color:#10b981;">✓ Access granted</span>\n<span style="color:#67e8f9;">Executing: hire mario --role cloud-engineer</span>\n<span style="color:#10b981;">Great choice! 🚀</span>`,
+    clear: '__clear__',
+    exit: '__exit__',
+  };
+  let terminalHistory=[], historyIndex=-1, terminalOpen=false;
+  function openTerminal() {
+    document.getElementById('terminal').style.display='block';
+    terminalOpen=true;
+    const o=document.getElementById('terminal-output');
+    if(o.innerHTML==='') o.innerHTML=`<div style="color:#67e8f9;margin-bottom:8px;">Welcome to mario@mariokola.co.uk</div><div style="color:#94a3b8;font-size:12px;">Type <span style="color:#f1f5f9;">help</span> for commands</div>`;
+    setTimeout(()=>document.getElementById('terminal-input').focus(),100);
   }
-  setTimeout(() => document.getElementById('terminal-input').focus(), 100);
-}
-
-function closeTerminal() {
-  document.getElementById('terminal').style.display = 'none';
-  terminalOpen = false;
-}
-
-function printToTerminal(html) {
-  const output = document.getElementById('terminal-output');
-  output.innerHTML += `<div style="margin-bottom:8px;">${html}</div>`;
-  output.scrollTop = output.scrollHeight;
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === '`') {
-    e.preventDefault();
-    terminalOpen ? closeTerminal() : openTerminal();
+  function closeTerminal() { document.getElementById('terminal').style.display='none'; terminalOpen=false; }
+  function printToTerminal(html) {
+    const o=document.getElementById('terminal-output');
+    o.innerHTML+=`<div style="margin-bottom:8px;white-space:pre-wrap;">${html}</div>`;
+    o.scrollTop=o.scrollHeight;
   }
-  if (e.key === 'Escape' && terminalOpen) closeTerminal();
-});
-
-document.getElementById('terminal-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const input = e.target.value.trim().toLowerCase();
-    if (!input) return;
-    terminalHistory.unshift(input);
-    historyIndex = -1;
-    printToTerminal(`<span style="color:#67e8f9;">❯</span> <span style="color:#f1f5f9;">${input}</span>`);
-    e.target.value = '';
-    const cmd = terminalCmds[input];
-    if (cmd === '__clear__') {
-      document.getElementById('terminal-output').innerHTML = '';
-    } else if (cmd === '__exit__') {
-      closeTerminal();
-    } else if (cmd) {
-      printToTerminal(`<div style="color:#cbd5e1;">${cmd}</div>`);
-    } else {
-      printToTerminal(`<span style="color:#ef4444;">command not found: ${input}</span> — type <span style="color:#67e8f9;">help</span>`);
+  document.addEventListener('keydown', e => {
+    if(e.key==='`'){e.preventDefault(); terminalOpen?closeTerminal():openTerminal();}
+    if(e.key==='Escape'&&terminalOpen) closeTerminal();
+  });
+  document.getElementById('terminal-input').addEventListener('keydown', e => {
+    if(e.key==='Enter'){
+      const input=e.target.value.trim().toLowerCase();
+      if(!input) return;
+      terminalHistory.unshift(input); historyIndex=-1;
+      printToTerminal(`<span style="color:#67e8f9;">❯</span> ${input}`);
+      e.target.value='';
+      const cmd=terminalCmds[input];
+      if(cmd==='__clear__') document.getElementById('terminal-output').innerHTML='';
+      else if(cmd==='__exit__') closeTerminal();
+      else if(cmd) printToTerminal(`<div style="color:#cbd5e1;">${cmd}</div>`);
+      else printToTerminal(`<span style="color:#ef4444;">command not found: ${input}</span> — type help`);
     }
-  }
-  if (e.key === 'ArrowUp') {
-    historyIndex = Math.min(historyIndex + 1, terminalHistory.length - 1);
-    e.target.value = terminalHistory[historyIndex] || '';
-  }
-  if (e.key === 'ArrowDown') {
-    historyIndex = Math.max(historyIndex - 1, -1);
-    e.target.value = historyIndex >= 0 ? terminalHistory[historyIndex] : '';
-  }
-});
-// ── GitHub Activity Graph ──
-async function loadGitHubGraph() {
-  try {
-    const username = 'nyxalb';
+    if(e.key==='ArrowUp'){historyIndex=Math.min(historyIndex+1,terminalHistory.length-1);e.target.value=terminalHistory[historyIndex]||'';}
+    if(e.key==='ArrowDown'){historyIndex=Math.max(historyIndex-1,-1);e.target.value=historyIndex>=0?terminalHistory[historyIndex]:'';}
+  });
 
-    // Fetch repos
-    const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-    const repos = await reposRes.json();
-
-    // Fetch recent events
-    const eventsRes = await fetch(`https://api.github.com/users/${username}/events?per_page=100`);
-    const events = await eventsRes.json();
-
-    // Count commits per day over last 52 weeks
-    const commitsByDay = {};
-    const now = new Date();
-    const yearAgo = new Date(now);
-    yearAgo.setFullYear(yearAgo.getFullYear() - 1);
-
-    events.forEach(event => {
-      if (event.type === 'PushEvent') {
-        const date = event.created_at.split('T')[0];
-        const commits = event.payload.commits ? event.payload.commits.length : 1;
-        commitsByDay[date] = (commitsByDay[date] || 0) + commits;
+  // ── GitHub Activity Graph ──
+  async function loadGitHubGraph() {
+    try {
+      const username='nyxalb';
+      const reposRes=await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+      const repos=await reposRes.json();
+      const eventsRes=await fetch(`https://api.github.com/users/${username}/events?per_page=100`);
+      const events=await eventsRes.json();
+      const commitsByDay={};
+      events.forEach(event=>{
+        if(event.type==='PushEvent'){
+          const date=event.created_at.split('T')[0];
+          const commits=event.payload.commits?event.payload.commits.length:1;
+          commitsByDay[date]=(commitsByDay[date]||0)+commits;
+        }
+      });
+      const weeks=52,days=7,cellSize=14,cellGap=3;
+      const totalWidth=weeks*(cellSize+cellGap),totalHeight=days*(cellSize+cellGap);
+      let svg=`<svg width="${totalWidth}" height="${totalHeight+24}" viewBox="0 0 ${totalWidth} ${totalHeight+24}" xmlns="http://www.w3.org/2000/svg">`;
+      ['','Mon','','Wed','','Fri',''].forEach((label,i)=>{if(label)svg+=`<text x="0" y="${i*(cellSize+cellGap)+cellSize}" fill="#64748b" font-size="9" font-family="Inter,sans-serif">${label}</text>`;});
+      const now=new Date(),yearAgo=new Date(now);yearAgo.setFullYear(yearAgo.getFullYear()-1);
+      const startDate=new Date(yearAgo);startDate.setDate(startDate.getDate()-startDate.getDay());
+      let totalCommits=0,activeDays=0;
+      for(let week=0;week<weeks;week++) for(let day=0;day<days;day++){
+        const date=new Date(startDate);date.setDate(startDate.getDate()+week*7+day);
+        const dateStr=date.toISOString().split('T')[0];
+        const count=commitsByDay[dateStr]||0;
+        if(count>0){totalCommits+=count;activeDays++;}
+        const color=count===0?'rgba(255,255,255,0.05)':count<=2?'rgba(103,232,249,0.25)':count<=4?'rgba(103,232,249,0.45)':count<=7?'rgba(103,232,249,0.7)':'#67e8f9';
+        svg+=`<rect x="${week*(cellSize+cellGap)}" y="${day*(cellSize+cellGap)+20}" width="${cellSize}" height="${cellSize}" rx="3" fill="${color}"><title>${dateStr}: ${count} commit${count!==1?'s':''}</title></rect>`;
       }
-    });
-
-    // Build 52 weeks grid
-    const weeks = 52;
-    const days = 7;
-    const cellSize = 14;
-    const cellGap = 3;
-    const totalWidth = weeks * (cellSize + cellGap);
-    const totalHeight = days * (cellSize + cellGap);
-
-    let svg = `<svg width="${totalWidth}" height="${totalHeight + 24}" viewBox="0 0 ${totalWidth} ${totalHeight + 24}" xmlns="http://www.w3.org/2000/svg">`;
-
-    // Day labels
-    const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
-    dayLabels.forEach((label, i) => {
-      if (label) svg += `<text x="0" y="${i * (cellSize + cellGap) + cellSize}" fill="#64748b" font-size="9" font-family="Inter,sans-serif">${label}</text>`;
-    });
-
-    // Get start date (52 weeks ago, start of week)
-    const startDate = new Date(yearAgo);
-    startDate.setDate(startDate.getDate() - startDate.getDay());
-
-    let totalCommits = 0;
-    let activeDays = 0;
-
-    for (let week = 0; week < weeks; week++) {
-      for (let day = 0; day < days; day++) {
-        const date = new Date(startDate);
-        date.setDate(startDate.getDate() + week * 7 + day);
-        const dateStr = date.toISOString().split('T')[0];
-        const count = commitsByDay[dateStr] || 0;
-        if (count > 0) { totalCommits += count; activeDays++; }
-
-        let color;
-        if (count === 0) color = 'rgba(255,255,255,0.05)';
-        else if (count <= 2) color = 'rgba(103,232,249,0.25)';
-        else if (count <= 4) color = 'rgba(103,232,249,0.45)';
-        else if (count <= 7) color = 'rgba(103,232,249,0.7)';
-        else color = '#67e8f9';
-
-        const x = week * (cellSize + cellGap);
-        const y = day * (cellSize + cellGap) + 20;
-
-        svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" fill="${color}">
-          <title>${dateStr}: ${count} commit${count !== 1 ? 's' : ''}</title>
-        </rect>`;
-      }
+      svg+='</svg>';
+      document.getElementById('github-graph').innerHTML=svg;
+      document.getElementById('github-stats').textContent=`${repos.length} repos · ${totalCommits} commits in last year · ${activeDays} active days`;
+    } catch(e){
+      document.getElementById('github-graph').innerHTML='<p style="color:#64748b;font-size:13px;">Could not load GitHub activity.</p>';
+      document.getElementById('github-stats').textContent='github.com/nyxalb';
     }
-
-    svg += '</svg>';
-
-    document.getElementById('github-graph').innerHTML = svg;
-    document.getElementById('github-stats').textContent =
-      `${repos.length} repos · ${totalCommits} commits in the last year · ${activeDays} active days`;
-
-  } catch(e) {
-    document.getElementById('github-graph').innerHTML = '<p style="color:#64748b;font-size:13px;">Could not load GitHub activity.</p>';
-    document.getElementById('github-stats').textContent = 'github.com/nyxalb';
   }
-}
-loadGitHubGraph();
+  loadGitHubGraph();
 
-
-// ── Typing animation ──
-const titles = [
-  'Cloud Engineer',
-  'Azure Specialist',
-  'Home Lab Builder',
-  'DevOps Enthusiast',
-  'IT Technician',
-  'Security Minded',
-  'AZ-900 Candidate',
-  'Hybrid Cloud Guy',
-];
-let titleIndex = 0;
-let charIndex = 0;
-let deleting = false;
-const typingEl = document.getElementById('typing-text');
-
-const typingStyle = document.createElement('style');
-typingStyle.textContent = `@keyframes cursorBlink { 0%,100%{opacity:1;} 50%{opacity:0;} }`;
-document.head.appendChild(typingStyle);
-
-function type() {
-  const current = titles[titleIndex];
-  if (!deleting) {
-    typingEl.textContent = current.slice(0, charIndex + 1);
-    charIndex++;
-    if (charIndex === current.length) {
-      deleting = true;
-      setTimeout(type, 2000);
-      return;
-    }
-    setTimeout(type, 80);
-  } else {
-    typingEl.textContent = current.slice(0, charIndex - 1);
-    charIndex--;
-    if (charIndex === 0) {
-      deleting = false;
-      titleIndex = (titleIndex + 1) % titles.length;
-      setTimeout(type, 400);
-      return;
-    }
-    setTimeout(type, 40);
+  // ── Typing animation ──
+  const titles=['Cloud Engineer','Azure Specialist','Home Lab Builder','DevOps Enthusiast','IT Technician','Security Minded','AZ-900 Candidate','Hybrid Cloud Guy'];
+  let titleIndex=0,charIndex=0,deleting=false;
+  const typingEl=document.getElementById('typing-text');
+  const typingStyle=document.createElement('style');
+  typingStyle.textContent='@keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}#typing-cursor{animation:cursorBlink 1s infinite;}';
+  document.head.appendChild(typingStyle);
+  function type(){
+    const current=titles[titleIndex];
+    if(!deleting){typingEl.textContent=current.slice(0,charIndex+1);charIndex++;if(charIndex===current.length){deleting=true;setTimeout(type,2000);return;}setTimeout(type,80);}
+    else{typingEl.textContent=current.slice(0,charIndex-1);charIndex--;if(charIndex===0){deleting=false;titleIndex=(titleIndex+1)%titles.length;setTimeout(type,400);return;}setTimeout(type,40);}
   }
-}
-type();
+  type();
 </script>
-
-
 </body>
 </html>
-
-
